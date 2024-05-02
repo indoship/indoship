@@ -1,0 +1,94 @@
+.cotainer-all {
+    display: flex;
+    align-items: stretch;
+}
+
+#siderbar {
+    width: 200px;
+    background-color: aquamarine;
+    color: rgb(11, 9, 11);
+    transition: 1s;
+    font-size: 12px;
+   
+    
+}
+
+.cotainer-right {
+background-color: aqua;
+width: 100%;
+font-size: 15px;
+border: 10px;
+border-color: blueviolet;
+padding: 25px;
+
+}
+
+#loginModal{
+    width: 75%;
+    height: 85%;
+}
+.collapse-btn {
+    position: relative;
+    top: 16%;
+    left: 155px;
+    background-color: brown;
+    color: aliceblue;
+    border: 1px;
+    font-size: 20px;
+}
+
+#siderbar p {
+    text-align: center;
+    font-size: 15px;
+    padding: 5px;
+}
+
+#siderbar ul li a {
+    padding: 5px;
+    margin-left: 15px;
+    font-size: 12px;
+    background-color: hsl(33, 90%, 55%);
+    display: block;
+    text-decoration: none;
+}
+
+#siderbar a {
+    padding: 5px;
+    margin: 3px;
+    font-size: 12px;
+    background-color: hsl(145, 87%, 43%);
+    display: block;
+    text-decoration: none;
+}
+
+#siderbar ul li a:hover {
+    color: hsl(0, 12%, 97%);
+    background-color: rgb(38, 94, 215);
+}
+
+#subclass ul li a {
+    padding: 5px;
+    margin-left:30px;
+    font-size: 12px;
+    background-color: #4a8d48;
+    display: block;
+    text-decoration: none;
+    color: hsl(137, 78%, 5%);
+}
+
+#siderbar image {
+    width: 25px;
+    height: 35px;
+    
+}
+
+.myLineChart {
+    width: 80%;
+    height: 40%;
+    background-color: hsl(60, 17%, 98%);
+}
+
+
+
+
+

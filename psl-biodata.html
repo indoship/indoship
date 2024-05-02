@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 引入 Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <!-- 引入 firebase.js -->
+    <script src="firebaseConfig.js"></script>
+    <title>印尼KCF 履歷表</title>
+
+    <style>
+        body {
+            max-width: 800px;
+            /* 设置页面最大宽度为800像素 */
+            margin: 0 auto;
+            /* 让页面水平居中 */
+        }
+
+        /* 限制页面高度 */
+        html,
+        body {
+            height: 80%;
+            /* 让html和body元素占满整个可视窗口 */
+        }
+
+        body {
+            overflow-y: auto;
+            /* 如果内容溢出，允许垂直滚动 */
+        }
+
+        
+    </style>
+
+</head>
+
+<body bgcolor="#ffffff" max-width="550px">
+
+        <!-- <img style="margin-top: 50px; width:60px; height:60px; margin-left: 180px;" src="img/psllogo.jpg" alt=""> -->
+        <div>
+            <p style="margin-left: 240px; margin-top: 10px; font-size: 40px; color: #0000ff;"><strong>印尼 KCF 履歷表
+                </strong><br>
+            <label style="color: brown ;font-size: 30px;"><strong>履歷表編號:</strong></label>
+                <strong> <u><label id="key" style="font-size: 30px; color: rgb(252, 3, 3);"></label> </u></strong>
+            </p>
+        </div>
+    <label style="font-size: 25px; text-align: center; color: hwb(34 2% 49%);"><strong>                                                   勞工個人資料</strong></label>
+
+    <div
+        style="background-color: hwb(48 30% 4%); display: flex; align-items: top; margin-left: 65px;margin-right: 65px;">
+        <img id="allpc"
+            style="margin-bottom: 15px; margin:right 30px; margin-left: 15px; margin-top: 15px; width:260px; height:420px"
+            src="" alt="">
+        <div style=" margin-top: 0; margin-left:30px;">
+            <p style="font-size: 18px; color: blue;"><strong>名：</strong>
+                <strong> <u><label id="name" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u></strong>
+            </p>
+            
+            <p style="font-size: 18px; color: blue;"> <strong>出生地：
+                 <u><label id="bhp" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u></strong>
+            </p>
+
+            <p style="font-size: 18px; color: blue;"><strong>出生日期：</strong>
+                <strong><u> <label id="bhd" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u></strong>
+                      <strong>年齡：</strong>
+                <strong><u> <label id="age" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u>歲</strong>
+            </p>
+
+            <p style="font-size: 18px; color: blue;"><strong>身高：
+                    <u> <label id="height" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u>公分
+                                     
+                    體重：<u> <label id="weight" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u>公斤</strong>
+            </p>
+
+            <p style="font-size: 18px; color: blue;"> <strong>信仰宗教：
+                <u> <label id="reg" style="font-size: 18px; color: hwb(33 0% 95%);">回教</label> </u>
+                               
+                學歷：<u> <label id="edu" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u>
+
+            </p>
+            <p style="font-size: 18px; color: blue;"> <strong>護照號碼：
+                <u> <label id="pasno" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u>
+            </p>
+
+            <br>
+            <p style="font-size: 18px; color: blue;"><strong>婚姻狀況：
+                    <u> <label id="mrg" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u></strong>
+            </p>
+
+            <p style="font-size: 18px; color: blue;"><strong>配偶名：
+                    <u> <label id="hsbname" style="font-size: 18px; color: hwb(33 0% 95%);">MUSMULIADI</label> </u>
+            </p>
+            <p style="font-size: 18px; color: blue;"><strong></strong>        
+                      年齡：
+                     <u><label id="hsbage" style="font-size: 18px; color: hwb(33 0% 95%);">42</label> </u>歲</strong> 
+            </p>
+            <p style="font-size: 18px; color: blue;"><strong>配偶工作：
+                <u> <label id="hsbjob" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u></strong>
+            </p>
+
+            <p style="font-size: 18px; color: blue;"><strong>子女數目：
+                <u> <label id="childn" style="font-size: 18px; color: hwb(33 0% 95%);">2</label> </u> 個      最大
+                <u> <label id="childb" style="font-size: 18px; color: hwb(33 0% 95%);">9</label> </u>歲
+                  最小
+                <u> <label id="childl" style="font-size: 18px; color: hwb(33 0% 95%);">4</label> </u>歲</strong>
+            </p>
+
+
+        </div>
+    </div>
+    <br>
+            <label style="background-color: aliceblue; text-align: center; font-size: 25px; color:hsl(237, 100%, 50%) ;"><strong>                                                   工   作   經  
+                歷  </strong></label>
+
+    <div  style="height: 420px; background-color: rgb(15, 219, 233);  margin-left:65px;margin-right: 65px;">
+        <br>
+        <p style="font-size: 20px; color: rgb(14, 5, 115); margin-left:55px;">
+            <strong><label id="exp1" style="font-size: 20px; color: hwb(33 0% 95%);"> </label></strong>
+        </p>
+
+        <p style="font-size: 20px; color: hwb(33 0% 95%); margin-left:55px;">
+            <strong><label id="exp2" style="font-size: 20px; color: hwb(33 0% 95%);"> </label></strong>
+        </p>
+        <p>&nbsp;</p>
+    </div>
+
+    <label style="text-align: center; margin-top:85px; font-size: 25px; color:hsl(237, 100%, 50%) ;"><strong>                                                   家   庭   狀  
+        況</strong></label>
+
+        <div
+        style="height: 250px; background-color: hwb(200 30% 4%); display: flex; align-items: top; margin-left: 65px;margin-right: 65px;">
+
+        <div style=" margin-top: 0; margin-left:30px;">
+            <p style="font-size: 18px; color: blue;">
+                <strong>父親名：</strong>
+                <strong> <u><label id="fathername" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u></strong>
+                      <strong>年齡：</strong>
+                <strong><u> <label id="fatherage" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u>歲</strong>
+                      <strong>父親工作：</strong>
+                <strong> <u><label id="fatherjob" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u></strong>
+
+            </p>
+
+            <p style="font-size: 18px; color: blue;"><strong>母親名：</strong>
+                <strong><u> <label id="mothername" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u></strong>
+                      <strong>年齡：</strong>
+                <strong><u> <label id="motherage" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u>歲</strong>
+                      <strong>母親工作：</strong>
+                <strong> <u><label id="motherjob" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u></strong>
+
+
+            </p>
+
+            <p style="font-size: 18px; color: blue;"><strong>兄弟姊妹數：
+                <u><label id="bsn" style="font-size: 18px; color: hwb(33 0% 95%);"></label></u> 個
+                            排行第 : 
+                <u> <label id="rng" style="font-size: 18px; color: hwb(33 0% 95%);"></label> </u></strong>
+        </p>
+
+        </div>
+    </div>
+    <br>
+    <label style="text-align: center; font-size: 25px; color:hsl(237, 100%, 50%) ;"><strong>                                              工作意願與生活習性</strong></label>
+
+        <div
+        style="background-color: hwb(200 30% 4%); display: flex; align-items: top; margin-left: 65px;margin-right: 65px;">
+
+        <div style=" margin-top: 0; margin-left:30px;">
+            <p style="font-size: 18px; color: blue;">
+                <strong>1. 是否對藥物過敏 ? 
+                 <u><label id="5-1" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 不會 </u></strong>
+            
+                <strong>                                           2. 是否有動過手術 ? </strong>
+                <strong> <u><label id="5-2" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 沒有 </u></strong>
+            </p>
+
+            <p style="font-size: 18px; color: blue;">
+                <strong>3. 是否願意照顧老人 ? </strong>
+                <strong> <u><label id="5-3" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 願意 </u></strong>
+            
+                <strong>           4. 是否願意照顧身心障礙者或病人 ? </strong>
+                <strong> <u><label id="5-4" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 願意 </u></strong>
+            </p>
+
+            <p style="font-size: 18px; color: blue;">
+                <strong>5. 是否願意照顧初生兒 ? </strong>
+                <strong> <u><label id="5-5" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 願意 </u></strong>
+            
+                <strong>                                   6. 是否願意煮三餐 ? </strong>
+                <strong> <u><label id="5-6" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 願意 </u></strong>
+            </p>
+
+            <p style="font-size: 18px; color: blue;">
+                <strong>7. 是否接受無休假工作 ? </strong>
+                <strong> <u><label id="5-7" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 願意 </u></strong>
+            
+                <strong>                                                  8. 是否怕狗 ? </strong>
+                <strong> <u><label id="5-8" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 是 </u></strong>
+            </p>
+
+            <p style="font-size: 18px; color: blue;">
+                <strong>9. 是否願意照顧寵物 ? </strong>
+                <strong> <u><label id="5-9" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 是 </u></strong>
+                 
+                <strong>                                  10. 會使用一般家電品 ? </strong>
+                <strong> <u><label id="5-10" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 會 </u></strong>
+            </p>
+
+            <p style="font-size: 18px; color: blue;">
+                <strong>11. 是否可以吃豬肉 ? </strong>
+                <strong> <u><label id="5-11" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 不可以 </u></strong>
+            
+                <strong>                      12. 是否願意接觸或煮豬肉 ? </strong>
+                <strong> <u><label id="5-12" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 願意 </u></strong>
+            </p>
+
+            <p style="font-size: 18px; color: blue;">
+                <strong>13. 是否可以工作不用手機 ? </strong>
+                <strong> <u><label id="5-13" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 可以 </u></strong>
+            
+                <strong>                          14. 是否願意燙衣物 ? </strong>
+                <strong> <u><label id="5-14" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 願意 </u></strong>
+            </p>
+
+            <p style="margin-bottom: 25px;   font-size: 18px; color: blue;">
+                <strong>15. 是否願意用手洗衣物 ? </strong>
+                <strong> <u><label id="5-15" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 願意 </u></strong>
+            
+                <strong>              16. 是否願意打理花園及洗車 ? </strong>
+                <strong> <u><label id="5-16" style="font-size: 18px; color: hwb(33 0% 95%);"></label> 願意 </u></strong>
+            </p>
+        </div>
+    </div>
+    <br>     
+
+    <script>
+        // 獲取 URL 中的參數
+        const urlParams = new URLSearchParams(window.location.search);
+        const key = urlParams.get('key');
+
+        // 定義要從 Firebase 讀取的屬性
+        const attributeLabelMapping = {
+            code: 'key',
+            name: 'name',
+            bhd: 'bhd',
+            age: 'age',
+            reg: 'reg',
+            bhp: 'bhp',
+            height: 'height',
+            weight: 'weight',
+            edu: 'edu',
+            bsn: 'bsn',
+            rng: 'rng',
+            mrg: 'mrg',
+            hsbname: 'hsbname',
+            hsbage: 'hsbage',
+            hsbjob: 'hsbjob',
+            childn: 'childn',
+            childb: 'childb',
+            childl: 'childl',
+            image2: 'allpc',
+            exp1: 'exp1',
+            exp2: 'exp2',
+            fathername:'fathername',
+            fatherage:'fatherage',
+            fatherjob:'fatherjob',
+            mothername:'mothername',
+            motherage:'motherage',
+            pasno:'pasno',
+            motherjob:'motherjob'
+
+
+
+        };
+
+        // 从 Firebase 读取每个属性的值并设置到相应的标签元素上
+        Object.entries(attributeLabelMapping).forEach(([attribute, labelId]) => {
+            databaseJOBSCRIPT.ref(`KFA/${key}/${attribute}`).once('value').then(function (snapshot) {
+                const value = snapshot.val();
+                // 将值设置到相应的标签元素上
+                document.getElementById(labelId).innerText = value;
+                // 如果是图像属性，设置到 <img> 标签的 src 属性上
+                if (attribute === 'image2') {
+                    document.getElementById('allpc').src = value;
+                }
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>

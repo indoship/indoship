@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學員中文成績</title>
+    
+    <link rel="stylesheet" href="siderbar.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="siderbar.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Boostrap 導入程式 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <!-- 引入Chart.js库 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="firebaseConfig.js"></script> -->
+
+
+</head>
+<body>
+    <div class="cotainer-all">
+     <!--左邊-->
+        <div class="cotainer-left">
+            <!--導覽列-->
+            <nav id="siderbar">
+             <!--展開/縮 按鈕-->
+  
+             <!--list 列表--> 
+             <ul class="list-unstyled"></ul>
+             <p><label id="key"></label></p>
+             <img id="image" width="90px" height="110px" src="" >
+             <li id="groupData"></li>             
+             <li> <a href="#subclass" onclick="ChangeToMenu()" data-bs-toggle="collapse" id="dropdown">課程內容</a> </li>
+              <ul id="subclass" class="list-unstyled collapse">
+                <li><a href="#subbass" onclick="ChangeToBass()" data-bs-toggle="collapse" id="dropdown" >基  本  語  句</a></li>
+                    <ul id="subbass" class="list-unstyled collapse"> 
+                        <li><a href="#" onclick="ChangeToGroup(1)" data-bs-toggle="modal" data-bs-target="#loginModal" >言語交流成績</a></li>
+                        <li><a href="#" onclick="ChangeToGroup(2)" data-bs-toggle="modal" data-bs-target="#loginModal" >數字和時間成績</a></li>
+                        <li><a href="#" onclick="ChangeToGroup(3)" data-bs-toggle="modal" data-bs-target="#loginModal" >日期和季節成績</a></li>
+                        <li><a href="#" onclick="ChangeToGroup(4)" data-bs-toggle="modal" data-bs-target="#loginModal" >色彩和身體成績</a></li>
+                        <li><a href="#" onclick="ChangeToGroup(5)" data-bs-toggle="modal" data-bs-target="#loginModal" >健康和就醫成績</a></li>
+                        <li><a href="#" onclick="ChangeToGroup(6)" data-bs-toggle="modal" data-bs-target="#loginModal" >問路和指引成績</a></li>
+                    </ul>
+                <li><a href="#subbbass" onclick="ChangeToFamily()" data-bs-toggle="collapse" id="dropdown" >家  事  語  句</a></li>
+                    <ul id="subbbass" class="list-unstyled collapse"> 
+                        <li><a href="#" onclick="ChangeToGroup(7)" data-bs-toggle="modal" data-bs-target="#loginModal" >生活作息成績</a></li>
+                        <li><a href="#" onclick="ChangeToGroup(8)" data-bs-toggle="modal" data-bs-target="#loginModal" >烹飪成績</a></li>
+                        <li><a href="#" onclick="ChangeToGroup(9)" data-bs-toggle="modal" data-bs-target="#loginModal" >居家環境成績</a></li>
+                        <li><a href="#" onclick="ChangeToGroup(10)" data-bs-toggle="modal" data-bs-target="#loginModal" >家務成績</a></li>
+                        <li><a href="#" onclick="ChangeToGroup(11)" data-bs-toggle="modal" data-bs-target="#loginModal" >居家照顧成績</a></li>
+                    </ul>         
+                <!-- <li><a href="#">家  事</a></li> -->
+                <!-- <li><a href="#">醫  療  照  顧</a></li> -->
+                <!-- <li><a href="#">聯  絡</a></li> -->
+                <!-- <li><a href="#">醫  療</a></li> -->
+                <!-- <li><a href="#">外  出</a></li> -->
+               </ul>
+         <li> <a href="#">  </a> </li>
+
+              <!-- <li>  -->
+                 <!-- <a href="#sublist" data-bs-toggle="collapse" id="dropdown">  </a> -->
+                 <!--子連結-->
+                     <!-- <ul id="sublist" class="list-unstyled collapse"> -->
+                     <!-- <li><a href="#"></a></li> -->
+                     <!-- <li><a href="#"></a></li> -->
+                     <!-- <li><a href="#"></a></li> -->
+                    <!-- </ul> -->
+              <!-- </li> -->
+            
+            </nav>
+        </div>
+       <!--右邊-->
+       <div class="cotainer-right">
+         <div>
+
+            <label id="myLabel">您所要挑選的外籍移工對於工作的需求必須具備特定的技能，及相當的語言能力。因此在入境前，移工需要接受相應的技能培訓及語言培訓，以確保他們能夠勝任工作。<br><br>
+                語言能力確實是一個漸進的過程，需要透過耐心和持續的努力。以下是我們印尼籍移工的語言訓練及自主學習的設計，以及學習成效：<br><br>
+                實用的語言課程：<br>
+                為了讓初來乍到的新進移工，能夠在有限的學習時間內獲得最大的效益，我們精心設計了課程內容，確保每個字、每句話都是確實實用的。這有助於學員在實際生活中能夠立即應用所學，提高學習的效果。
+                <br>
+                <br>
+                自主學習的設計：<br>
+                我們利用文字、圖片和線上資源設計了一個便利的自主學習應用程式，讓所有學員可以隨時進行自主學習及自我評量。這有效地提升了學員的聽、說的綜合能力。
+                <br>
+                <br>
+                聽力訓練：<br>
+                透過反覆聆聽語音音檔，我們訓練學員熟悉語言的音調、語速以及常用詞彙。這種方法確保學員能夠更自信地應對實際語境，提高他們的聽力水平。<br>
+                <br>
+                口語練習：<br>
+                我們鼓勵學員勇於開口，參與各種口語練習，包括自我介紹、面試練習以及討論主題等。這些模擬真實情境的活動，可以有效地提升了學員的口語表達能力，讓他們能更快適應工作和與您府上溝通的需求。
+                <br>
+                <br>
+                在【學習履歷表】中呈現的學習成績，正是這套系統的實際成績。這個系統不僅能夠協助學員在語言方面取得明顯進步，也為他們到台灣工作和生活提供了更多信心。更是您在挑人選時最重要的依據。</label>
+            <h7>
+                
+                </h7>
+            </div>  
+            <div class="modal fade" id="loginModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Header -->
+                        <div class="modal-header">
+                            <label id="LBlogin"></label>
+                            <!-- <h3>語言學習成績</h3> -->
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <!-- Body -->
+                        <div class="modal-body">
+                            <canvas id="myLineChart"></canvas>
+                            <script>
+                             const urlParams = new URLSearchParams(window.location.search);
+                             const key = urlParams.get('key');
+                             const name = urlParams.get('name');
+                             // 將 key 值設置到 label 元素上
+                             document.getElementById('key').innerHTML = "編號:" + key + "<br>名字:" + name;
+
+                             // 創建圖片的路徑
+                             const imagePath = "img/" + key + "H.jpg";
+                             
+                             // 將圖片路徑設置到 img 元素上
+                             document.getElementById('image').src = imagePath;
+                             
+                             // 調整圖片與左邊緣的距離
+                             document.getElementById('image').style.marginLeft = "60px";
+                             // 获取并解码 imageUrl 参数
+                             //  const encodedImageUrl = urlParams.get('imageUrl');
+                             //  const decodedImageUrl = decodeURIComponent(encodedImageUrl);
+
+                             // 将解码后的 imageUrl 设置为图片的 src 属性
+                            //   document.getElementById('image').src = decodedImageUrl;
+                            //   console.log(decodedImageUrl);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+       </div>
+    </div>   
+
+</body>
+
+</html>
