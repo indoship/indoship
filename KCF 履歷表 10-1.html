@@ -408,7 +408,9 @@
                 </td>
                 
                 <td>
-                    <button onclick="window.open('siderbar 4.html?key=${filteredData[i].key}&name=${filteredData[i].name}&imageUrl=${encodeURIComponent(filteredData[i].image1)}', '_blank', 'width=' + window.innerWidth * 0.25);">學習成績</button>
+                    ${filteredData[i]['101'] !== undefined && filteredData[i]['101'] !== null
+                    ? `<button onclick="window.open('siderbar 4.html?key=${filteredData[i].key}&name=${filteredData[i].name}&imageUrl=${encodeURIComponent(filteredData[i].image1)}', '_blank', 'width=' + window.innerWidth * 0.25);">學習成績</button>`
+                     : ''}    
                 </td>
                ${filteredData[i].score4 ? `<button onclick="showScore4('${filteredData[i].key}')">學習履歷表</button>` : ''}
             </tr>
