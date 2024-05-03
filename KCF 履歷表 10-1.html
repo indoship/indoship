@@ -401,7 +401,7 @@
                 <td id="height-${filteredData[i].key}">${filteredData[i].height}</td>
                 <td id="weight-${filteredData[i].key}">${filteredData[i].weight}</td>
                 <td>
-                    ${filteredData[i].name && filteredData[i].age && filteredData[i].height && filteredData[i].weight !== null
+                    ${filteredData[i].self && filteredData[i].height !== null
                         ? `<button onclick="showDetail('${filteredData[i].key}', 'name', 'height', 'weight', 'self')"
                     id="button-${filteredData[i].key}">自我介紹</button> `
                         : ''}
