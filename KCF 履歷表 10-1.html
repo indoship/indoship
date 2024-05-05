@@ -381,7 +381,7 @@
 
         });
 
-function renderTable(filteredData) {
+            function renderTable(filteredData) {
             var htmldata = '';
             const startIdx = (currentPage - 1) * itemsPerPage;
             const endIdx = startIdx + itemsPerPage;
@@ -417,8 +417,7 @@ function renderTable(filteredData) {
             }
             dataContainer.innerHTML = htmldata;
             updatePagination();
-        }
-        }
+         }
 
         function closeModal() {
             document.getElementById('myModal').style.display = 'none';
