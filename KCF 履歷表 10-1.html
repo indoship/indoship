@@ -381,13 +381,14 @@
 
         });
 
-        function renderTable(filteredData) {
+function renderTable(filteredData) {
             var htmldata = '';
             const startIdx = (currentPage - 1) * itemsPerPage;
             const endIdx = startIdx + itemsPerPage;
 
             for (var i = startIdx; i < Math.min(endIdx, filteredData.length); i++) {
-                htmldata += `
+                if (filteredData[i].code && filteredData[i].code !== '') {
+                    htmldata += `
             <tr>
                 <td id="code-${filteredData[i].key}">${filteredData[i].code}</td>
                 <td id="image-${filteredData[i].key}">
@@ -396,28 +397,27 @@
                 <td style="text-decoration: underline;" id="name-${filteredData[i].key}">
                     <a onclick="window.open('psl-biodata.html?key=${filteredData[i].key}&name=${filteredData[i].name}&age=${filteredData[i].age}', '_blank');">${filteredData[i].name}</a>
                 </td>
-
                 <td id="age-${filteredData[i].key}">${filteredData[i].age}</td>
                 <td id="height-${filteredData[i].key}">${filteredData[i].height}</td>
                 <td id="weight-${filteredData[i].key}">${filteredData[i].weight}</td>
                 <td>
                     ${filteredData[i].self && filteredData[i].height !== null
-                        ? `<button onclick="showDetail('${filteredData[i].key}', 'name', 'height', 'weight', 'self')"
-                    id="button-${filteredData[i].key}">自我介紹</button> `
-                        : ''}
+                            ? `<button onclick="showDetail('${filteredData[i].key}', 'name', 'height', 'weight', 'self')" id="button-${filteredData[i].key}">自我介紹</button> `
+                            : ''}
                 </td>
-                
                 <td>
                     ${filteredData[i]['101'] !== undefined && filteredData[i]['101'] !== null
-                    ? `<button onclick="window.open('siderbar 4.html?key=${filteredData[i].key}&name=${filteredData[i].name}&imageUrl=${encodeURIComponent(filteredData[i].image1)}', '_blank', 'width=' + window.innerWidth * 0.25);">學習成績</button>`
-                     : ''}    
+                            ? `<button onclick="window.open('siderbar 4.html?key=${filteredData[i].key}&name=${filteredData[i].name}&imageUrl=${encodeURIComponent(filteredData[i].image1)}', '_blank', 'width=' + window.innerWidth * 0.25);">學習成績</button>`
+                            : ''}
                 </td>
-               ${filteredData[i].score4 ? `<button onclick="showScore4('${filteredData[i].key}')">學習履歷表</button>` : ''}
+                ${filteredData[i].score4 ? `<td><button onclick="showScore4('${filteredData[i].key}')">學習履歷表</button></td>` : ''}
             </tr>
             `;
+                }
             }
             dataContainer.innerHTML = htmldata;
             updatePagination();
+        }
         }
 
         function closeModal() {
