@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JO FORM</FORM>
+  </title>
+  <!-- Bootstrap連結 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+
+  <!-- CSS連結 -->
+  <link rel="stylesheet" href="style.css">
+
+  <!--JQuery 連結-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!--SimplePagenation 連結-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"></script>
+</head>
+
+
+<body>
+
+  <div style="width: 750px; height: auto;" class="container-fluid">
+    <h1>填寫聘工表</h1>
+
+    <div style="background-color: beige;font-size: 14px; height: 50px;">
+      <label style="margin-top: 15px;margin-left:20px;">* 聘工表編號</label>
+      <input style="background-color:#eec07c ;width: 230px;" type="text" id="bcode" required>
+      <label style="margin-top: 15px;margin-left: 20px;">* 聘工表密碼</label>
+      <input style="background-color:#eec07c ;width: 230px;" type="text" id="bpwd" required>
+    </div>
+    <br>
+
+    <div class="tab-content">
+      <!-- 第一部份：標籤分頁的導覽列 -->
+      <div class="nav nav-tabs nav-justified">
+        <!-- 按鈕1 -->
+        <button id="button1" class="nav-link active" data-bs-toggle="tab" data-bs-target="#menu1" aria-selected="true">
+          Informasi pribadi dasar<br>基本資料
+        </button>
+        <!-- 按鈕2 -->
+        <button id="button2" class="nav-link" data-bs-toggle="tab" data-bs-target="#menu2" aria-selected="false">
+          Status keluarga<br>工作內容
+        </button>
+        <!-- 按鈕3
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#menu5" aria-selected="false">
+          kebiasaan hidup<br>移工條件
+        </button> -->
+      </div>
+
+
+      <!-- 第1個內容 -->
+      <div class="tab-pane fade show active" id="menu1">
+        <div style="margin-top: 25px; margin-left: 15px;" class="row">
+
+          <div style="margin-top: 25px;" class="row">
+            <div class="col">
+              <label>*連絡電話</label>
+              <input style="background-color:blanchedalmond;" type="text" id="btelno" required>
+            </div>
+            <div class="col">
+              <label for="age">*Line ID</label>
+              <input style="background-color:blanchedalmond;width: 200px;" type="text" id="bline" required>
+            </div>
+            <div class="col">
+              <label>*雇主姓名</label>
+              <input style="background-color:blanchedalmond;" type="text" id="bname" required>
+            </div>
+
+            <div>
+              <label style="margin-top: 25px;">*聘雇資格</label>
+              <div style="background-color: blanchedalmond;width: 650px;">
+                <input type="radio" name="bdoc" value="已經有函文" style="display: inline-block;margin-left: 15px; ">已經有函文
+                <input type="radio" name="bdoc" value="巴氏量表" style="display: inline-block;margin-left: 15px; ">巴氏量表
+                <input type="radio" name="bdoc" value="身心障礙證明" style="display: inline-block;margin-left: 15px; ">身心障礙證明
+                <input type="radio" name="bdoc" value="連續六個月長照收據"
+                  style="display: inline-block;margin-left: 15px; ">連續六個月長照收據
+                <input type="radio" name="bdoc" value="其它" style="display: inline-block;margin-left: 15px;">其它
+              </div>
+            </div>
+
+            <div>
+              <label style="margin-top: 25px; ">*聘僱方式</label><br>
+              <div style="background-color:blanchedalmond; width: 650px;">
+                <input type="radio" name="wform" value="不拘" style="display: inline-block;margin-left: 15px;" checked>不拘
+                <input type="radio" name="wform" value="國外引進" style="margin-left: 15px;">國外引進
+                <input type="radio" name="wform" value="國內承接" style="margin-left: 15px;">國內承接
+              </div>
+            </div>
+            <div style="margin-top: 25px;" class="row">
+              <div class="col">
+                <label for="weight">*被照顧人年齡</label>
+                <input style="background-color:blanchedalmond; width: 80PX;" type="text" id="page">
+                <label>歲</label>
+              </div>
+              <div class="col">
+                <label for="height">*被照顧人身高</label>
+                <input style="background-color:blanchedalmond; width: 80px;" type="text" id="pheight">
+                <label>cm.</label>
+              </div>
+              <div class="col">
+                <label for="height">*被照顧人體重</label>
+                <input style="background-color:blanchedalmond; width: 80px;" type="text" id="pweight" required>
+                <label>kg.</label>
+              </div>
+
+              <div class="col">
+                <label>*被照顧人性別</label>
+                <div style="background-color: blanchedalmond;width: 150px;">
+                  <input type="radio" name="psex" value="男生pria" style="display: inline-block;margin-left: 5px; ">男生
+                  <input type="radio" name="psex" value="女生wanita" style="display: inline-block;margin-left: 15px; ">女生
+                </div>
+
+              </div>
+            </div>
+
+            <div style="margin-top: 25px;" class="row">
+              <div class="col">
+                <label for="weight">被照顧人所在縣市</label>
+                <input style="background-color:blanchedalmond; width: 160PX;" type="text" id="wcity" required>
+              </div>
+              <div class="col">
+                <label for="height">被照顧人所在行政區</label>
+                <input style="background-color:blanchedalmond; width: 160px;" type="text" id="wblock" required>
+              </div>
+              <div class="col">
+                <label for="height">與被照顧人同住幾人</label>
+                <input style="background-color:blanchedalmond; width: 160px;" type="text" id="wfperson" required>
+                <label>人</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+
+              <label style="margin-top: 25px; ">被照顧人主要病症caresk</label><br>
+              <div style="background-color:blanchedalmond; width: 650px;" class="row">
+                <div class="col">
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox1" name="caresk"
+                      value="中風Stroke"> 中風</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox2" name="caresk"
+                      value="失智Pikun">失智</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox3" name="caresk" value="癌症Kanke">
+                    癌症</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox4" name="caresk"
+                      value="肢體障礙Gangguan Fisik">肢體障礙</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox5" name="caresk"
+                      value="視力障礙Gangguan Penglihatan">視力障礙</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox6" name="caresk"
+                      value="精神障礙">精神障礙</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox7" name="caresk"
+                      value="心臟病Penyakit Jantung">心臟病</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox8" name="caresk"
+                      value="高血壓Darah Tinggi">高血壓</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox9" name="caresk"
+                      value="糖尿病 diabetes">糖尿病</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox10" name="caresk"
+                      value="洗腎 dialisis ginjal">洗腎</label>
+                </div>
+              </div>
+
+              <label style="margin-top: 25px;">被照顧人行動能力caremo</label><br>
+              <div style=" background-color:blanchedalmond; width: 650px;" class="row">
+                <div class="col">
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox1" name="caremo"
+                      value="行動自如Bisa berjalan">行動自如</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox2" name="caremo"
+                      value="虛弱(行動緩慢須扶持) Lemah(Gerakan lambat, perlu dituntun)">虛弱(行動緩慢須扶持)</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox3" name="caremo"
+                      value="使用助行器">使用助行器</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox4" name="caremo"
+                      value="坐輪椅Duduk kursi roda">坐輪椅</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox5" name="caremo"
+                      value="半身癱瘓Lumpuh separuh ">半身癱瘓</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox6" name="caremo"
+                      value="全身癱瘓Lumpuh total">全身癱瘓</label>
+                </div>
+              </div>
+
+              <label style="margin-top: 25px;">被照顧人使用的輔助器械caremh</label><br>
+              <div style=" background-color:blanchedalmond; width: 650px;" class="row">
+                <div class="col">
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox1" name="caremh"
+                      value="無">無</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox2" name="caremh"
+                      value="尿布">尿布</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbo3" name="caremh"
+                      value="鼻胃管">鼻胃管</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox4" name="caremh"
+                      value="氣切">氣切</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox5" name="caremh"
+                      value="呼吸器/氧氣機">呼吸器/氧氣機</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox6" name="caremh"
+                      value="尿袋">尿袋</label>
+                  <label style="margin-left: 15px;"><input type="checkbox" id="checkbox7" name="caremh"
+                      value="造口">造口</label>
+                </div>
+              </div>
+              <label style="margin-top: 25px;">基本資料備註infrmr</label><br>
+              <div style="  width: 650px;" class="row">
+                <textarea style=" background-color:blanchedalmond; width: 650px;margin-bottom: 25px; height:80px;"
+                  id="infrmr"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第2個內容 -->
+      <div class="tab-pane fade" id="menu2">
+        <div style="margin-top: 25px; margin-left: 25px;" class="row">
+
+          <label style="margin-top: 15px; ">移工看護工作內容carepet</label><br>
+          <div style="background-color:blanchedalmond; width:700px;" class="row">
+            <div class="col">
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox1" name="carepet"
+                  value="餵食三餐Suapi makan hari">餵食三餐</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox2" name="carepet"
+                  value="鼻胃管餵食Makan melalui Selang makan">鼻胃管餵食</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox3" name="carepet"
+                  value="餵藥Suapi obat">餵藥</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox4" name="carepet"
+                  value="翻身、按摩、拍背Balik badan, pijit, tepuk punggung">翻身、按摩、拍背</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox5" name="carepet"
+                  value="幫病人刷牙洗臉Bantu sikat gigi">幫病人刷牙洗臉</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox6" name="carepet"
+                  value="幫病人洗澡Memandikan pasien">幫病人洗澡</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox7" name="carepet"
+                  value="導尿Selang kencin">導尿</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox8" name="carepet"
+                  value="量血壓及體溫Ukur tens">量血壓及體溫</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox9" name="carepet"
+                  value="換尿布Ganti popok">換尿布</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox10" name="carepet"
+                  value="打針(胰島素)Suntik (Insulin)">打針(胰島素)</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox11" name="carepet"
+                  value="抽痰sedot dahak">抽痰</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox16" name="carepet
+                  value=" 輪椅散步Jalan-jalan dengan kursi roda">輪椅散步</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox12" name="carepet"
+                  value="陪同病人就醫/復健Temani ke RS/Terapi">陪同病人就醫/復健</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox13" name="carepet"
+                  value="居家夜間伴護Jaga malam hari ">居家夜間伴護</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox14" name="carepet"
+                  value="醫院看護Jaga di RS ">醫院看護</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox15" name="carepet"
+                  value="無 ">無</label>
+
+            </div>
+          </div>
+
+          <label style="margin-top: 25px; ">是否需要烹飪Memasak-meal</label><br>
+          <div style="background-color:blanchedalmond; width: 650px;" class="row">
+            <div class="col">
+              <label style="margin-left: 15px;">
+                <input type="checkbox" id="checkbox1" name="meal" value="不需要" checked>不需要
+              </label>
+              <label style="margin-left: 15px;">
+                <input type="checkbox" id="checkbox2" name="meal" value="早餐Sarapan">早餐
+              </label>
+              <label style="margin-left: 15px;">
+                <input type="checkbox" id="checkbox3" name="meal" value="午餐Makan siang">午餐
+              </label>
+              <label style="margin-left: 15px;">
+                <input type="checkbox" id="checkbox4" name="pro1" value="晚餐Makan malam">晚餐
+              </label>
+              <label style="margin-left: 15px;">
+                <input type="checkbox" id="checkbox5" name="meal" value="宵夜Makan malam tambahan">宵夜
+              </label>
+            </div>
+          </div>
+
+          <label style="margin-top: 25px; ">是否需要照顧小孩╱Jaga Anak-carechid</label><br>
+          <div style="background-color:blanchedalmond; width: 650px;" class="row">
+            <div class="col">
+              <div class="col">
+                <label style="margin-left: 15px;"><input type="checkbox" id="checkbox1" name="carechid" value="不需要"
+                    checked>不需要</label>
+                <br>
+                <label style="margin-left: 15px; margin-top: 10px;">照顧人數╱Jumlah yang dijaga-carechid_no</label>
+                <input style=" width: 50px; font-size: 14px;" type="text" id="carechid_no" required>
+                <label>人</label>
+
+                <label style="margin-left: 15px;">年齡Umur-carechid_age</label>
+                <input style=" width: 80px; font-size: 14px;" type="text" id="carechid_age">
+                <label>歲</label>
+              </div>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox2" name="carechid"
+                  value="接送上下學Antar jemput sekolah">接送上下學</label>
+              <label style="margin-left: 15px;"><input type="checkbox" nid="checkbox3" name="carechid"
+                  value="泡奶、餵奶Seduh & suapi susu  ">泡奶、餵奶</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox4" name="carechid"
+                  value="換尿布Ganti popok">換尿布</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox5" name="carechid"
+                  value="陪讀陪玩Temani belajar & bermain">陪讀陪玩</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox6" name="carechid"
+                  value="準備、送便當Menyiapkan&mengantar rantang">準備、送便當</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox7" name="carechid"
+                  value="三餐照顧Urusi makan 3hari ">三餐照顧</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox8" name="carechid"
+                  value="洗澡Memandikan">洗澡</label>
+            </div>
+
+
+          </div>
+
+          <label style="margin-top: 25px; ">是否需要家事處理hwk</label><br>
+          <div style="background-color:blanchedalmond; width: 650px;" class="row">
+            <div class="col">
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox1" name="hwk" value="不需要"
+                  checked>不需要</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox2" name="hwk"
+                  value="洗衣Cuci pakaian">洗衣</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox3" name="hwk"
+                  value="燙衣Setrika pakaian">燙衣</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox4" name="hwk"
+                  value="倒圾垃Buang sampah">倒圾垃</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox5" name="hwk"
+                  value="澆花、整理庭園Siram bunga, taman">澆花、整理庭園</label>
+              <label style="margin-left: 15px;"><input type="checkbox" id="checkbox6" name="hwk"
+                  value="清洗車輛Cuci mobil">清洗車輛</label>
+            </div>
+          </div>
+          <label style="margin-top:15px;">工作內容備註jobmr</label><br>
+          <div style="  width: 650px;" class="row">
+            <textarea style=" background-color:blanchedalmond; width: 650px;margin-bottom: 25px; height:80px;"
+              id="jobmr"></textarea>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- 第5個內容 -->
+      <div class="tab-pane fade" id="menu5">
+        <div style="margin-top: 25px; margin-left: 15px;" class="row">
+        </div>
+
+        <div style="margin-top: 25px;margin-left: 25px;">
+          <label>*年齡區間</label><br>
+          <div style="background-color:blanchedalmond; width: 650px;" class="row">
+            <div class="col">
+              <input type="radio" name="wage" value="不拘" checked>不拘
+              <input type="radio" name="wage" value="20-25" style="margin-left: 15px;">20-25
+              <input type="radio" name="wage" value="26-30" style="margin-left: 15px;">26-30
+              <input type="radio" name="wage" value="31-35" style="margin-left: 15px;">31-35
+              <input type="radio" name="wage" value="36-40" style="margin-left: 15px;">36-40
+              <input type="radio" name="wage" value="40以上" style="margin-left: 15px;">40以上
+            </div>
+          </div>
+
+
+          <label style="margin-top: 25px; ">*身高區間</label><br>
+          <div style="background-color:blanchedalmond; width: 650px;" class="row">
+            <div class="col">
+              <input type="radio" name="wheight" value="不拘" checked>不拘
+              <input type="radio" name="wheight" value="150-155" style="margin-left: 15px;">150-155
+              <input type="radio" name="wheight" value="156-160" style="margin-left: 15px;">156-160
+              <input type="radio" name="wheight" value="161-165" style="margin-left: 15px;">161-165
+              <input type="radio" name="wheight" value="166-170" style="margin-left: 15px;">166-170
+              <input type="radio" name="wheight" value="170以上" style="margin-left: 15px;">170以上
+            </div>
+          </div>
+
+          <label style="margin-top: 25px; ">*體重區間</label><br>
+          <div style="background-color:blanchedalmond; width: 650px;" class="row">
+            <div class="col">
+              <input type="radio" name="wweight" value="不拘" checked>不拘
+              <input type="radio" name="wweight" value="50-55" style="margin-left: 15px;">50-55
+              <input type="radio" name="wweight" value="56-60" style="margin-left: 15px;">56-60
+              <input type="radio" name="wweight" value="61-65" style="margin-left: 15px;">61-65
+              <input type="radio" name="wweight" value="66-70" style="margin-left: 15px;">66-70
+              <input type="radio" name="wweight" value="70以上" style="margin-left: 15px;">70以上
+            </div>
+          </div>
+
+          <label style="margin-top: 25px; ">*學歷要求</label><br>
+          <div style="background-color:blanchedalmond; width: 650px;" class="row">
+            <div class="col">
+              <input type="radio" name="wedu" value="不拘" checked>不拘
+              <input type="radio" name="wedu" value="國中" style="margin-left: 15px;">國中
+              <input type="radio" name="wedu" value="高中" style="margin-left: 15px;">高中
+              <input type="radio" name="wedu" value="高中以上" style="margin-left: 15px;">高中以上
+            </div>
+          </div>
+
+          <label style="margin-top: 25px; ">*工作經驗</label><br>
+          <div style="background-color:blanchedalmond; width: 650px;" class="row">
+            <div class="col">
+              <input type="radio" name="wexp" value="不拘" checked>不拘
+              <input type="radio" name="wexp" value="台灣" style="margin-left: 15px;">台灣
+              <input type="radio" name="wexp" value="新加坡" style="margin-left: 15px;">新加坡
+              <input type="radio" name="wexp" value="香港" style="margin-left: 15px;">香港
+              <input type="radio" name="wexp" value="當地" style="margin-left: 15px;">當地
+              <input type="radio" name="wexp" value="馬來西亞" style="margin-left: 15px;">馬來西亞
+              <input type="radio" name="wexp" value="阿拉伯" style="margin-left: 15px;">阿拉伯
+            </div>
+          </div>
+          <label style="margin-top: 25px; ">*聘僱方式</label><br>
+          <div style="background-color:blanchedalmond; width: 650px;" class="row">
+            <div class="col">
+              <input type="radio" name="wform" value="不拘" checked>不拘
+              <input type="radio" name="wform" value="國外引進" style="margin-left: 15px;">國外引進
+              <input type="radio" name="wform" value="國內承接" style="margin-left: 15px;">國內承接
+            </div>
+
+
+          </div>
+          <br>
+        </div>
+      </div>
+      <button
+        style="margin-bottom: 25px; margin-left: 35px;margin-top: 25px; height: 50px; width: 650px; background-color: chocolate;"
+        id="Sumit" onclick="sendData()">Sumit
+      </button><br>
+    </div>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig1 = { databaseURL: "https://jobscript-79d02-default-rtdb.firebaseio.com/" }
+    firebase.initializeApp(firebaseConfig1, "db1");
+    const database1 = firebase.database(firebase.app("db1"));
+
+    //const firebaseConfig2 = { databaseURL: "https://ptkcf-521ad-default-rtdb.firebaseio.com/" }
+    //firebase.initializeApp(firebaseConfig2, "db2");
+    //const database2 = firebase.database(firebase.app("db2"));
+
+
+    // Access the first database
+    // const db1Ref = firebase.database(firebase.app("db1")).ref('messages/+ firebaseIndex');
+    // const db2Ref = firebase.database(firebase.app("db2")).ref('messages/+ firebaseIndex');
+
+    // 定義一個函數，處理每組 checkbox 的選擇行為
+    function handleCheckboxGroup(groupName) {
+      const checkboxes = document.querySelectorAll(`input[name="${groupName}"]`);
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', function () {
+          // 如果選中的是除了 "不需要" 以外的其他選項，則取消選中 "不需要"
+          if (checkbox.value !== '不需要' && checkbox.checked) {
+            document.querySelector(`input[name="${groupName}"][value="不需要"]`).checked = false;
+          }
+
+          // 如果所有其他選項都未選中，則重新選中 "不需要"
+          const otherSelected = Array.from(checkboxes).some(cb => cb.value !== '不需要' && cb.checked);
+          if (!otherSelected) {
+            document.querySelector(`input[name="${groupName}"][value="不需要"]`).checked = true;
+          }
+        });
+      });
+    }
+    // 處理多組 checkbox
+    handleCheckboxGroup('hwk');
+    handleCheckboxGroup('carechid');
+    handleCheckboxGroup('meal');
+
+    function sendData() {
+
+      // 獲取所有選中的複選框
+
+      const bcode = document.getElementById('bcode').value;
+      const bpwd = document.getElementById('bpwd').value;
+      const bname = document.getElementById('bname').value;
+      const btelno = document.getElementById('btelno').value;
+      const bline = document.getElementById('bline').value;
+      const bdoc = document.querySelector('input[name="bdoc"]:checked');
+      const page = document.getElementById('page').value;
+      const pweight = document.getElementById('pweight').value;
+      const pheight = document.getElementById('pheight').value;
+      const psex = document.querySelector('input[name="psex"]:checked');
+      const wcity = document.getElementById("wcity").value;
+      const wblock = document.getElementById("wblock").value;
+      const wfperson = document.getElementById("wfperson").value;
+
+      const selectedcaresk = [];
+      const careskcheckboxes = document.querySelectorAll('input[name="caresk"]:checked');
+      careskcheckboxes.forEach((checkbox) => {
+        selectedcaresk.push(checkbox.value); // 收集被選中的值
+      });
+
+      const selectedcaremo = [];
+      const caremocheckboxes = document.querySelectorAll('input[name="caremo"]:checked');
+      caremocheckboxes.forEach((checkbox) => {
+        selectedcaremo.push(checkbox.value); // 收集被選中的值
+      });
+
+
+      const selectedcaremh = [];
+      const caremhcheckboxes = document.querySelectorAll('input[name="caremh"]:checked');
+      caremhcheckboxes.forEach((checkbox) => {
+        selectedcaremh.push(checkbox.value); // 收集被選中的值
+      });
+
+      const selectedcarepet = [];
+      const carepetcheckboxes = document.querySelectorAll('input[name="carepet"]:checked'); // 修正拼寫
+      carepetcheckboxes.forEach((checkbox) => {
+        selectedcarepet.push(checkbox.value); // 收集被選中的值
+      });
+
+
+      const selectedMeals = [];
+      const mealcheckboxes = document.querySelectorAll('input[name="meal"]:checked');
+      mealcheckboxes.forEach((checkbox) => {
+        selectedMeals.push(checkbox.value); // 收集被選中的值
+      });
+
+      const selectedcarechid = [];
+      const carechidckboxes = document.querySelectorAll('input[name="carechid"]:checked'); // 修正變數名
+      carechidckboxes.forEach((checkbox) => {
+        selectedcarechid.push(checkbox.value); // 收集被選中的值
+      });
+
+
+      const selectedhwk = [];
+      const hwkcheckboxes = document.querySelectorAll('input[name="hwk"]:checked');
+      hwkcheckboxes.forEach((checkbox) => {
+        selectedhwk.push(checkbox.value); // 收集被選中的值
+      });
+      const infrmr = document.getElementById("infrmr").value;
+      const jobmr = document.getElementById("jobmr").value;
+
+      //const wage = document.querySelector('input[name="wage"]:checked');
+      //const wheight = document.querySelector('input[name="wheight"]:checked');
+      //const wweight = document.querySelector('input[name="wweight"]:checked');
+      //const wedu = document.querySelector('input[name="wedu"]:checked');
+      //const wexp = document.querySelector('input[name="wexp"]:checked');
+      const wform = document.querySelector('input[name="wform"]:checked');
+console.log(psex)
+      // 检查输入是否有效
+      if (!bcode) {
+        // 如果有任何输入为空，阻止表单提交
+        alert('請自創聘工表編號');
+        return false; // 阻止表单提交
+      }
+
+      if (!bpwd) {
+        // 如果有任何输入为空，阻止表单提交
+        alert('請自創聘工表密碼');
+        return false; // 阻止表单提交
+      }
+      if (!btelno) {
+        // 如果有任何输入为空，阻止表单提交
+        alert('請輸入連絡電話');
+        return false; // 阻止表单提交
+      }
+      if (!bline) {
+        // 如果有任何输入为空，阻止表单提交
+        alert('Line ID');
+        return false; // 阻止表单提交
+      }
+      if (!bname) {
+        // 如果有任何输入为空，阻止表单提交
+        alert('請輸入雇主姓名');
+        return false; // 阻止表单提交
+      }
+      if (!bdoc) {
+        // 如果有任何输入为空，阻止表单提交
+        alert('請輸入聘雇資格');
+        return false; // 阻止表单提交
+      }
+      if (!page) {
+        // 如果有任何输入为空，阻止表单提交
+        alert('請輸入被照顧人年齡');
+        return false; // 阻止表单提交
+      }
+      if (!pheight) {
+        // 如果有任何输入为空，阻止表单提交
+        alert('請輸入被照顧人身高');
+        return false; // 阻止表单提交
+      }
+      if (!pweight) {
+        // 如果有任何输入为空，阻止表单提交
+        alert('請輸入被照顧人體重');
+        return false; // 阻止表单提交
+      }
+      if (!psex) {
+        // 如果有任何输入为空，阻止表单提交
+        alert('請輸入被照顧人性別');
+        return false; // 阻止表单提交
+      }
+
+      // 現在在給定的路徑上將數據設置到數據庫中
+      const userData = {
+        bcode: bcode,
+        bpwd: bpwd,
+        bname: bname,
+        btelno: btelno,
+        bline: bline,
+        bdoc: bdoc.value,
+        page: page,
+        pweight: pweight,
+        pheight: pheight,
+        psex: psex.value,
+        wcity: wcity,
+        wblock: wblock,
+        wfperson: wfperson,
+        selectedcaresk: selectedcaresk,
+        selectedcaremo: selectedcaremo,
+        selectedcaremh: selectedcaremh,
+        selectedcarepet: selectedcarepet,
+        selectedMeals: selectedMeals,
+        selectedcarechid: selectedcarechid,
+        selectedhwk: selectedhwk,
+        infrmr: infrmr,
+        jobmr: jobmr,
+        //wage: wage.value,
+        //wheight: wheight.value,
+        //wweight: wweight.value,
+        //wwedu: wedu.value,
+        //wexp: wexp.value,
+        wform: wform.value
+      };
+      // 將資料同時寫入到兩個 Firebase 數據庫
+      //  db1Ref.push(userData)
+
+      database1.ref('job/' + bcode).set(userData)
+      saveData(bcode, bpwd);
+    }
+
+    function saveData(bcode, bpwd) {
+      // 模擬資料儲存完成（這裡是假設的例子）
+      setTimeout(function () {
+        // 資料儲存完成的通知
+        alert(
+          "資料儲存完成！\n\n" +
+          "請使用以下通關資料安排視訊：\n" +
+          "您的聘工表編號: " + bcode + "\n" +
+          "聘工表密碼: " + bpwd
+        );
+
+        // 通知完成後，關閉視窗或跳轉下一個頁面
+        //window.close(); // 關閉當前視窗
+        // 或者
+        window.location.href = "KCF 履歷表 10-5.html"; // 跳轉到下一個頁面
+      }, 1000); // 模擬1秒後完成儲存
+    }
+
+    // 在某個按鈕點擊後執行儲存
+    document.querySelector("#saveButton").addEventListener("click", saveData);
+
+  </script>
+</body>
+
+</html>
