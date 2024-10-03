@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改 Informasi Resume</title>
+    <!-- Bootstrap連結 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+
+    <!-- CSS連結 -->
+    <link rel="stylesheet" href="style -修改資料.css">
+
+    <!--JQuery 連結-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--SimplePagenation 連結-->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"></script>
+</head>
+
+
+<body>
+
+    <div style="width: 750px; height: auto;" class="container-fluid">
+        <h1>修改 KCF Isi Informasi Resume</h1>
+
+        <div class="tab-content">
+            <!-- 第一部份：標籤分頁的導覽列 -->
+            <div class="nav nav-tabs nav-justified">
+                <!-- 按鈕1 -->
+                <button id="button1" class="nav-link active" data-bs-toggle="tab" data-bs-target="#menu1"
+                    aria-selected="true">
+                    Informasi pribadi dasar<br>個人基本資料
+                </button>
+                <!-- 按鈕2
+                    <button id="button2" class="nav-link" data-bs-toggle="tab" data-bs-target="#menu2">
+                     Status keluarga<br>家庭狀況
+                    </button> -->
+                <!-- 按鈕3 -->
+                <button id="button3" class="nav-link" data-bs-toggle="tab" data-bs-target="#menu3"
+                    aria-selected="false">
+                    status pernikahan<br>婚姻狀況
+                </button>
+                <!-- <div class="w-100"></div> -->
+                <!-- 按鈕4 -->
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#menu4" aria-selected="false">
+                    pengalaman kerja<br>工作經驗
+                </button>
+                <!-- 按鈕5 -->
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#menu5" aria-selected="false">
+                    kebiasaan hidup<br>生活習性
+                    <!-- </button> -->
+                    <!-- 按鈕6 -->
+                    <!-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#menu6" aria-selected="false"> -->
+                    <!-- JavaScript6 -->
+                </button>
+                <!-- 按鈕6 -->
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#menu6" aria-selected="false">
+                    paspor<br>護照
+                </button>
+                <!-- 按鈕7 -->
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#menu6" aria-selected="false">
+                    visa<br>簽證
+                </button>
+
+
+
+
+            </div>
+            <div style="background-color: beige;font-size: 14px; height: 50px;">
+                <label style="margin-top: 15px;margin-left: 45px;">* No.Induk編號</label>
+                <input style="background-color:#eec07c ;" type="text" id="code" required>
+                <label style="margin-left: 25px">* Nama 姓名</label>
+                <input style="background-color:#eec07c; width: 250px;" type="text" id="name" required>
+            </div>
+
+            <!-- 第1個內容 -->
+            <div class="tab-pane fade show active" id="menu1">
+                <div style="margin-top: 25px; margin-left: 15px;" class="row">
+
+                    <div style="margin-top: 25px;" class="row">
+                        <div class="col">
+                            <label>*Tgl.lahir 出生日期</label>
+                            <input style="background-color:blanchedalmond;" type="text" id="bhd" required>
+                        </div>
+                        <div class="col">
+                            <label for="age">*Umur年齡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input style="background-color:blanchedalmond;width: 135px;" type="text" id="age" required>
+                            <label>tahun</label>
+                        </div>
+
+                        <div class="col">
+                            <label for="bhp">*Tempat lahir出生地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input style="background-color:blanchedalmond ;" type="text" id="bhp" required>
+                        </div>
+
+                        <div style="margin-top: 25px;" class="row">
+                            <div class="col">
+                                <label for="weight">*Berat badan體重</label>
+                                <input style="background-color:blanchedalmond; width: 150PX;" type="text" id="weight"
+                                    required>
+                                <label>kg.</label>
+                            </div>
+                            <div class="col">
+                                <label for="height">*Tinggi Badan身高</label>
+                                <input style="background-color:blanchedalmond; width: 150px;" type="text" id="height"
+                                    required>
+                                <label>cm.</label>
+                            </div>
+                            <div class="col">
+                                <label>*pilih tujuan anda bekerja</label>
+                                <select style="background-color:blanchedalmond;" id="FCTY" size="3" class="form-select">
+                                    <option value="TWN">Taiwan台灣</option>
+                                    <option value="HKG">Hongkong香港</option>
+                                    <option value="SNG">Singapura新加坡</option>
+                                    <option value="MLYS">Malaysia馬來西亞</option>
+                                    <option value="OMN">Oman澳門</option>
+                                    <option value="ARB">Arab阿拉伯</option>
+                                    <option value="KRE">Korea韓國</option>
+                                    <option value="BRN">Brunai汶萊</option>
+                                    <option value="JPN">Jepan日本</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-top: 25px;" class="row">
+                            <div class="col">
+
+                                <div style="margin-top: 25px;" class="row">
+                                    <div class="col">
+                                        <label for="edu">*Pendidikan學歷</label>
+                                        <select style="background-color:blanchedalmond;" id="edu" size="4">
+                                            <option value="小學">SD小學</option>
+                                            <option value="國中" selected>SMP/SLTP國中</option>
+                                            <option value="高中">SMA/SLTA/SMK高中</option>
+                                            <option value="大學">D3/S1大學</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col">
+                                        <label for="reg">*Agama宗教信仰</label>
+                                        <select style="background-color:blanchedalmond;" id="reg" size="5">
+                                            <option value="回教" selected>Islam回教</option>
+                                            <option value="天主教">Katolik天主教</option>
+                                            <option value="基督教">Keristenan基督教</option>
+                                            <option value="佛教">Buddha佛教</option>
+                                            <option value="印度教">Hinduisme印度教</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col">
+                                        <label for="edu">*jenis kelamin</label>
+                                        <select style="background-color:blanchedalmond;" id="sex" size="2">
+                                            <option value="male">pria男性</option>
+                                            <option value="female" selected>perempuan女性</option>
+                                        </select>
+                                    </div>
+                                    <div style="margin-top: 25px;" class="row">
+                                        <div class="col">
+                                            <label>Jumlah Saudara兄弟姊妹數&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                            <input style=" width: 230px;" type="text" id="bsn" required>
+                                        </div>
+                                        <div class="col">
+                                            <label for="age">Anak Ke家中排行</label>
+                                            <input style=" width: 130px;" type="text" id="rng" required>
+                                        </div>
+                                        <div class="col">
+                                            <label for="pasno">Nomor paspor護照號碼</label>
+                                            <input style=" width: 180px;" type="text" id="pasno">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 25px;margin-left: 5px;" class="row">
+                            <label>Foto setengah panjang半身照 : <input type="file" id="fileInputimage1"></label>
+
+                            <!-- <input style="background-color:blanchedalmond; width: 550px;" type="text" id="image1">-->
+                        </div>
+
+
+                        <div style="margin-top: 25px;margin-left: 5px;" class="row">
+                            <label>Citra seluruh tubuh全身照 : <input type="file" id="fileInputimage2"></label>
+                            <!-- <input style="background-color:blanchedalmond; width: 550px;" type="text" id="image2">-->
+                        </div>
+
+                        <div style="margin-top: 25px;margin-bottom: 25px;margin-left: 5px;" class="row">
+                            <label>pengenalan diri mp4自我介紹 : <input type="file" id="fileInputmp4"></label>
+                            <!--  <input style="background-color:blanchedalmond; width: 550px;" type="text" id="self">-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第2個內容 
+            <div class="tab-pane fade" id="menu2">
+            </div>-->
+
+            <!-- 第3個內容婚姻狀況 -->
+            <div class="tab-pane fade" id="menu3">
+                <div style="margin-top: 25px; margin-left: 15px;" class="row">
+
+                    <div style="margin-top: 35px;" class="row">
+                        <div class="col">
+                            <label for="mrg">*Status Perkawinan<br>婚姻狀況</label><br>
+                            <select id="mrg" size="4">
+                                <option value="未婚" selected>Belum Kawin未婚</option>
+                                <option value="已婚">Kawin已婚</option>
+                                <option value="離婚">Cerai離婚</option>
+                                <option value="寡居">Janda寡居</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="hsbname">Nama Pasangan配偶名</label>
+                            <input type="text" id="hsbname" required>
+                            <label style="margin-top: 10px;" for="hsbage">Umur Pasangan配偶年齡</label>
+                            <input type="text" id="hsbage" required>
+
+                        </div>
+                        <div class="col">
+                            <label style="margin-top: 10px;" for="hsbjob">Pekerjaan Pasangan配偶工作</label>
+                            <select id="hsbjob" size="4">
+                                <option value="農夫">Petani農夫</option>
+                                <option value="家庭主婦">Ibu rumah tangga家庭主婦</option>
+                                <option value="上班">Bekerja上班</option>
+                                <option value="開店">Buka toko開店</option>
+                                <option value="工廠工作">Pabrik kerja工廠工作</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div style="margin-top: 35px;" class="row">
+                        <div class="col">
+                            <label for="childn">Jumlah Anak<br>子女數目</label>
+                            <input type="text" id="childn">
+                        </div>
+                        <div class="col">
+                            <label for="childb">Umur Anak Sulung<br>最大孩子的年齡</label>
+                            <input type="text" id="childb">
+
+                        </div>
+                        <div class="col">
+                            <label for="childl">Umur Anak Bungsu<br>最小孩子的年齡</label>
+                            <input style="margin-bottom: 50px;" type="text" id="childl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 第4個內容工作經驗 -->
+            <div class="tab-pane fade" id="menu4">
+                <div style="margin-top: 25px; margin-left: 15px;" class="row">
+
+                    <label style="margin-top: 15px;" id="exp1"><b>Pengalaman Kerja1 工作經驗 1:</b></label>
+                    <!-- <input type="text" id="exp1"> -->
+                    <div style="margin-top: 25px;" class="row">
+                        <div class="col">
+                            <label>Mulai Danggal開始日期</label>
+                            <input id="startDay1" type="month" placeholder="開始日期" class="form-control"><BR>
+                            <label>Tanggal <A></A>khir結束日期</label>
+                            <input id="finishDay1" type="month" placeholder="結束日期" class="form-control">
+                        </div>
+                        <div class="col">
+                            <label>Tempat Kerja</label>
+                            <select id="place1" size="5" class="form-select">
+                                <option value="當地">Indonesia當地</option>
+                                <option value="台灣">Taiwan台灣</option>
+                                <option value="新加坡">Singapura新加坡</option>
+                                <option value="馬來西亞">Malaysia馬來西亞</option>
+                                <option value="香港">Hongkong香港</option>
+                                <option value="澳門">Macao澳門</option>
+                                <option value="阿拉伯">Arab阿拉伯</option>
+                                <option value="韓國">Korea韓國</option>
+                                <option value="汶萊">Brunai汶萊</option>
+                                <option value="日本">Jepan日本</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div style="margin-top: 25px;" class="row">
+                        <div class="col">
+                            <label>Konten Pekerjaan工作內容</label>
+                            <textarea style="height: 120px;" id="job1ds"></textarea>
+                        </div>
+                        <div class="col">
+                            <label>Alasan Untuk Pergi離職原因</label>
+                            <select style="width: 420px;" id="finishReason1" size="5" class="form-select">
+                                <option value="合約到期">kontrak telah habis合約到期</option>
+                                <option value="家裡有事">Sesuatu terjadi di rumah家裡有事</option>
+                                <option value="結婚">nikah結婚</option>
+                                <option value="要到台灣工作">Ingin bekerja di Taiwan要到台灣工作</option>
+                                <option value="被照顧人往生">Orang yang dirawat meninggal dunia被照顧人往生</option>
+                            </select>
+                        </div>
+                    </div><br><br>
+                    <label style="margin-top: 45px;" id="exp2"><b>Pengalaman Kerja2 工作經驗 2:</b></label>
+                    <div style="margin-top: 25px;" class="row">
+                        <div class="col">
+                            <label>Mulai Tanggal開始日期</label>
+                            <input id="startDay2" type="month" placeholder="開始日期" class="form-control"><BR>
+                            <label>Tanggal Akhir結束日期</label>
+                            <input id="finishDay2" type="month" placeholder="結束日期" class="form-control">
+                        </div>
+                        <div class="col">
+                            <label>Tempat Kerja</label>
+                            <select id="place2" size="5" class="form-select">
+                                <option value="當地">Indonesia當地</option>
+                                <option value="台灣">Taiwan台灣</option>
+                                <option value="新加坡">Singapura新加坡</option>
+                                <option value="馬來西亞">Malaysia馬來西亞</option>
+                                <option value="香港">Hongkong香港</option>
+                                <option value="澳門">Macao澳門</option>
+                                <option value="阿拉伯">Arab阿拉伯</option>
+                                <option value="韓國">Korea韓國</option>
+                                <option value="汶萊">Brunai汶萊</option>
+                                <option value="日本">Jepan日本</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div style="margin-top: 25px;" class="row">
+                        <div class="col">
+                            <label>Konten pekerjaan工作內容</label>
+                            <textarea style="height: 120px;" id="job2ds"></textarea>
+                        </div>
+                        <div style="margin-bottom: 50px;" class="col">
+                            <label>Alasan untuk pergi離職原因</label>
+                            <select style="width: 420px;" id="finishReason2" size="5" class="form-select">
+                                <option value="合約到期">kontrak telah habis合約到期</option>
+                                <option value="家裡有事">Sesuatu terjadi di rumah家裡有事</option>
+                                <option value="結婚">nikah結婚</option>
+                                <option value="要到台灣工作">Ingin bekerja di Taiwan要到台灣工作</option>
+                                <option value="被照顧人往生">Orang yang dirawat meninggal dunia被照顧人往生</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第5個內容 -->
+            <div class="tab-pane fade" id="menu5">
+                <div style="margin-top: 25px; margin-left: 15px;" class="row">
+                </div>
+                <label style="margin-left: 15px; margin-top: 15px;   color: hsl(60, 4%, 5%); font-size: 12px;"><b>1.
+                        Takut
+                        pada
+                        anjing?</b></label>
+                <input type="radio" name="5-8" value="是" style="display: inline-block; ">Ya是
+                <input type="radio" name="5-8" value="不是" style="display: inline-block; " checked>Tidak不
+                                       
+                <label style="margin-left: 15px; margin-top: 15px;   color: hsl(60, 4%, 5%); font-size: 12px;"><b>2.
+                        Sediakah
+                        jaga anjing/kucing?</b></label>
+                <input type="radio" name="5-9" value="願意" style="display: inline-block; " checked>Ya是
+                <input type="radio" name="5-9" value="不願意" style="display: inline-block;">Tidak不
+                <br>
+                <label style="margin-left: 15px; margin-top: 15px;   color: hsl(60, 4%, 5%); font-size: 12px;"><b>3.
+                        Maukah
+                        makan daging babi?</b></label>
+                <input type="radio" name="10-11" value="可以" style="display: inline-block;">Ya是
+                <input type="radio" name="10-11" value="不可以" style="display: inline-block; " checked>Tidak不
+                         
+                <label style="margin-left: 15px; margin-top: 15px;   color: hsl(60, 4%, 5%); font-size: 12px;"><b>4.
+                        Sediakah
+                        pegang daging babi?</b></label>
+                <input type="radio" name="11-12" value="願意" style="display: inline-block;" checked>Ya是
+                <input type="radio" name="11-12" value="不願意" style="display: inline-block; ">Tidak不
+                <div style="margin-top: 25px; background-color: hwb(83 61% 4%);">
+                    <br>
+                    <fieldset style="margin-left: 165PX;">
+                        <legend>      KEAHLIALIAN PEKERJAAN:</legend>
+                        <br><br>
+                        <label><input type="checkbox" name="pro1" value="農業"> Pertanian</label>
+                        <label style="margin-left: 150px;"><input type="checkbox" name="pro2" value="建築工"> Buruh
+                            Bangunan</label><br>
+                        <label><input type="checkbox" name="pro3" value="操作機器"> Operator Mesin</label>
+                        <label style="margin-left: 103px;"><input type="checkbox" name="pro4" value="木工">
+                            Perkayuan</label><br>
+                        <label><input type="checkbox" name="pro5" value="鐵工"> Besi</label>
+                        <label style="margin-left: 191px;"><input type="checkbox" name="pro6" value="刷漆">
+                            Mengecat</label><br>
+                        <label><input type="checkbox" name="pro7" value="維修機台"> Reparasi Mesin</label>
+                        <label style="margin-left: 108px;"><input type="checkbox" name="pro8" value="司機">
+                            Supir</label><br>
+                        <label><input type="checkbox" name="pro9" value="電器"> Elektronik</label>
+                        <label style="margin-left: 146px;"><input type="checkbox" name="pro10" value="車床"> Pembubutan
+                            (CNC)</label><br>
+                        <label><input type="checkbox" name="pro11" value="紡織"> Tekstil</label>
+                        <label style="margin-left: 173px;"><input type="checkbox" name="pro12" value="水電">
+                            air/Listrik</label><br>
+                        <label><input type="checkbox" name="pro13" value="推高機"> Forklift</label>
+                        <label style="margin-left: 165px;"><input type="checkbox" name="pro14"
+                                value="漁夫">Nelayan</label><br>
+                        <label><input type="checkbox" name="pro15" value="電焊"> Las</label><br><br>
+                    </fieldset>
+                </div>
+            </div>
+
+            <!-- 第6個內容 -->
+            <div class="tab-pane fade" id="menu6">
+                <div style="margin-top: 25px; margin-left: 15px;" class="row">
+
+                    <div style="margin-top: 25px;" class="row">
+                        <div class="col">
+                            <label>*Tgl.lahir 出生日期</label>
+                            <input style="background-color:blanchedalmond;" type="text" id="bhd" required>
+                        </div>
+                        <div class="col">
+                            <label for="age">*Umur年齡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input style="background-color:blanchedalmond;width: 135px;" type="text" id="age" required>
+                            <label>tahun</label>
+                        </div>
+
+                        <div class="col">
+                            <label for="bhp">*Tempat lahir出生地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input style="background-color:blanchedalmond ;" type="text" id="bhp" required>
+                        </div>
+
+                        <div style="margin-top: 25px;" class="row">
+                            <div class="col">
+                                <label for="weight">*Berat badan體重</label>
+                                <input style="background-color:blanchedalmond; width: 150PX;" type="text" id="weight"
+                                    required>
+                                <label>kg.</label>
+                            </div>
+                            <div class="col">
+                                <label for="height">*Tinggi Badan身高</label>
+                                <input style="background-color:blanchedalmond; width: 150px;" type="text" id="height"
+                                    required>
+                                <label>cm.</label>
+                            </div>
+                            <div class="col">
+                                <label>*pilih tujuan anda bekerja</label>
+                                <select style="background-color:blanchedalmond;" id="FCTY" size="3" class="form-select">
+                                    <option value="TWN">Taiwan台灣</option>
+                                    <option value="HKG">Hongkong香港</option>
+                                    <option value="SNG">Singapura新加坡</option>
+                                    <option value="MLYS">Malaysia馬來西亞</option>
+                                    <option value="OMN">Oman澳門</option>
+                                    <option value="ARB">Arab阿拉伯</option>
+                                    <option value="KRE">Korea韓國</option>
+                                    <option value="BRN">Brunai汶萊</option>
+                                    <option value="JPN">Jepan日本</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-top: 25px;" class="row">
+                            <div class="col">
+
+                                <div style="margin-top: 25px;" class="row">
+                                    <div class="col">
+                                        <label for="edu">*Pendidikan學歷</label>
+                                        <select style="background-color:blanchedalmond;" id="edu" size="4">
+                                            <option value="小學">SD小學</option>
+                                            <option value="國中" selected>SMP/SLTP國中</option>
+                                            <option value="高中">SMA/SLTA/SMK高中</option>
+                                            <option value="大學">D3/S1大學</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col">
+                                        <label for="reg">*Agama宗教信仰</label>
+                                        <select style="background-color:blanchedalmond;" id="reg" size="5">
+                                            <option value="回教" selected>Islam回教</option>
+                                            <option value="天主教">Katolik天主教</option>
+                                            <option value="基督教">Keristenan基督教</option>
+                                            <option value="佛教">Buddha佛教</option>
+                                            <option value="印度教">Hinduisme印度教</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col">
+                                        <label for="edu">*jenis kelamin</label>
+                                        <select style="background-color:blanchedalmond;" id="sex" size="2">
+                                            <option value="male">pria男性</option>
+                                            <option value="female" selected>perempuan女性</option>
+                                        </select>
+                                    </div>
+                                    <div style="margin-top: 25px;" class="row">
+                                        <div class="col">
+                                            <label>Jumlah Saudara兄弟姊妹數&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                            <input style=" width: 230px;" type="text" id="bsn" required>
+                                        </div>
+                                        <div class="col">
+                                            <label for="age">Anak Ke家中排行</label>
+                                            <input style=" width: 130px;" type="text" id="rng" required>
+                                        </div>
+                                        <div class="col">
+                                            <label for="pasno">Nomor paspor護照號碼</label>
+                                            <input style=" width: 180px;" type="text" id="pasno">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 25px;margin-left: 5px;" class="row">
+                            <label>Foto setengah panjang半身照 : <input type="file" id="fileInputimage1"></label>
+
+                            <!-- <input style="background-color:blanchedalmond; width: 550px;" type="text" id="image1">-->
+                        </div>
+
+
+                        <div style="margin-top: 25px;margin-left: 5px;" class="row">
+                            <label>Citra seluruh tubuh全身照 : <input type="file" id="fileInputimage2"></label>
+                            <!-- <input style="background-color:blanchedalmond; width: 550px;" type="text" id="image2">-->
+                        </div>
+
+                        <div style="margin-top: 25px;margin-bottom: 25px;margin-left: 5px;" class="row">
+                            <label>pengenalan diri mp4自我介紹 : <input type="file" id="fileInputmp4"></label>
+                            <!--  <input style="background-color:blanchedalmond; width: 550px;" type="text" id="self">-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <button
+                style="margin-bottom: 25px; margin-left: 35px;margin-top: 25px; height: 50px; width: 650px; background-color: chocolate;"
+                id="Submit" onclick="saveData()">Submit
+            </button><br>
+
+        </div>
+    </div>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+    <script src="firebaseConfig.js"></script>
+
+    <script>
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfigJOBSCRIPT, "dbJOB");
+        const db = firebase.database(firebase.app("dbJOB"));
+        // 從URL參數中取得數據
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                key: params.get('key'),
+                name: params.get('name'),
+                age: params.get('age')
+            };
+        }
+
+        // 初始化頁面時讀取Firebase資料
+        window.onload = function () {
+            const queryParams = getQueryParams();
+
+            if (queryParams.key) {
+                db.ref(`TWN/${queryParams.key}`).once('value').then((snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        document.getElementById("code").value = queryParams.key;
+                        document.getElementById("name").value = data.name || queryParams.name;
+                        document.getElementById("age").value = data.age || queryParams.age;
+
+                        // 其他欄位賦值，根據需要添加
+                        document.getElementById("bhd").value = data.bhd || '';
+                        document.getElementById("weight").value = data.weight || '';
+                        document.getElementById("height").value = data.height || '';
+                    } else {
+                        alert("No such document in Firebase!");
+                    }
+                }).catch((error) => {
+                    console.error("Error getting document: ", error);
+                });
+            } else {
+                alert("No key provided in the URL!");
+            }
+        }
+
+        function saveData() {
+            const code = document.getElementById("code").value;
+
+            db.ref(`TWN/${code}`).set({
+                name: document.getElementById("name").value,
+                age: document.getElementById("age").value,
+                bhd: document.getElementById("bhd").value,
+                weight: document.getElementById("weight").value,
+                height: document.getElementById("height").value,
+                // 其他欄位的數據，根據需要添加
+            }).then(() => {
+                alert("Document successfully written!");
+            }).catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聘工表列式-1</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            font-family: sans-serif;
+            margin: auto;
+        }
+
+        .sidebar {
+            font-size: 12px;
+            flex: 0 0 15%;
+            padding: 15px;
+            background-color: #f2f2f2;
+        }
+
+        style body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        table {
+            width: 95%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #d2e9bb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: hsl(49, 76%, 70%);
+        }
+
+        td {
+            font-size: 16px;
+        }
+
+        th,
+        td {
+            text-align: center;
+        }
+
+        .pagination {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination button {
+            margin: 0 5px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pagination button:hover {
+            background-color: #45a049;
+        }
+
+        .pagination button.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <!-- Sidebar content remains unchanged -->
+        <h3>
+            聘工表數量:<label id="male">0</label>
+            <br>
+            <label id="CHsheight"></label>
+        </h3>
+        <hr>
+        <input style="background-color:blanchedalmond; " type="text" id="biono" placeholder="No.Induk編號" required>
+        <input style="background-color:blanchedalmond; margin-top: 10px;" type="text" id="BioName" placeholder="請輸入密碼"
+            required>
+
+        <button style="cursor: pointer; color: hwb(359 18% 7%);background-color: hsl(55, 61%, 82%);margin-top: 10px;"
+            id="checkAndToggleBtn" onclick="checkpwd()"><b>Mengundang Anda ke obrolan video</b></button>
+        <hr>
+    </div>
+
+    <div class="container">
+        <!-- 分頁按鈕的頂部 -->
+        <div class="pagination" id="pagination-top">
+            <!-- 分頁按鈕將插入這裡 -->
+        </div>
+
+        <h2>Daftar Pekerjaan</h2>
+
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th style="width:100px;">bcode</th>
+                    <th style="width:40px;">Umur</th>
+                    <th style="width:40px;">Tingi</th>
+                    <th style="width:40px;">Berat</th>
+                    <th>Jenis kelamin</th>
+                    <th>Kabupaten atau kota</th>
+                    <th style="width:150px;"></th>
+                    <th style="width:150px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 資料會插入這裡 -->
+            </tbody>
+        </table>
+
+        <!-- 分頁按鈕的底部 -->
+        <div class="pagination" id="pagination-bottom">
+            <!-- 分頁按鈕將插入這裡 -->
+        </div>
+
+        <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+        <script src="firebaseConfig.js"></script>
+        <script>
+            var data = [];
+            var filteredData = [];
+            var currentPage = 1;
+            var rowsPerPage = 10; // 每頁顯示的資料筆數
+
+            // 假設這是從 Firebase 取得的資料
+            var fetchdata = databaseJOBSCRIPT.ref('job/');
+            fetchdata.on('value', (snapshot) => {
+                data = [];
+                snapshot.forEach((childSnapshot) => {
+                    data.push({
+                        key: childSnapshot.key,
+                        ...childSnapshot.val()
+                    });
+                });
+
+                renderTable();
+                setupPagination();
+            });
+
+            function renderTable(page = 1) {
+                const tableBody = document.querySelector("#data-table tbody");
+                tableBody.innerHTML = "";
+
+                // 計算當前頁的資料起始與結束位置
+                const startIndex = (page - 1) * rowsPerPage;
+                const endIndex = startIndex + rowsPerPage;
+                const pageData = data.slice(startIndex, endIndex);
+
+                // 動態生成表格內容
+                pageData.forEach(item => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td class="bcode-link" style="color: blue; text-decoration: underline; cursor: pointer;">
+                            ${item.bcode}
+                        </td>
+                        <td>${item.page}</td>
+                        <td>${item.pheight}</td>
+                        <td>${item.pweight}</td>
+                        <td>${item.psex}</td>
+                        <td>${item.wcity}</td>
+                        <td><label id="invLabel-${item.bcode}" style="display: none;"></label><br>
+<button id="${item.bcode}" style="color: blue; text-decoration: underline; cursor: pointer;" 
+    onclick="window.open('Jadwalkan panggilan video-indo.html?key=${item.bcode}&biono=' + document.getElementById('biono').value + '&BioName=' + document.getElementById('BioName').value, '_blank', 'width=480,height=380');">
+    Atur obrolan video dengan majikan
+</button>
+                        </td>
+                    `;
+
+                    // 監聽點擊事件，點擊 bcode 欄位才會跳轉
+                    const bcodeCell = row.querySelector(".bcode-link");
+                    bcodeCell.addEventListener('click', () => {
+                        const bcode = item.bcode;
+                        const bpwd = item.bpwd;
+                        const url = `test radio.html?bcode=${bcode}&bpwd=${bpwd}`;
+                        window.open(url, '_blank');
+                    });
+
+                    tableBody.appendChild(row);
+                });
+            }
+
+            function setupPagination() {
+                const totalPages = Math.ceil(data.length / rowsPerPage);
+                const paginationTop = document.getElementById('pagination-top');
+                const paginationBottom = document.getElementById('pagination-bottom');
+
+                paginationTop.innerHTML = "";
+                paginationBottom.innerHTML = "";
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const buttonTop = createPaginationButton(i);
+                    const buttonBottom = createPaginationButton(i);
+
+                    //paginationTop.appendChild(buttonTop);
+                    paginationBottom.appendChild(buttonBottom);
+                }
+            }
+
+            function createPaginationButton(page) {
+                const button = document.createElement('button');
+                button.textContent = page;
+                if (page === currentPage) {
+                    button.classList.add('active');
+                }
+
+                button.addEventListener('click', () => {
+                    currentPage = page;
+                    renderTable(currentPage);
+                    setupPagination();
+                });
+
+                return button;
+            }
+
+            function checkpwd() {
+                // 取得 biono 和 BioName 的值
+                var bionoValue = document.getElementById("biono").value;
+                var BioNameValue = document.getElementById("BioName").value;
+
+                // Firebase 的參考節點 job
+                var ref = databaseJOBSCRIPT.ref('KFA/' + bionoValue);
+
+                // 檢查 biono 是否存在
+                ref.once('value', function (snapshot) {
+                    if (snapshot.exists()) {
+                        // 如果 biono 存在，檢查 BioName
+                        var BioData = snapshot.val();
+                        var storedBioName = BioData.name; // Firebase 中存儲的密碼
+                        console.log('0 storedBioName: ', storedBioName);
+                        if (BioNameValue === storedBioName) {
+                            // 密碼正確，繼續進行後續操作
+                            console.log('履歷表名字和輸入名正確');
+                            // 在這裡添加你需要執行的其他操作...
+                        } else {
+                            // 密碼錯誤
+                            alert("聘工表編號的密碼錯誤");
+                        }
+                    } else {
+                        // 顯示自定義彈出窗口，提示用戶並提供超連結
+                        //showCustomAlert();
+                    }
+                }).catch(function (error) {
+                    // 捕捉 Firebase 查詢錯誤
+                    console.error("Firebase 查詢時發生錯誤: ", error);
+                });
+                checkAndToggle();
+
+            }
+
+            function checkAndToggle() {
+                // 初始化符合條件的父節點數量
+                let matchingParentCount = 0;
+
+                // 取得 biono 的值
+                var bionoValue = document.getElementById("biono").value;
+
+                // 使用實際 key 值，正確形成 Firebase 路徑
+                var ref = databaseJOBSCRIPT.ref('INTERVIEW/');
+
+                ref.once('value', function (snapshot) {
+                    if (snapshot.exists()) {
+                        snapshot.forEach(function (childSnapshot) {
+                            // 取得每個 INTERVIEW 節點下的值
+                            var key = childSnapshot.key;
+                            var childData = childSnapshot.val();
+
+                            // 取得 Iagency, Tagency, TimeZone 的值
+                            var IagencyValue = childData.Iagency;
+                            var TagencyValue = childData.Tagency;
+                            var selectedInterviewValue = childData.TimeZone;
+
+                            console.log('1子節點 (key): ', key);
+                            console.log('2Iagency: ', IagencyValue);
+                            console.log('3Tagency: ', TagencyValue);
+                            console.log('4TimeZone', selectedInterviewValue)
+
+                            // 檢查 Tagency 是否等於 bionoValue
+                            if (IagencyValue === bionoValue) {
+                                console.log('5對應的 Tagency: ', TagencyValue);
+                                matchingParentCount++;
+
+                                // 設定按鈕文字和顏色
+                                var button = document.getElementById('checkAndToggleBtn');
+                                button.innerHTML = matchingParentCount + ' orang<br>telah melakukan reservasi untuk obrolan video';
+                                button.style.color = 'blue';
+
+                                // 更新對應的 label
+                                var label = document.getElementById('invLabel-' + TagencyValue);
+                                if (label) {
+                                    var url = `test radio.html?bcode=${TagencyValue}`;
+                                    label.innerHTML = 'sesi video:<br>' + selectedInterviewValue.join('<br>');
+                                    label.style.display = 'inline';
+                                    label.style.color = 'blue';
+                                    label.style.fontSize = '14px';
+                                }
+
+                                // 綁定刪除按鈕
+                                var deleteButton = document.getElementById(TagencyValue);
+                                if (deleteButton) {
+                                    deleteButton.innerHTML = 'Batalkan reservasi';
+                                    deleteButton.style.color = 'red';
+                                    deleteButton.onclick = function () {
+                                        console.log('嘗試刪除 Firebase 中的 key: ', key);
+                                        var ref = databaseJOBSCRIPT.ref('INTERVIEW/' + key);
+                                        ref.remove().then(function () {
+                                            console.log('預約已成功刪除');
+                                            deleteButton.style.display = 'none';
+                                            renderTable(filteredData);
+                                        }).catch(function (error) {
+                                            console.error('刪除預約時發生錯誤: ', error);
+                                        });
+                                    };
+                                } else {
+                                    console.log('未找到刪除按鈕，可能按鈕 ID 錯誤');
+                                }
+                            }
+                        });
+
+                        // 如果沒有符合的 Tagency，更新按鈕文字為 "尚未預約"
+                        if (matchingParentCount === 0) {
+                            var button = document.getElementById('checkAndToggleBtn');
+                            button.textContent = '您尚未預約視訊';
+                            button.style.color = 'red';
+                        }
+                    }
+                });
+            }
+        </script>
+    </div>
+</body>
+
+</html>
