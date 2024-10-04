@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 引入 Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <!-- 引入 firebase.js -->
+    <script src="firebaseConfig.js"></script>
+    <title>印尼 KCF 履歷表</title>
+
+    <style>
+        body {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            background-color:"#ffffff" ;
+        }
+
+        /* 基本樣式設置 */
+        h1, h2, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 對圖片容器使用 Flexbox */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: hsl(41, 70%, 66%);
+        }
+
+        /* 圖片和文本的彈性布局 */
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .profile-info p {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: blue;
+        }
+
+        /* 限制圖片的寬度 */
+        img {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* 響應式調整 */
+        @media screen and (min-width: 768px) {
+            .profile-section {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .profile-info {
+                margin-left: 10px;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .profile-info p {
+                font-size: 14px;
+                
+            }
+        }
+
+        /* 工作經歷樣式 */
+        .experience-section {
+            background-color: #0fdbed;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .experience-section p {
+            font-size: 18px;
+            color: hwb(33 0% 95%);
+        }
+
+        .experience-section strong {
+            color: rgb(14, 5, 115);
+            font-size: 16px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- 標題區 -->
+    <header>
+        <h1 style="text-align: center; color: #0000ff;">印尼 KCF 履歷表</h1>
+        <p style="text-align: center; font-size: 30px; color: brown;"><strong>履歷表編號: <u><label id="key" style="font-size: 30px; color: rgb(252, 3, 3);"></label></u></strong></p>
+    </header>
+
+    <!-- 勞工個人資料 -->
+    <section class="profile-section">
+        <img id="allpc" src="" alt="個人照片" style="width: 260px; height: 420px;">
+        <div class="profile-info">
+            <p>名：<u><strong><label id="name"></strong></label></u></p>
+            <p>出生地：<u><strong><label id="bhp"></strong></label></u></p>
+            <p>出生日期：<u><strong><label id="bhd"></strong></label></u></p> 
+            <p>年齡：<u><strong><label id="age"></strong></label></u> 歲</p>
+            <p>身高： <u><strong><label id="height"></strong></label></u> 公分</p>
+             <p>體重： <u><strong><label id="weight"></strong></label></u> 公斤</p>
+            <p>信仰宗教： <u><strong><label id="reg"></strong></label></u></p>
+            <p>學歷：<u><strong><label id="edu"></strong></label></u></p>
+            <p>兄弟姊妹數：<u><strong><label id="bsn"></strong></label></u> 個 排行第：<u><strong><label id="rng"></strong></label></u></p>
+            <p>護照號碼： <u><strong><label id="pasno"></strong></label></u></p>
+            <p>婚姻狀況：<u><strong><label id="mrg"></strong></label></u></p>
+            <p>配偶名：<u><strong><label id="hsbname"></strong></label></u> 配偶年齡：<u><strong><label id="hsbage"></strong></label></u>歲</p>
+            <p>配偶工作：<u><strong><label id="hsbjob"></strong></label></u></p>
+            <p>子女數目：<u><strong><label id="childn"></strong></label></u> 個 最大：<u><strong><label id="childb"></strong></label></u> 歲 最小： <u><strong><label id="childl"></strong></label></u> 歲</p>
+        </div>
+    </section>
+
+    <!-- 工作經歷 -->
+    <section class="experience-section">
+        <h2 style="text-align: center;">工作經歷</h2>
+        <p><strong><label id="exp1"></label></strong></p>
+        <p><strong><label id="exp2"></label></strong></p>
+    </section>
+
+    <script>
+        // 獲取 URL 中的參數
+        const urlParams = new URLSearchParams(window.location.search);
+        const key = urlParams.get('key');
+
+        // 定義要從 Firebase 讀取的屬性
+        const attributeLabelMapping = {
+            code: 'key',
+            name: 'name',
+            bhd: 'bhd',
+            age: 'age',
+            reg: 'reg',
+            bhp: 'bhp',
+            height: 'height',
+            weight: 'weight',
+            edu: 'edu',
+            bsn: 'bsn',
+            rng: 'rng',
+            mrg: 'mrg',
+            hsbname: 'hsbname',
+            hsbage: 'hsbage',
+            hsbjob: 'hsbjob',
+            childn: 'childn',
+            childb: 'childb',
+            childl: 'childl',
+            image2: 'allpc',
+            exp1: 'exp1',
+            exp2: 'exp2',
+            fathername: 'fathername',
+            fatherage: 'fatherage',
+            fatherjob: 'fatherjob',
+            mothername: 'mothername',
+            motherage: 'motherage',
+            pasno: 'pasno',
+            motherjob: 'motherjob'
+        };
+
+        // 從 Firebase 讀取並顯示資料
+        Object.entries(attributeLabelMapping).forEach(([attribute, labelId]) => {
+            databaseJOBSCRIPT.ref(`KFA/${key}/${attribute}`).once('value').then(function (snapshot) {
+                const value = snapshot.val();
+                document.getElementById(labelId).innerText = value;
+                if (attribute === 'image2') {
+                    document.getElementById('allpc').src = value;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
