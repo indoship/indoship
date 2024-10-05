@@ -87,6 +87,11 @@ h1 {
         width: 80%;
     }
 
+     .form-control {
+        width: 60%;
+        font-size: 12px;
+    }
+
     .form-select {
         width: 50%;
         /* 設定為 100% 占滿行寬度 */
