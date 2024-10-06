@@ -8,7 +8,7 @@
     <title>Jadwalkan panggilan video-1</title>
     <style>
         body {
-            max-width: 500px;
+            max-width: 400px;
             /* 设置页面最大宽度为800像素 */
             margin: 0 auto;
             /* 让页面水平居中 */
@@ -31,51 +31,52 @@
 
 <body>
 
-    <div style="margin-top: 25px; background-color: chocolate; height:90px;width: 500px;" class="row">
+    <div style="margin-top: 25px; background-color: chocolate; height:130px;width: 350px;" class="row">
         <div style="margin-left: 35px; " class="col">
-            <label>*Silakan masukkan nomor Anda</label>
-            <input style="background-color:blanchedalmond; width: 150PX;margin-top: 15px;" type="text" id="biono"
-                required>
+            <label style="margin-top: 15px;">*Silakan masukkan nomor resume Anda</label><br>
+            <input style="background-color:blanchedalmond; width: 150PX;" type="text" id="biono" required>
         </div>
         <div style="margin-left: 35px; " class="col">
             <div class="row">
-                <label>*請輸入聘工表密碼</label>
+                <label>*Silakan masukkan nama Anda</label><br>
                 <input style="background-color:blanchedalmond; width: 150px;" type="text" id="bioname" required>
 
             </div>
-            <div class="row"> <button style="margin-left: 165px;width: 130px;"
-                    onclick="window.open('Isi Informasi Resume-1.html', '_blank');">Isi resume</button>
+            <div class="row">
+                <button style="margin-left: 65px; width: 130px; margin-top: 15px;"
+                    onclick="window.open('Isi Informasi Resume-1.html', '_blank');">Isi resume
+                </button>
             </div>
             <br><br>
         </div>
-              <label id=key></label>
-        <div style="margin: left 80px; margin-top: 25px; background-color: hwb(83 61% 4%);width:500px;height: 400px;">
+        <div style="margin: left 80px; background-color: hwb(83 61% 4%);width:350px;height: 530px;">
             <br>
-            <fieldset style="margin-left: 10PX;width: 450px; margin-bottom: 25px;">
+            <fieldset style="margin-left: 10PX;width: 300px; margin-bottom: 2dvb5px;">
                 <legend>   Jangka waktu yang Anda <br> untuk menjadwalkan panggilan video   </legend>
                 <br>
                 <label><input type="checkbox" id="time0" name="intvw" value="09~23">tidak resmi</label><br><br>
                 <label><input type="checkbox" id="time1" name="intvw" value="09~12">Kapan saja di pagi hari</label><br>
-                <label><input type="checkbox" id="time2" name="intvw" value="09~10"> 09~10</label>
-                <label><input type="checkbox" id="time3" name="intvw" value="10~11"> 10~11</label>
+                <label><input type="checkbox" id="time2" name="intvw" value="09~10"> 09~10</label><br>
+                <label><input type="checkbox" id="time3" name="intvw" value="10~11"> 10~11</label><br>
                 <label><input type="checkbox" id="time4" name="intvw" value="11~12">11~12</label><br><br>
 
                 <label><input type="checkbox" id="time5" name="intvw" value="12~18">Setiap sore</label><br>
-                <label><input type="checkbox" id="time6" name="intvw" value="12~13">12~13</label>
-                <label><input type="checkbox" id="time7" name="intvw" value="13~14">13~14</label>
-                <label><input type="checkbox" id="time8" name="intvw" value="14~15">14~15</label>
-                <label><input type="checkbox" id="time9" name="intvw" value="15~16">15~16</label>
-                <label><input type="checkbox" id="time10" name="intvw" value="16~17">15~16</label>
+                <label><input type="checkbox" id="time6" name="intvw" value="12~13">12~13</label><br>
+                <label><input type="checkbox" id="time7" name="intvw" value="13~14">13~14</label><br>
+                <label><input type="checkbox" id="time8" name="intvw" value="14~15">14~15</label><br>
+                <label><input type="checkbox" id="time9" name="intvw" value="15~16">15~16</label><br>
+                <label><input type="checkbox" id="time10" name="intvw" value="16~17">15~16</label><br>
                 <label><input type="checkbox" id="time11" name="intvw" value="17~18">17~18</label><br><br>
 
                 <label><input type="checkbox" id="time12" name="intvw" value="19~23">Kapan saja di malam
                     hari</label><br>
-                <label><input type="checkbox" ide="time13" name="intvw" value="19~20">19~20</label>
-                <label><input type="checkbox" id="time14" name="intvw" value="21~22">21~22</label>
+                <label><input type="checkbox" ide="time13" name="intvw" value="19~20">19~20</label><br>
+                <label><input type="checkbox" id="time14" name="intvw" value="21~22">21~22</label><br>
                 <label><input type="checkbox" id="time15" name="intvw" value="22~23">22~23</label><br><br>
-                <label style="color: crimson;"><b>Perbedaan waktu antara Taiwan dan Indonesia: +1 jam</b></label>
+                <label style="color: crimson;"><b>Perbedaan waktu antara Taiwan <br> dan Indonesia: +1 jam</b></label>
             </fieldset>
-            <button style="margin-left: 130px;width: 250px;height: 40px;background-color: chartreuse;font-size: 15px;"
+            <button
+                style="margin-left: 25px;margin-top:15px;width: 300px;height: 40px;background-color: chartreuse;font-size: 15px;"
                 onclick="checkpwd()">Silakan atur video sesuai slot waktunya</button>
         </div>
     </div>
@@ -94,7 +95,6 @@
         //const img = urlParams.get('name');
         // 將 'key' 的值指定給 label
         const label = document.getElementById('key');
-        label.textContent = "編號:" + key + "       名:" + bioname + "       編號:" + biono; // 更新 label 內容為參數的值
 
         if (!biono == '') {
             document.getElementById('biono').value = biono;
@@ -116,28 +116,24 @@
                 if (snapshot.exists()) {
                     // 如果 biono 存在，檢查 BioName
                     var BioData = snapshot.val();
+                    var storedBiocode = BioData.code; // Firebase 中存儲的密碼
                     var storedBioName = BioData.name; // Firebase 中存儲的密碼
-                    console.log('0 storedBioName: ', storedBioName);
                     if (BioNameValue === storedBioName) {
-                        // 密碼正確，繼續進行後續操作
-                        console.log('履歷表名字和輸入名正確');
-                        // 在這裡添加你需要執行的其他操作...
+
+                        if (BioNameno === storedBiocode) {
+                            sendData()
+                        } else {
+                            // 密碼錯誤
+                            alert("Nomor resume yang dimasukkan salah.");
+                        }
                     } else {
                         // 密碼錯誤
-                        alert("聘工表編號的密碼錯誤");
+                        alert("Nama resume yang dimasukkan salah.");
                     }
-                } else {
-                    // 顯示自定義彈出窗口，提示用戶並提供超連結
-                    //showCustomAlert();
+
                 }
-            }).catch(function (error) {
-                // 捕捉 Firebase 查詢錯誤
-                console.error("Firebase 查詢時發生錯誤: ", error);
             });
-            sendData();
-
         }
-
 
         function sendData() {
 
@@ -155,7 +151,7 @@
 
             if (document.querySelectorAll('input[name="intvw"]:checked').length === 0) {
                 // 如果沒有選中的項目，阻止表單提交
-                alert('請選出適Silakan pilih jangka waktu video yang sesuai合視訊時段');
+                alert('Silakan pilih jangka waktu video yang sesuai');
                 return false; // 阻止表單提交
             }
             const biono = document.getElementById('biono').value;
