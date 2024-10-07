@@ -32,7 +32,7 @@
         }
 
         table {
-            width: 85%;
+            width: auto;
             border-collapse: collapse;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             background-color: #9ce8c9;
@@ -96,6 +96,7 @@
             background-color: #ccc;
             cursor: not-allowed;
         }
+        
     </style>
 </head>
 
@@ -108,18 +109,18 @@
         </div>
         <div style="margin-top: 25px;margin-left: 15px;" class="row">
             <div class="col-md">
-                <input style="background-color:blanchedalmond;" type="text" id="biono" placeholder="Nomor resume"
+                <input style="background-color:blanchedalmond;font-size: 14px;" type="text" id="biono" placeholder="Nomor resume"
                     required>
             </div>
             <div class="col-md">
-                <input style="background-color:blanchedalmond; margin-top: 10px;" type="text" id="BioName"
+                <input style="background-color:blanchedalmond; margin-top: 10px;font-size: 14px;" type="text" id="BioName"
                     placeholder="Nama resume">
             </div>
             <div class="col-md">
                 <button
-                    style="cursor: pointer; color: hwb(359 18% 7%); background-color: hsl(55, 61%, 82%); margin-top: 10px;"
+                    style="cursor: pointer; color: hwb(359 18% 7%);font-size: 14px;height: 40px; background-color: hsl(55, 61%, 82%); margin-top: 10px;"
                     id="checkAndToggleBtn" onclick="checkpwd()">
-                    <b>Mengundang Anda ke obrolan video</b>
+                    <u><b>Mengundang Anda ke obrolan video</b></u>
                 </button>
             </div>
         </div>
@@ -193,7 +194,7 @@
                         <td>${item.psex}</td>
                         <td>${item.wcity}</td>
                         <td><label id="invLabel-${item.bcode}" style="display: none;"></label><br>
-<button id="${item.bcode}" style="background:orange; width:150px; color: blue; text-decoration: underline; cursor: pointer;" 
+<button id="${item.bcode}" style="background:orange; width:125px; color: blue; text-decoration: underline; cursor: pointer;" 
     onclick="window.open('Jadwalkan panggilan video-indo.html?key=${item.bcode}&biono=' + document.getElementById('biono').value + '&BioName=' + document.getElementById('BioName').value, '_blank', 'width=300,height=500');">
     Atur obrolan video dengan majikan
 </button>
@@ -211,7 +212,7 @@
 
                     tableBody.appendChild(row);
                 });
-                checkAndToggle();
+                //checkAndToggle();
 
             }
 
@@ -243,6 +244,7 @@
                     currentPage = page;
                     renderTable(currentPage);
                     setupPagination();
+                    checkAndToggle();
                 });
 
                 return button;
