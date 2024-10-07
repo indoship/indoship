@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聘工表列式-1</title>
+    <title>Pekerjaan yang ada</title>
     <style>
         body {
             display: flex;
@@ -131,13 +131,8 @@
             <thead>
                 <tr>
                     <th>bcode</th>
-                    <!-- <th style="width:30px;">Umur</th>
-                            <th style="width:30px;">Tingi</th>
-                            <th style="width:30px;">Berat</th>
-                            -->
-                    <th>Jenis kelamin</th>
-                    <th>Kabupaten atau kota</th>
-                    <th></th>
+                    <th>Jenis<br>kelamin</th>
+                    <th>Kabupaten<br>atau kota</th>
                     <th></th>
                 </tr>
             </thead>
@@ -212,8 +207,6 @@
 
                     tableBody.appendChild(row);
                 });
-                //checkAndToggle();
-
             }
 
             function setupPagination() {
@@ -239,14 +232,12 @@
                 if (page === currentPage) {
                     button.classList.add('active');
                 }
-
                 button.addEventListener('click', () => {
                     currentPage = page;
                     renderTable(currentPage);
                     setupPagination();
                     checkAndToggle();
                 });
-
                 return button;
             }
 
@@ -278,7 +269,6 @@
 
                         // 檢查輸入的 BioName 是否匹配存儲的名稱
                         if (BioNameValue === storedBioName) {
-                            console.log('履歷表名字和輸入名正確');
                             // 檢查 biono 是否匹配
                             if (bionoValue === storedBiocode) {
                                 checkAndToggle(); // 呼叫其他處理函數
@@ -316,11 +306,6 @@
                             var TagencyValue = childData.Tagency;
                             var selectedInterviewValue = childData.TimeZone;
 
-                            console.log('1子節點 (key): ', key);
-                            console.log('2Iagency: ', IagencyValue);
-                            console.log('3Tagency: ', TagencyValue);
-                            console.log('4TimeZone', selectedInterviewValue)
-
                             // 檢查 Tagency 是否等於 bionoValue
                             if (IagencyValue === bionoValue) {
                                 matchingParentCount++;
@@ -346,7 +331,6 @@
                                     deleteButton.style.color = 'red';
                                     deleteButton.style.fontSize = '14px';
                                     deleteButton.onclick = function () {
-                                        console.log('嘗試刪除 Firebase 中的 key: ', key);
                                         var ref = databaseJOBSCRIPT.ref('INTERVIEW/' + key);
                                         ref.remove().then(function () {
                                             deleteButton.style.display = 'none';
@@ -369,5 +353,4 @@
         </script>
     </div>
 </body>
-
 </html>
