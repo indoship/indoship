@@ -1,3 +1,6 @@
+<!--來源是複製於聘工表列表.html
+試用去除身高年齡體重在手機上是否會更好-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -127,17 +130,18 @@
 
                 <h2>Daftar Pekerjaan</h2>
 
-                <table id="data-table">
+                <table style="width: 550px;" id="data-table">
                     <thead>
                         <tr>
-                            <th style="width:100px;">bcode</th>
-                            <th style="width:30px;">Umur</th>
+                            <th>bcode</th>
+                            <!-- <th style="width:30px;">Umur</th>
                             <th style="width:30px;">Tingi</th>
                             <th style="width:30px;">Berat</th>
+                            -->
                             <th>Jenis kelamin</th>
                             <th>Kabupaten atau kota</th>
-                            <th style="width:150px;"></th>
-                            <th style="width:180px;"></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -190,9 +194,6 @@
                         <td class="bcode-link" style="color: blue; text-decoration: underline; cursor: pointer;">
                             ${item.bcode}
                         </td>
-                        <td>${item.page}</td>
-                        <td>${item.pheight}</td>
-                        <td>${item.pweight}</td>
                         <td>${item.psex}</td>
                         <td>${item.wcity}</td>
                         <td><label id="invLabel-${item.bcode}" style="display: none;"></label><br>
@@ -214,6 +215,8 @@
 
                             tableBody.appendChild(row);
                         });
+                        checkAndToggle();
+
                     }
 
                     function setupPagination() {
@@ -280,7 +283,7 @@
                             // 捕捉 Firebase 查詢錯誤
                             console.error("Firebase 查詢時發生錯誤: ", error);
                         });
-                        checkAndToggle();
+                        renderTable();
 
                     }
 
@@ -313,7 +316,6 @@
 
                                     // 檢查 Tagency 是否等於 bionoValue
                                     if (IagencyValue === bionoValue) {
-                                        console.log('5對應的 Tagency: ', TagencyValue);
                                         matchingParentCount++;
 
                                         // 設定按鈕文字和顏色
@@ -336,19 +338,15 @@
                                         if (deleteButton) {
                                             deleteButton.innerHTML = 'Batalkan reservasi';
                                             deleteButton.style.color = 'red';
+                                            deleteButton.style.fontSize = '14px';
                                             deleteButton.onclick = function () {
                                                 console.log('嘗試刪除 Firebase 中的 key: ', key);
                                                 var ref = databaseJOBSCRIPT.ref('INTERVIEW/' + key);
                                                 ref.remove().then(function () {
-                                                    console.log('預約已成功刪除');
                                                     deleteButton.style.display = 'none';
                                                     renderTable(filteredData);
-                                                }).catch(function (error) {
-                                                    console.error('刪除預約時發生錯誤: ', error);
-                                                });
+                                                })
                                             };
-                                        } else {
-                                            console.log('未找到刪除按鈕，可能按鈕 ID 錯誤');
                                         }
                                     }
                                 });
@@ -356,7 +354,7 @@
                                 // 如果沒有符合的 Tagency，更新按鈕文字為 "尚未預約"
                                 if (matchingParentCount === 0) {
                                     var button = document.getElementById('checkAndToggleBtn');
-                                    button.textContent = '您尚未預約視訊';
+                                    button.textContent = 'Anda belum memesan panggilan video';
                                     button.style.color = 'red';
                                 }
                             }
