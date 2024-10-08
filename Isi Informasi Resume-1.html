@@ -14,7 +14,7 @@
     crossorigin="anonymous"></script>
 
   <!-- CSS連結 -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="Isi Informasi Resume.css">
 
   <!--JQuery 連結-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -26,20 +26,19 @@
 <body>
 
   <div style="width: auto; height: auto;" class="container-fluid">
-    <h1>KCF Isi Informasi Resume</h1>
+    <h1 style="font-size: 25px; color: floralwhite;"><b>Isi Informasi Resume</b></h1>
 
     <div class="tab-content">
 
-      <div class="containerN" style="background-color: hsl(102, 70%, 50%);font-size: 14px;height: 150PX;"
+      <div class="containerN" style="background-color: hsl(102, 70%, 50%);font-size: 14px;height: 130PX;width: 85%;"
         class="row my-4">
         <div style="margin-top: 10px;margin-left: 15px;" class="col-md">
           <label style="margin-top: 10px;">* No.Induk</label>
-          <input class="form-control" style="background-color:#eec07c;width: 65%;" type="text" id="code" required>
+          <input class="form-control" style="background-color:#eec07c;width: 45%;" type="text" id="code" required>
         </div>
-        <div style="margin-top: 10px;margin-left: 15px;" class="col-md">
+        <div style="margin-left: 15px;" class="col-md">
           <label>* Nama</label>
-          <input class="form-control" style="background-color:#eec07c;width: 65%; margin-bottom:10px; " type="text"
-            id="name" required>
+          <input class="form-control" style="background-color:#eec07c;width: 85%;" type="text" id="name" required>
         </div>
       </div>
 
@@ -67,7 +66,7 @@
         </div>
 
         <!-- 第二行 -->
-        <div class="row my-4 margin-left: 10px;">
+        <div class="row my-4 ">
           <div class="col-md mb-3">
             <label for="weight">*Berat badan</label>
             <!-- 使用 d-flex 將 input 和 label 放在同一行 -->
@@ -176,7 +175,7 @@
           pernikahan</label>
 
         <!-- <div class="tab-pane fade show active" id="menu3">-->
-        <div style="margin-top: 25px; margin-left: 15px;" class="row">
+        <div style="margin-top:15px; " class="row">
           <div class="row my-4">
             <div class="col-md">
               <label for="mrg">*Status Perkawinan</label><br>
@@ -210,7 +209,7 @@
           </div>
         </div>
 
-        <div style=" margin-left: 15px;" class="row">
+        <div class="row">
           <div class="row my-4">
             <div class="col">
               <label for="childn">Jumlah Anak</label><br>
@@ -230,15 +229,15 @@
         <!-- </div> -->
         <!-- 第4個內容工作經驗 -->
         <label
-          style="font-size:20px;color: hsl(359, 90%, 54%);background-color: lightyellow;margin-top: 10px;width: 75%;">Pengalaman
+          style="font-size:20px;color: hsl(359, 76%, 42%);background-color: lightyellow;width: 75%;">Pengalaman
           kerja</label>
         <!--<div class="tab-pane fade" id="menu4">-->
-        <div style="margin-top: 15px; margin-left: 15px;" class="row">
+        <div class="row">
           <div class="row my-4">
             <div class="col-md">
-              <label style="margin-top: 10px;" id="exp1"><b>Pengalaman Kerja1:</b></label>
+              <label id="exp1"><b>Pengalaman Kerja1:</b></label>
               <!-- <input type="text" id="exp1"> -->
-              <div style="margin-top: 20px;" class="row">
+              <div class="row">
                 <div class="col-md">
                   <label>Mulai Danggal</label><br>
                   <input id="startDay1" type="month" placeholder="tanggal mulai" class="form-controlday"><br>
@@ -281,7 +280,7 @@
             </div>
           </div><br>
           <label style="margin-top: 45px;" id="exp2"><b>Pengalaman Kerja2 :</b></label>
-          <div style="margin-top: 20px;" class="row">
+          <div class="row">
             <div class="col-md">
               <label>Mulai Dangga2</label><br>
               <input id="startDay2" type="month" placeholder="tanggal mulai" class="form-controlday"><br>
@@ -304,30 +303,30 @@
               <option value="日本">Jepan</option>
             </select>
           </div>
-        </div>
 
-
-        <div style="margin-top: 25px;" class="row">
-          <div class="col-md">
-            <label>Konten pekerjaan</label><br>
-            <textarea style="height: 120px;" id="job2ds"></textarea>
-          </div>
-          <div class="col-md">
-            <label>Alasan untuk pergi</label><br>
-            <select style="width: 320px;" id="finishReason2" size="5" class="form-select">
-              <option value="合約到期">kontrak telah habis</option>
-              <option value="家裡有事">Sesuatu terjadi di rumah</option>
-              <option value="結婚">nikah</option>
-              <option value="要到台灣工作">Ingin bekerja di Taiwan</option>
-              <option value="被照顧人往生">Orang yang dirawat meninggal dunia</option>
-            </select>
+          <div class="row">
+            <div class="col-md">
+              <label>Konten pekerjaan</label><br>
+              <textarea style="height: 120px;" id="job2ds"></textarea>
+            </div>
+            <div class="col-md">
+              <label>Alasan untuk pergi</label><br>
+              <select style="margin-bottom: 15px; width: 320px;" id="finishReason2" size="5" class="form-select">
+                <option value="合約到期">kontrak telah habis</option>
+                <option value="家裡有事">Sesuatu terjadi di rumah</option>
+                <option value="結婚">nikah</option>
+                <option value="要到台灣工作">Ingin bekerja di Taiwan</option>
+                <option value="被照顧人往生">Orang yang dirawat meninggal dunia</option>
+              </select>
+            </div>
           </div>
         </div>
         <!-- </div> -->
 
         <div style="display: flex; justify-content: center; align-items: center;margin-top: 25PX; ">
-          <button style="margin-bottom: 15px; height: 45px; width: 75%; background-color: chocolate;" id="Sumit"
-            onclick="sendData()">Sumit
+          <button
+            style="margin-bottom: 15px; height: 45px; width: 75%; background-color: hwb(34 8% 2%);font-size: 20px;"
+            id="Sumit" onclick="sendData()">Sumit
           </button>
         </div>
       </div>
