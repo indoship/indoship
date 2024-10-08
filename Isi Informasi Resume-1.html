@@ -515,7 +515,7 @@
     function saveFileUrl(path, code, url) {
       //const abc = document.getElementById('code').value;
       console.log(code.value);
-      const fileRef = database1.ref('TWN/' + code.value + '/' + path);
+      const fileRef = database1.ref('KFA/' + code.value + '/' + path);
       fileRef.set(url);
 
       // Clear the form
