@@ -28,20 +28,19 @@
   <div style="margin-left:10px;margin-right:10px; background-color: hsl(82, 86%, 35%);">
     <h1><b>填寫聘工表</b></h1>
 
-        <div style="background-color: hsl(32, 80%, 54%);font-size: 14px; height:auto;width: 85%;margin: 0 auto;">
+    <div style="background-color: hsl(32, 80%, 54%);font-size: 14px; height:auto;width: 85%;margin: 0 auto;">
       <label style="margin-top: 15px;margin-left:20px;"><b>*聘工表編號</b></label>
       <input style="background-color:#fcfbfa ;width:75%;" type="text" id="bcode" required><br>
       <label style="margin-top: 15px;margin-left: 20px;"><b>*聘工表密碼</b></label>
       <input style="background-color:#fcfbfa ;width:75%;margin-bottom: 15px;" type="text" id="bpwd" required>
     </div>
-
     <br>
     <div style="margin-left:10px;margin-right:15px; background-color: hsl(52, 79%, 74%);">
       <br>
         <div>
-          <div style="margin-left: 10px;" class="col">
+          <div class="col">
             <label><b>*連絡電話</b></label><br>
-            <input style="background-color:blanchedalmond;" type="text" id="btelno" required>
+            <input style="background-color:blanchedalmond;margin-left:10px;" type="text" id="btelno" required>
           </div>
         </div>
         <div>
@@ -215,7 +214,7 @@
       </div>
       <label style="margin-top: 10px;"><b>基本資料備註</b></label><br>
       <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
-        <textarea style=" background-color:blanchedalmond; width:100%;" id="infrmr">
+        <textarea style=" background-color:white; width:100%;" id="infrmr">
         </textarea>
       </div>
       <div>
@@ -284,7 +283,7 @@
 
           <label style="margin-left: 10px;">年齡Umur-carechid_age</label>
           <input style=" width: 80px; font-size: 14px;background-color: white;" type="text" id="carechid_age">
-          <label>歲</label>
+          <label>歲</label><br>
           <label style="margin-left: 10px;"><input type="checkbox" id="checkbox2" name="carechid"
               value="接送上下學-Antar jemput sekolah">接送上下學</label>
           <label style="margin-left: 10px;"><input type="checkbox" nid="checkbox3" name="carechid"
@@ -318,13 +317,13 @@
         </div>
         <label style="margin-top:15px;"><b>工作內容備註</b></label><br>
         <div style="margin-left: 10px;margin-bottom:20px;background-color: cadetblue;width: 90%;">
-          <textarea style="width:100%;" id="jobmr"></textarea>
+          <textarea style="width:100%;background-color: white;" id="jobmr"></textarea>
           <br>
         </div>
       </div>
       <button
-        style="margin-left: 35px; margin-bottom: 25px; margin-top: 10px; height: 50px; width:90%; background-color: chocolate; font-size: 20px;align-self: center;"
-        id="Sumit" onclick="sendData()">Sumit
+        style="margin-bottom: 25px; margin-top: 10px; height: 50px; width:100%; background-color: chocolate; font-size: 20px;"
+        id="Sumit" onclick="sendData()"><b>確認送出</b>
       </button><br>
 
 
@@ -429,8 +428,8 @@
           const pweight = document.getElementById('pweight').value;
           const pheight = document.getElementById('pheight').value;
           const psex = document.querySelector('input[name="psex"]:checked');
-          const wcity = document.getElementById("wcity").value;
-          const wblock = document.getElementById("wblock").value;
+          const wcity = document.getElementById('select[name="wcity"]).selected');
+          //const wblock = document.getElementById("wblock").value;
           const wfperson = document.getElementById("wfperson").value;
 
           const selectedcaresk = [];
@@ -553,7 +552,7 @@
             pheight: pheight,
             psex: psex.value,
             wcity: wcity,
-            wblock: wblock,
+            //wblock: wblock,
             wfperson: wfperson,
             selectedcaresk: selectedcaresk,
             selectedcaremo: selectedcaremo,
@@ -597,7 +596,7 @@
         }
 
         // 在某個按鈕點擊後執行儲存
-        document.querySelector("#saveButton").addEventListener("click", saveData);
+        //document.querySelector("#saveButton").addEventListener("click", saveData);
 
       </script>
 </body>
