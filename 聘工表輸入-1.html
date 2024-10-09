@@ -38,19 +38,19 @@
     <div style="margin-left:10px;margin-right:15px; background-color: hsl(52, 79%, 74%);">
       <br>
         <div>
-          <div class="col">
+          <div style="margin-left: 10px;" class="col">
             <label><b>*連絡電話</b></label><br>
             <input style="background-color:blanchedalmond;" type="text" id="btelno" required>
           </div>
         </div>
         <div>
-          <div style="margin-top: 15px;" class="col">
+          <div style="margin-top: 15px; margin-left: 10px;" class="col">
             <label for="age"><b>*Line ID</b></label><br>
             <input style="background-color:blanchedalmond;" type="text" id="bline" required>
           </div>
         </div>
         <div>
-          <div style="margin-top: 15px;" class="col">
+          <div style="margin-top: 15px; margin-left: 10px;" class="col">
             <label><b>*雇主姓名</b></label><br>
             <input style="background-color:blanchedalmond;margin-bottom: 10px;" type="text" id="bname" required>
           </div>
@@ -94,14 +94,14 @@
         <div>
           <label for="height"><b>*被照顧人身高</b></label>
           <div style="margin-left: 10px;background-color: cadetblue;width: 75px;">
-            <input style="width: 40px;" type="text" id="pheight">
+            <input style="width: 40px;background-color: white;" type="text" id="pheight">
             <label>cm.</label>
           </div>
         </div>
         <div>
           <label for="height"><b>*被照顧人體重</b></label>
           <div style="margin-left: 10px;background-color: cadetblue;width: 75px;">
-            <input style="width: 40px;" type="text" id="pweight" required>
+            <input style="width: 40px;background-color: white;" type="text" id="pweight" required>
             <label>kg.</label>
             <br>
           </div>
@@ -109,7 +109,7 @@
         <div>
           <label for="height"><b>*與被照顧人同住幾人</b></label>
           <div style="margin-left: 10px;background-color: cadetblue;width: 55px;">
-            <input style=" width: 30px;" type="text" id="wfperson" required>
+            <input style=" width: 30px;background-color: white;" type="text" id="wfperson" required>
             <label>人</label>
             <br>
           </div>
@@ -118,7 +118,7 @@
       <label for="weight"><b>被照顧人所在縣市</b></label>
       <div style="margin-left: 10px;background-color: cadetblue;width:150px;">
         <!--<input style=" width: 160PX;" type="text" id="wcity" required> -->
-        <select id="city" onchange="updateDistricts()">
+        <select style="background-color: white;" id="city" onchange="updateDistricts()">
           <option value="">--請選擇縣市--</option>
           <option value="台北市-Taipei City">台北市</option>
           <option value="新北市-New Taipei City">新北市</option>
@@ -148,7 +148,7 @@
       <label for="height"><b>被照顧人所在行政區</b></label><br>
       <div style="margin-left: 10px;background-color: cadetblue;width:165px;">
         <!--<input style="width: 160px;" type="text" id="wblock" required> -->
-        <select id="district">
+        <select  style="background-color: white;" id="district">
           <option value="">--請先選擇縣市--</option>
         </select>
         <br>
@@ -278,11 +278,11 @@
               checked>不需要-tidak perlu</label>
           <br>
           <label style="margin-left: 10px; margin-top: 10px;">照顧人數</label>
-          <input style=" width: 30px; font-size: 14px;" type="text" id="carechid_no" required>
+          <input style=" width: 30px; font-size: 14px;background-color: white;" type="text" id="carechid_no" required>
           <label>人</label>
 
           <label style="margin-left: 10px;">年齡Umur-carechid_age</label>
-          <input style=" width: 80px; font-size: 14px;" type="text" id="carechid_age">
+          <input style=" width: 80px; font-size: 14px;background-color: white;" type="text" id="carechid_age">
           <label>歲</label>
           <label style="margin-left: 10px;"><input type="checkbox" id="checkbox2" name="carechid"
               value="接送上下學-Antar jemput sekolah">接送上下學</label>
