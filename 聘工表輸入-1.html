@@ -37,26 +37,26 @@
     <br>
     <div style="margin-left:10px;margin-right:15px; background-color: hsl(52, 79%, 74%);">
       <br>
-        <div>
-          <div class="col">
-            <label><b>*連絡電話</b></label><br>
-            <input style="background-color:blanchedalmond;margin-left:10px;" type="text" id="btelno" required>
-          </div>
+      <div style=" margin-left: 10px;">
+        <div class="col">
+          <label><b>*連絡電話</b></label><br>
+          <input style="background-color:blanchedalmond;" type="number" id="btelno" required>
         </div>
-        <div>
-          <div style="margin-top: 15px; margin-left: 10px;" class="col">
-            <label for="age"><b>*Line ID</b></label><br>
-            <input style="background-color:blanchedalmond;" type="text" id="bline" required>
-          </div>
+      </div>
+      <div>
+        <div style="margin-top: 15px; margin-left: 10px;" class="col">
+          <label for="age"><b>*Line ID</b></label><br>
+          <input style="background-color:blanchedalmond;" type="text" id="bline" required>
         </div>
-        <div>
-          <div style="margin-top: 15px; margin-left: 10px;" class="col">
-            <label><b>*雇主姓名</b></label><br>
-            <input style="background-color:blanchedalmond;margin-bottom: 10px;" type="text" id="bname" required>
-          </div>
+      </div>
+      <div>
+        <div style="margin-top: 15px; margin-left: 10px;" class="col">
+          <label><b>*雇主姓名</b></label><br>
+          <input style="background-color:blanchedalmond;margin-bottom: 10px;" type="text" id="bname" required>
         </div>
+      </div>
 
-      <label style="margin-top: 10px;"><b>*聘雇資格</b></label>
+      <label style="margin-top:10px; margin-left: 10px;"><b>*聘雇資格</b></label>
       <br>
       <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
         <input type="radio" name="bdoc" value="已經有函文" style="display: inline-block;margin-left: 10px; ">已經有函文
@@ -66,7 +66,7 @@
         <input type="radio" name="bdoc" value="其它" style="display: inline-block;margin-left: 10px;">其它
         <br>
       </div>
-      <label style="margin-top: 10px; "><b>*聘僱方式</b></label><br>
+      <label style="margin-top: 10px; margin-left: 10px; "><b>*聘僱方式</b></label><br>
       <div style="margin-left: 10px;background-color: cadetblue;width: 280px;">
         <input type="radio" name="wform" value="不拘" style="display: inline-block;margin-left: 10px;" checked>不拘
         <input type="radio" name="wform" value="國外引進" style="margin-left: 10px;">國外引進
@@ -75,16 +75,16 @@
       </div>
       <div style="display: flex; gap: 20px; align-items: center;margin-top: 10px;">
         <div>
-          <label><b>*被照顧人性別</b></label>
+          <label style=" margin-left: 10px;"><b>*被照顧人性別</b></label>
           <div style="margin-left: 10px;background-color: cadetblue;width: 120px;">
             <input type="radio" name="psex" value="男生-pria" style="display: inline-block;margin-left: 5px; ">男生
             <input type="radio" name="psex" value="女生-wanita" style="display: inline-block;margin-left: 10px; ">女生
           </div>
         </div>
         <div>
-          <label for="weight"><b>*被照顧人年齡</b></label>
-          <div style="margin-left: 10px;background-color: cadetblue;width: 75px;">
-            <input style="width: 40px;background-color: white;" type="text" id="page">
+          <label style=" margin-left: 10px;"><b>*被照顧人年齡</b></label>
+          <div style="margin-left: 10px;background-color: cadetblue;width:85px;">
+            <input style="width: 50px;background-color: white;" type="number" id="page">
             <label>歲</label>
             <br>
           </div>
@@ -92,30 +92,31 @@
       </div>
       <div style="display: flex; gap: 15px; align-items: center;margin-top: 10px;">
         <div>
-          <label for="height"><b>*被照顧人身高</b></label>
-          <div style="margin-left: 10px;background-color: cadetblue;width: 75px;">
-            <input style="width: 40px;background-color: white;" type="text" id="pheight">
+          <label style=" margin-left: 10px;"><b>*被照顧人身高</b></label>
+          <div style="margin-left: 10px;background-color: cadetblue;width: 85px;">
+            <input style="width: 50px;background-color: white;" type="number" id="pheight">
             <label>cm.</label>
           </div>
         </div>
         <div>
-          <label for="height"><b>*被照顧人體重</b></label>
-          <div style="margin-left: 10px;background-color: cadetblue;width: 75px;">
-            <input style="width: 40px;background-color: white;" type="text" id="pweight" required>
+          <label style=" margin-left: 10px;"><b>*被照顧人體重</b></label>
+          <div style="margin-left: 10px;background-color: cadetblue;width: 85px;">
+            <input style="width: 50px;background-color: white;" type="number" id="pweight" required>
             <label>kg.</label>
             <br>
           </div>
         </div>
         <div>
-          <label for="height"><b>*與被照顧人同住幾人</b></label>
-          <div style="margin-left: 10px;background-color: cadetblue;width: 55px;">
-            <input style=" width: 30px;background-color: white;" type="text" id="wfperson" required>
+          <label style=" margin-left: 10px;"><b>*與被照顧人同住幾人</b></label>
+          <div style="margin-left: 10px;background-color: cadetblue;width: 65px;">
+            <input style=" width: 40px;background-color: white;" type="number" id="wfperson" required>
             <label>人</label>
             <br>
           </div>
         </div>
       </div>
-      <label for="weight"><b>被照顧人所在縣市</b></label>
+      <br>
+      <label style=" margin-left: 10px;"><b>被照顧人所在縣市</b></label>
       <div style="margin-left: 10px;background-color: cadetblue;width:150px;">
         <!--<input style=" width: 160PX;" type="text" id="wcity" required> -->
         <select style="background-color: white;" id="city" onchange="updateDistricts()">
@@ -145,15 +146,15 @@
         </select>
         <br>
       </div>
-      <label for="height"><b>被照顧人所在行政區</b></label><br>
+      <label style=" margin-left: 10px;"><b>被照顧人所在行政區</b></label><br>
       <div style="margin-left: 10px;background-color: cadetblue;width:165px;">
         <!--<input style="width: 160px;" type="text" id="wblock" required> -->
-        <select  style="background-color: white;" id="district">
+        <select style="background-color: white;" id="district">
           <option value="">--請先選擇縣市--</option>
         </select>
         <br>
       </div>
-      <label style="margin-top: 10px; "><b>被照顧人主要病症</b></label><br>
+      <label style="margin-top: 10px;margin-left: 10px; "><b>被照顧人主要病症</b></label><br>
       <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
         <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="caresk"
             value="中風-Stroke">中風</label>
@@ -176,7 +177,7 @@
         <label style="margin-left: 10px;"><input type="checkbox" id="checkbox10" name="caresk"
             value="洗腎-dialisis ginjal">洗腎</label>
       </div>
-      <label style="margin-top: 10px;">
+      <label style="margin-top: 10px;margin-left: 10px;">
         <b>被照顧人行動能力</b></label><br>
       <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
 
@@ -194,7 +195,7 @@
             value="全身癱瘓-Lumpuh total">全身癱瘓</label>
         <br>
       </div>
-      <label style="margin-top: 10px;"><b>被照顧人使用的輔助器械</b></label><br>
+      <label style="margin-top: 10px;margin-left: 10px;"><b>被照顧人使用的輔助器械</b></label><br>
       <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
         <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="caremh"
             value="無-tidak ada">無</label>
@@ -212,13 +213,13 @@
             value="造口-perut">造口</label>
         <br>
       </div>
-      <label style="margin-top: 10px;"><b>基本資料備註</b></label><br>
+      <label style="margin-top: 10px;margin-left: 10px;"><b>基本資料備註</b></label><br>
       <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
         <textarea style=" background-color:white; width:100%;" id="infrmr">
         </textarea>
       </div>
       <div>
-        <label style="margin-top: 15px;font-size: 18px;"><b>看護工作內容</b></label>
+        <label style="margin-top: 15px;font-size: 18px;margin-left: 10px;"><b>看護工作內容</b></label>
         <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
           <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="carepet"
               value="餵食三餐-Suapi makan hari">餵食三餐</label>
@@ -253,7 +254,7 @@
           <label style="margin-left: 10px;"><input type="checkbox" id="checkbox15" name="carepet"
               value="無-tidak ">無</label>
         </div>
-        <label style="margin-top: 10px; "><b>是否需要烹飪</b></label><br>
+        <label style="margin-top: 10px;margin-left: 10px; "><b>是否需要烹飪</b></label><br>
         <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
           <label>
             <input type="checkbox" id="checkbox1" name="meal" value="不需要-tidak perlu" checked>不需要
@@ -265,20 +266,20 @@
             <input type="checkbox" id="checkbox3" name="meal" value="午餐-Makan siang">午餐
           </label>
           <label style="margin-left: 10px;">
-            <input type="checkbox" id="checkbox4" name="pro1" value="晚餐-Makan malam">晚餐
+            <input type="checkbox" id="checkbox4" name="meal" value="晚餐-Makan malam">晚餐
           </label>
           <label style="margin-left: 10px;">
             <input type="checkbox" id="checkbox5" name="meal" value="宵夜-Makan malam tambahan">宵夜
           </label>
         </div>
-        <label style="margin-top: 10px; "><b>是否需要照顧小孩</b></label>
+        <label style="margin-top: 10px;margin-left: 10px; "><b>是否需要照顧小孩</b></label>
         <br>
         <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
-          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="carechid" value="不需要"
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="carechid" value="不需要-tidak perlu"
               checked>不需要-tidak perlu</label>
           <br>
           <label style="margin-left: 10px; margin-top: 10px;">照顧人數</label>
-          <input style=" width: 30px; font-size: 14px;background-color: white;" type="text" id="carechid_no" required>
+          <input style=" width:40px; font-size: 14px;background-color: white;" type="number" id="carechid_no" required>
           <label>人</label>
 
           <label style="margin-left: 10px;">年齡Umur-carechid_age</label>
@@ -299,9 +300,9 @@
           <label style="margin-left: 10px;"><input type="checkbox" id="checkbox8" name="carechid"
               value="洗澡-Memandikan">洗澡</label>
         </div>
-        <label style="margin-top: 10px; "><b>是否需要家事處理</b></label><br>
+        <label style="margin-top: 10px;margin-left: 10px; "><b>是否需要家事處理</b></label><br>
         <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
-          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="hwk" value="不需要"
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="hwk" value="不需要-tidak perlu"
               checked>不需要-tidak
             perlu</label>
           <label style="margin-left: 10px;"><input type="checkbox" id="checkbox2" name="hwk"
@@ -315,7 +316,7 @@
           <label style="margin-left: 10px;"><input type="checkbox" id="checkbox6" name="hwk"
               value="清洗車輛-Cuci mobil">清洗車輛</label>
         </div>
-        <label style="margin-top:15px;"><b>工作內容備註</b></label><br>
+        <label style="margin-top:15px;margin-left: 10px;"><b>工作內容備註</b></label><br>
         <div style="margin-left: 10px;margin-bottom:20px;background-color: cadetblue;width: 90%;">
           <textarea style="width:100%;background-color: white;" id="jobmr"></textarea>
           <br>
@@ -396,15 +397,15 @@
 
           checkboxes.forEach((checkbox) => {
             checkbox.addEventListener('change', function () {
-              // 如果選中的是除了 "不需要" 以外的其他選項，則取消選中 "不需要"
-              if (checkbox.value !== '不需要' && checkbox.checked) {
-                document.querySelector(`input[name="${groupName}"][value="不需要"]`).checked = false;
+              // 如果選中的是除了 "不需要-tidak perlu-tidak perlu" 以外的其他選項，則取消選中 "不需要-tidak perlu"
+              if (checkbox.value !== '不需要-tidak perlu' && checkbox.checked) {
+                document.querySelector(`input[name="${groupName}"][value="不需要-tidak perlu"]`).checked = false;
               }
 
-              // 如果所有其他選項都未選中，則重新選中 "不需要"
-              const otherSelected = Array.from(checkboxes).some(cb => cb.value !== '不需要' && cb.checked);
+              // 如果所有其他選項都未選中，則重新選中 "不需要-tidak perlu"
+              const otherSelected = Array.from(checkboxes).some(cb => cb.value !== '不需要-tidak perlu' && cb.checked);
               if (!otherSelected) {
-                document.querySelector(`input[name="${groupName}"][value="不需要"]`).checked = true;
+                document.querySelector(`input[name="${groupName}"][value="不需要-tidak perlu"]`).checked = true;
               }
             });
           });
@@ -479,11 +480,6 @@
           const infrmr = document.getElementById("infrmr").value;
           const jobmr = document.getElementById("jobmr").value;
 
-          //const wage = document.querySelector('input[name="wage"]:checked');
-          //const wheight = document.querySelector('input[name="wheight"]:checked');
-          //const wweight = document.querySelector('input[name="wweight"]:checked');
-          //const wedu = document.querySelector('input[name="wedu"]:checked');
-          //const wexp = document.querySelector('input[name="wexp"]:checked');
           const wform = document.querySelector('input[name="wform"]:checked');
           console.log(psex)
           // 检查输入是否有效
@@ -563,11 +559,6 @@
             selectedhwk: selectedhwk,
             infrmr: infrmr,
             jobmr: jobmr,
-            //wage: wage.value,
-            //wheight: wheight.value,
-            //wweight: wweight.value,
-            //wwedu: wedu.value,
-            //wexp: wexp.value,
             wform: wform.value
           };
           // 將資料同時寫入到兩個 Firebase 數據庫
