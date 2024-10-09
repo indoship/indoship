@@ -1,0 +1,81 @@
+.container-fluid {
+    background-color: rgb(145, 154, 181);
+    
+}
+
+
+h1 {
+    text-align: center;
+    padding: 15px;
+    color: rgb(78, 5, 19);
+}
+
+
+.tab-content h3 {
+    text-align: center;
+    padding: 12px;
+    color: blueviolet;
+}
+
+.active-tab {
+    background-color: green;
+    color: white;
+}
+
+.inactive-tab {
+    background-color: grey;
+    color: white;
+}
+
+
+/* 默認情況下，input 元素占滿父容器 */
+.form-control {
+    width: 60%;
+}
+
+@media screen and (max-width: 768px) {
+
+    h1 {
+        text-align: center;
+        padding: 15px;
+        color: #5606a2;
+        font-size: 18px;
+    }
+
+    .container-fluid {
+        background-color: #769707;
+        width: 90% !important;
+    }
+
+    containerN {
+        height: 290px;
+        background-color: rgb(230, 55, 11);
+
+
+    }
+
+
+    nav nav-tabs .nav-tabs,
+    .nav-tabs .nav-link {
+        width: 80%;
+    }
+
+    .form-control {
+        width: 60%;
+        font-size: 12px;
+    }
+
+    .form-controlday {
+        width: 30%;
+        font-size: 14px;
+    }
+
+    .form-select {
+        width: 50%;
+        /* 設定為 100% 占滿行寬度 */
+        font-size: 14px;
+        background-color: #fafcfa;
+    }
+
+
+}
