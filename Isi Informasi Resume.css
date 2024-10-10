@@ -1,7 +1,7 @@
 
 
 .form-control {
-    width:100%;
+    width:auto;
     font-size: 14px;
 }
 
@@ -23,7 +23,7 @@
 
 
     .form-select {
-        width: 35%;
+        width: 55%;
         /* 設定為 100% 占滿行寬度 */
         font-size: 16px;
         background-color: #fafcfa;
@@ -36,7 +36,12 @@
         background-color: white;
     }
 
-form-controlday
+    .form-controlday
     {
      width:50%;
     }
+
+    .form-select
+    {
+        width:30%;
+       }
