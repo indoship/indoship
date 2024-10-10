@@ -14,7 +14,7 @@
 
         /* 样式部分保持不变 */
         .container {
-            max-width: 900px;
+            max-width: 100%;
             font-family: sans-serif;
             margin: auto;
         }
@@ -77,43 +77,46 @@
             background-color: rgba(0, 0, 0, 0.7);
         }
 
-        .modal-content {
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+        }
+
+        /*.modal-content {
             position: absolute;
-            top: 50%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: hwb(195 94% 3%);
             padding: 20px;
             border: 1px solid rgb(71, 128, 233);
-            width: 500px;
-            height: 400px;
-            overflow-y: auto;
+            width: 60%;
+            height: 25%;
             text-align: center;
+            }
             /* 將文本居中 */
-        }
 
         #videoPlayer,
         #Himg {
-            width: 270px;
-            height: 400px;
+            width: 100%;
+            height: 100%;
         }
 
-        #Himg {
-            width: 270px;
-            height: 400px;
-            display: none;
-        }
 
         .close {
-            color: #aaa;
+            color: #f31111;
             float: right;
-            font-size: 28px;
+            font-size: 30px;
             font-weight: bold;
+            background-color: #4CAF50;
+            width: 35px;
         }
 
         .close:hover,
         .close:focus {
-            color: black;
+            color: rgb(15, 249, 54);
+            background-color: #f90a36;
             text-decoration: none;
         }
 
@@ -139,6 +142,9 @@
         #myModal {
             z-index: 1;
             border-bottom: 2px solid rgb(8, 20, 234);
+            width: 70%;
+            height: 25%;
+            margin-left: 25%;
         }
 
         .label {
@@ -156,14 +162,15 @@
             <hr>
             <label id="CHsheight"></label>
         </h3>
+        <!---->
         <hr>請輸入公司名稱
-        <input style="background-color:blanchedalmond; " type="text" id="jobno" placeholder="公司名稱" required><br><br>
+        <input style="background-color:blanchedalmond;width: 90%;" type="text" id="jobno" placeholder="公司名稱"><br><br>
         請輸入公司密碼
-        <input style="background-color:blanchedalmond;" type="text" id="jobpw" placeholder="公司密碼" required>
+        <input style="background-color:blanchedalmond;width: 90%;" type="text" id="jobpw" placeholder="公司密碼">
 
-        <button style="cursor: pointer; color: hwb(359 18% 7%);background-color: hsl(55, 61%, 82%);margin-top: 10px;"
-            id="checkAndToggleBtn" onclick="checkpwd()"><b>顯示預約視訊人選</b></button>
-        <hr>
+       <!-- <button style="cursor: pointer; color: hwb(359 18% 7%);background-color: hwb(35 29% 7%);margin-top: 10px;"
+            id="checkAndToggleBtn" onclick="checkpwd()"><b>顯示預約<br>視訊人選</b></button><br>
+         -->
         <label style="color: hsl(60, 4%, 5%); font-size: 12px;"><b>性別</b></label><br>
         <input type="radio" name="ssex" value="ssex1" data-gender="female" onchange="filterByHWA()">女生<br>
         <input type="radio" name="ssex" value="ssex2" data-gender="male" onchange="filterByHWA()">男生<br>
@@ -221,7 +228,6 @@
         <div style="display: flex; align-items: center;">
             <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </h1>
-            <img width="60px" src="" style="margin-right: 10px;">
             <h1 style="margin: 10px;">仲介選工系統 10-8</h1>
         </div>
 
@@ -230,7 +236,7 @@
             style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background-color:white; border:1px solid black; z-index:1000;">
             <p>沒有這個聘工表編號</p>
             <p>請點擊以下連結以填寫聘工表：<br>
-                <a href="聘工表輸入-1.html" target="_blank" style="color:blue;">前往填寫聘工表</a>
+                <a href="聘工表輸入-3.html" target="_blank" style="color:blue;">前往填寫聘工表</a>
             </p>
             <button onclick="closeCustomAlert()">關閉</button>
         </div>
@@ -287,59 +293,53 @@
     </div>
 
     <div id="myModal" class="modal">
-        <div class="modal-content" style="width: 500px; height: 420px; overflow-y: auto;">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h3 align="center">個 人 基 本 資 料</h3>
-            <TABLE CELLPADDING=2 border=4 BORDERCOLORLIGHT="#FFD0D0" BORDERCOLORDARK="#A425B1"
-                style="width: 500px; height: 350px;">
-                <!-- <caption><b>個 人 履 歷 表</b></caption> -->
-                <tr>
-                    <TH width="450">編號: <label id="code"></label></TH>
+        <TABLE CELLPADDING=2 border=4 BORDERCOLORLIGHT="#FFD0D0" BORDERCOLORDARK="#A425B1">
+            <caption style="background-color: #f96903;text-align: center;"><b>個 人 履 歷 表</b><span class="close"
+                    onclick="closeModal()">&times;</span></caption>
+            <tr>
+                <TH>編號: <label id="code"></label></TH>
 
-                    <td WIDTH=100 rowspan=6>
-                        <video id="videoPlayer" style="width: 230px; height: 330px;" controls>
-                            <!-- 預設顯示的內容，可自行更改 image/jpeg-->
-                            <source type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <img id="Himg" src="" alt="Default Image" style="width: 230px; height: 330px; ">
-                    </td>
-                </tr>
+                <td style="width: 50%;height: 100%;" rowspan=6>
+                    <video id="videoPlayer" controls>
+                        <!-- 預設顯示的內容，可自行更改 image/jpeg-->
+                        <source type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <img id="Himg" src="" alt="Default Image">
+                </td>
+            </tr>
 
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;名: <label id="name"></label></TH>
-                </TR>
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;出生日期:<label
-                            id="bhd"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年齡:<label id="age"></label>
-                    </TH>
-                </TR>
-
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;身高:<label
-                            id="height"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;體重:<label
-                            id="weight"></label></TH>
-                </TR>
-
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;學歷:<label
-                            id="edu"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;婚姻狀況:<label
-                            id="mrg"></label></TH>
-                </TR>
-                <TR>
-                    <TH>工作經驗:
-                        <br style="text-align: left;"> <label id="exp1"></label>
-                        <br style="text-align: left;"> <label id="exp2"></label>
-                    </TH>
-                </TR>
-                <!-- <TH COLSPAN=3 style="height: 45px; text-align: center;" <button onclick="showDetail()"> -->
-                <!-- 播放自我介紹影片</button></TH> -->
-                <!-- <button onclick="showVideo()">播放自我介紹影片</button> -->
+            <TR>
+                <TH style=" text-align: left;">&nbsp;&nbsp;名: <label id="name"></label></TH>
+            </TR>
+            <TR>
+                <TH style=" text-align: left;">&nbsp;&nbsp;出生日期:<label
+                        id="bhd"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年齡:<label id="age"></label>
                 </TH>
-            </TABLE>
+            </TR>
 
-            <div id="modalContent"> </div>
-        </div>
+            <TR>
+                <TH style=" text-align: left;">&nbsp;&nbsp;身高:<label
+                        id="height"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;體重:<label
+                        id="weight"></label></TH>
+            </TR>
+
+            <TR>
+                <TH style=" text-align: left;">&nbsp;&nbsp;學歷:<label
+                        id="edu"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;婚姻狀況:<label
+                        id="mrg"></label></TH>
+            </TR>
+            <TR>
+                <TH>工作經驗:
+                    <br style="text-align: left;"> <label id="exp1"></label>
+                    <br style="text-align: left;"> <label id="exp2"></label>
+                </TH>
+            </TR>
+            </TH>
+        </TABLE>
+
+        <div id="modalContent"> </div>
+    </div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -423,7 +423,6 @@
             dataContainer.innerHTML = htmldata;
             updatePagination();
             checkAndToggle();
-
         }
 
         function closeModal() {
@@ -649,8 +648,8 @@
 
         function checkpwd() {
             // 取得 jobno 和 jobpw 的值
-            var jobnoValue = document.getElementById("jobno").value;
-            var jobpwValue = document.getElementById("jobpw").value;
+            //var jobnoValue = document.getElementById("jobno").value;
+            //var jobpwValue = document.getElementById("jobpw").value;
 
             // Firebase 的參考節點 job
             var ref = databaseJOBSCRIPT.ref('job/' + jobnoValue);
