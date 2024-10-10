@@ -28,5 +28,11 @@
         font-size: 16px;
         background-color: #fafcfa;
     }
-
+   .be white,
+   .form-controlday,
+   form-select,
+   form-controlday
+    {
+        background-color: white;
+    }
 
