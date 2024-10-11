@@ -77,19 +77,19 @@
             background-color: rgba(0, 0, 0, 0.7);
         }
 
-        /*.modal-content {
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: hwb(195 94% 3%);
-            padding: 20px;
-            border: 1px solid rgb(71, 128, 233);
-            width: 60%;
-            height: 25%;
-            text-align: center;
-            }
-            /* 將文本居中 */
+        /* .modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: hwb(195 94% 3%);
+    padding: 20px;
+    border: 1px solid rgb(71, 128, 233);
+    width: 60%;
+    height: 25%;
+    text-align: center;
+} */
+
 
         #videoPlayer,
         #Himg {
@@ -121,7 +121,6 @@
         }
 
         thead th {
-            position: -webkit-sticky;
             position: sticky;
             top: 0;
             background-color: aquamarine;
@@ -155,7 +154,8 @@
 
         @media screen and (max-width: 768px) {
             .sidebar {
-                display: none;
+                display: none !important;
+                /* 添加 !important 來強制應用這個樣式 */
             }
 
             #myModal {
@@ -166,8 +166,8 @@
                 background-color: hwb(195 94% 3%);
                 border: 1px solid rgb(71, 128, 233);
                 text-align: center;
-                 z-index: 9999; /* 提高 z-index，讓 modal 在最上層 */
-
+                z-index: 9999;
+                /* 提高 z-index，讓 modal 在最上層 */
             }
         }
     </style>
@@ -245,12 +245,12 @@
 
     </div>
     <div class="container">
-        <div style="display: flex; align-items: center;">
-            <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </h1>
-            <h1 style="margin: 10px;">仲介選工系統 10-8</h1>
-        </div>
+        <br><br>
+        <div style="text-align: center;">
 
+            <label style="color: #a84c0a;font-size:35px;"><b>仲介選工系統 10-8</b></label>
+        </div>
+        <br><br>
         <!-- 自定義的模態框 -->
         <div id="customAlert"
             style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background-color:white; border:1px solid black; z-index:1000;">
@@ -268,7 +268,7 @@
 
 
         <div>
-            <label for="pageSize">Page Size:</label>
+            <label for="pageSize">&nbsp;&nbsp;&nbsp;Page Size:</label>
             <select id="pageSize" onchange="changePageSize()">
 
                 <option value="10">10</option>
@@ -302,10 +302,11 @@
         </table>
         <div id="tableContainer"></div>
 
-        <div id="pagination">
-            <button onclick="prevPage()">Previous</button>
+        <div style="font-size: 16px;text-align: center;color: #051cb0;" id="pagination">
+            <button style="font-size: 16px;color: #f96903;" onclick="prevPage()"><b>Previous</b></button>
             <span id="pageInfo"></span>
-            <button onclick="nextPage()">Next</button>
+            <button style="font-size: 16px;color: #f96903;height: 20px;" onclick="nextPage()"><b>Next</b></button>
+            <br>
         </div>
 
     </div>
