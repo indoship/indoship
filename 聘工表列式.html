@@ -1,6 +1,3 @@
-<!--來源是複製於聘工表列表.html
-試用去除身高年齡體重在手機上是否會更好-->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +8,8 @@
     <style>
         body {
             display: flex;
-            margin: 0;
-            width: 80%;
+            margin: 10px;
+            width: 90%;
         }
 
         .container {
@@ -197,9 +194,6 @@
                     // 在這裡進行分割處理，確保每次頁面切換時都重新應用分割邏輯
                     const formattedpsex = item.psex && item.psex;
                     const formattedwcity = item.wcity && item.wcity;
-console.log('pageData',pageData)
-console.log('formattedpsex',formattedpsex)
-
                     const row = document.createElement("tr");
                     row.innerHTML = `
             <td class="bcode-link" style="color: blue; text-decoration: underline; cursor: pointer;">
