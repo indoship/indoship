@@ -11,7 +11,193 @@
 
   <div>
     <p style="text-align: center; margin-top: 10px;font-size: 25px; color: #0000ff;"><strong>Data Pemilihan TKW
+      </strong<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabel isi pekerjaan</title>
+</head>
+
+<body>
+
+  <div>
+    <p style="text-align: center; margin-top: 10px;font-size: 25px; color: #0000ff;"><strong>Data Pemilihan TKW
       </strong><br>
+      <label style="color: brown ; ;"><strong>Nomor Seri:</strong></label>
+      <strong> <u><label id="key" style="font-size: 25px; color: rgb(252, 3, 3);"></label></u></strong>
+    </p>
+  </div>
+  <label style="text-align:center;font-size: 25px; color: hwb(30 1% 67% / 0.965);margin-left:20px;"><strong>  Kondisi
+      Pasien</strong></label>
+  <div style="background-color: hwb(48 30% 4%); display: flex; align-items: top; margin-left:5px;margin-right:5px;">
+
+    <div style="margin-top:10px;margin-left:15px;" class="row">
+      <div class="col">
+        <label style="font-size:20px;">Umur:</label><br>
+        <label style="color: blue; font-weight: bold;" id="1001"></label> tahun
+        <br>
+        <hr>
+        <label style="font-size:20px;">Tingi:</label><br>
+        <label style="color: blue; font-weight: bold;" id="1002"></label> cm.
+        <br>
+        <hr>
+        <label style="font-size:20px;">Berat:</label><br>
+        <label style="color: blue; font-weight: bold;" id="1003"></label> kg.
+        <br>
+        <hr>        <label style="font-size:20px;">Jenis kelamin:</label><br>
+        <label style="color: blue; font-weight: bold;" id="1004"></label>
+        <br>
+        <hr>
+        <label style="font-size:20px;">Kabupaten atau kota:</label><br>
+        <label style="color: blue; font-weight: bold;" id="1007"></label>
+        <br>
+        <hr>        
+        <label style="font-size:20px;">Berapa banyak orang yang tinggal bersama:</label><br>
+        <label style="color: blue; font-weight: bold;" id="1009"></label> orang
+        <br>
+        <hr>        
+        <label style="font-size:20px;">Gejala utama:</label>
+        <label style="margin-left: 25px; color: blue; font-weight: bold;" id="1010">
+        </label>
+        <br>
+        <hr>        
+        <label style="font-size:20px;">Mobilitas:</label>
+        <label style="margin-left: 25px; color: blue; font-weight: bold;" id="1011">
+        </label>
+        <br>
+        <hr>
+        <label style="font-size:20px;">Alat bantu yang digunakan:</label>
+        <label style="margin-left: 25px; color: blue; font-weight: bold;" id="1012">
+        </label>
+        <br>
+        <hr>
+        <label style="font-size:20px;">Keterangan informasi dasar:</label><br>
+        <label style="margin-left: 25px; color: blue; font-weight: bold" id="1013">
+        </label>
+        <br>
+        <hr>      
+      </div>
+    </div>
+  </div>
+  <br>
+
+
+  <label style="font-size:25px; color: hsla(135, 90%, 11%, 0.965);margin-left:25px; text-indent: 25px;">
+    <strong>Konten pekerjaan perawatan migran</strong></label>
+  <div style="background-color: hwb(126 38% 9%); display: flex; align-items: top; margin-left:5px;margin-right:5px;">
+    <div style="margin-left:15px; margin-top: 10px;" class="col">
+      <label style="font-size:20px;">Konten pekerjaan:</label>
+
+      <label style="margin-left:15px; color: blue; font-weight: bold;font-size: 18px;" id="label1"></label>
+      <br>
+      <hr>
+      <label style="font-size:20px;">Apakah memasak diperlukan?</label>
+      <label style="margin-left: 25px; color: blue; font-weight: bold;font-size: 18px;" id="label2"></label>
+      <br>
+      <hr>
+      <label style="font-size:20px;">Apakah Anda perlu merawat anak-anak?</label>
+      <label style="margin-left: 25px; color: blue; font-weight: bold;font-size: 18px;" id="label3"></label>
+      <br>
+      <hr>
+      <label style="font-size: 20px ;">Apakah Anda memerlukan pekerjaan rumah untuk?</label>
+      <label style="margin-left: 25px; color: blue; font-weight: bold;font-size: 18px;" id="label4"></label>
+      <br>
+      <hr>    
+    </div>
+  </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+  <script src="firebaseConfig.js"></script>
+
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // 解析 bcode 參數
+    const bcode = getQueryParam('bcode');
+
+    // 使用 bcode 生成 Firebase 的參考
+    var firebase = databaseJOBSCRIPT.ref(`job/${bcode}`);
+
+    // 讀取 Firebase 資料
+    firebase.once('value').then((snapshot) => {
+      const value = snapshot.val();
+
+      // 调试输出，检查 value 的内容
+      console.log('Full value:', value);
+
+      // 如果 value 是對象，處理並顯示到頁面
+      if (value && typeof value === 'object') {
+
+        // 定義一個工具函數，用來提取 '-' 後的部分
+        function extractAfterDash(data) {
+          if (typeof data === 'string' && data.includes('-')) {
+            return data.split('-')[1].trim();  // 提取 '-' 後面的部分，並去掉空格
+          }
+          return data;  // 如果不是字符串或不包含 '-', 直接返回原始值
+        }
+
+        document.getElementById('key').innerHTML = value.bcode || '';
+        document.getElementById('1001').innerHTML = value.page || '';
+        document.getElementById('1003').innerHTML = value.pweight || '';
+        document.getElementById('1002').innerHTML = value.pheight || '';
+
+        // 處理 psex，提取 "-" 後的部分
+        document.getElementById('1004').innerHTML = extractAfterDash(value.psex);
+
+        // 處理 wcity 和 wblock
+        document.getElementById('1007').innerHTML = (value.wcity || '') + "  " + (value.wblock || '');
+
+        document.getElementById('1009').innerHTML = value.wfperson || '';
+
+        // 處理數組型數據，並提取每個數組元素中 '-' 後面的部分
+        if (Array.isArray(value.selectedcaresk)) {
+          const formattedcaresk = value.selectedcaresk.map(extractAfterDash).join('<br>');
+          document.getElementById('1010').innerHTML = `<br> ${formattedcaresk}`;
+        }
+        if (Array.isArray(value.selectedcaremo)) {
+          const formattedcaremo = value.selectedcaremo.map(extractAfterDash).join('<br>');
+          document.getElementById('1011').innerHTML = `<br> ${formattedcaremo}`;
+        }
+        if (Array.isArray(value.selectedcaremh)) {
+          const formattedcaremh = value.selectedcaremh.map(extractAfterDash).join('<br>');
+          document.getElementById('1012').innerHTML = `<br> ${formattedcaremh}`;
+        }
+
+        document.getElementById('1013').innerHTML = value.infrmr || '';
+
+        if (Array.isArray(value.selectedcarepet)) {
+          const formattedcarepet = value.selectedcarepet.map(extractAfterDash).join('<br>');
+          document.getElementById('label1').innerHTML = `<br> ${formattedcarepet}`;
+        }
+        if (Array.isArray(value.selectedMeals)) {
+          const formattedMeals = value.selectedMeals.map(extractAfterDash).join('<br>');
+          document.getElementById('label2').innerHTML = `<br> ${formattedMeals}`;
+        }
+        if (Array.isArray(value.selectedcarechid)) {
+          const formattedcarechid = value.selectedcarechid.map(extractAfterDash).join('<br>');
+          document.getElementById('label3').innerHTML = `<br> ${formattedcarechid}`;
+        }
+        if (Array.isArray(value.selectedhwk)) {
+          const formattedhwk = value.selectedhwk.map(extractAfterDash).join('<br>');
+          document.getElementById('label4').innerHTML = `<br> ${formattedhwk}`;
+        }
+      } else {
+        console.log('Data is null or not in expected format.');
+      }
+    });
+
+
+  </script>
+</body>
+
+</html>><br>
       <label style="color: brown ; ;"><strong>Nomor Seri:</strong></label>
       <strong> <u><label id="key" style="font-size: 25px; color: rgb(252, 3, 3);"></label></u></strong>
     </p>
