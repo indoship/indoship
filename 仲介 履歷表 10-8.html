@@ -85,7 +85,6 @@
             background-color: hwb(195 94% 3%);
             padding: 20px;
             border: 1px solid rgb(71, 128, 233);
-            width: 500px;
             overflow-y: auto;
             text-align: center;
             /* 將文本居中 */
@@ -139,7 +138,7 @@
         }
 
         #myModal {
-            z-index:999;
+            z-index: 999;
             border-bottom: 2px solid rgb(8, 20, 234);
         }
 
@@ -153,8 +152,7 @@
                 /* 添加 !important 來強制應用這個樣式 */
             }
 
-            .modal
-             {
+            .modal {
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -289,43 +287,43 @@
     </div>
 
     <div id="myModal" class="modal">
-        <div class="modal-content" >
+        <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h3 align="center">個 人 基 本 資 料</h3>
-            <TABLE CELLPADDING=2 border=4 BORDERCOLORLIGHT="#FFD0D0" BORDERCOLORDARK="#A425B1">
+            <TABLE CELLPADDING=2 border=4 BORDERCOLORLIGHT="#FFD0D0" BORDERCOLORDARK="#A425B1" font-size="12px">
                 <!-- <caption><b>個 人 履 歷 表</b></caption> -->
                 <tr>
-                    <TH width="450">編號: <label id="code"></label></TH>
+                    <td width="550">編號: <label id="code"></label></td>
 
-                    <td WIDTH=80 rowspan=5>
-                        <video id="videoPlayer" style="width: 230px; height: 330px;" controls>
+                    <td WIDTH=80 rowspan=9>
+                        <video id="videoPlayer" style="width: 180px; height: 230px;" controls>
                             <!-- 預設顯示的內容，可自行更改 image/jpeg-->
                             <source type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                        <img id="Himg" src="" alt="Default Image" style="width: 230px; height: 330px; ">
+                        <img id="Himg" src="" alt="Default Image" style="width: 180px; height: 230px; ">
                     </td>
                 </tr>
-
+                <tr>
+                    <td style="text-align: left;">&nbsp;&nbsp;名:<label id="name"></label></td>
+                </tr>
                 <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;名: <label id="name"></label></TH>
+                    <Td style=" text-align: left;">&nbsp;&nbsp;出生日期:<br><label id="bhd"></label></Td>
                 </TR>
                 <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;出生日期:<label
-                            id="bhd"></label>&nbsp;&nbsp;&nbsp;&nbsp;年齡:<label id="age"></label>
-                    </TH>
+                    <td style=" text-align: left;">&nbsp;&nbsp;年齡:<label id="age"></label></td>
                 </TR>
-
                 <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;身高:<label
-                            id="height"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;體重:<label
-                            id="weight"></label></TH>
+                    <Td style=" text-align: left;">&nbsp;&nbsp;身高:<label id="height"></label></Td>
                 </TR>
-
                 <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;學歷:<label
-                            id="edu"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;婚姻狀況:<label
-                            id="mrg"></label></TH>
+                    <Td style=" text-align: left;">&nbsp;&nbsp;體重:<label id="weight"></label></Td>
+                </TR>
+                <TR>
+                    <Td style=" text-align: left;">&nbsp;&nbsp;學歷:<label id="edu"></label></Td>
+                </TR>
+                <TR>
+                    <Td style=" text-align: left;">&nbsp;&nbsp;婚姻狀況:<label id="mrg"></label></Td>
                 </TR>
                 <TR>
                     <TH colspan="2" style="text-align: left;">
