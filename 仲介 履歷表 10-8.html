@@ -152,19 +152,18 @@
                 /* 添加 !important 來強制應用這個樣式 */
             }
 
-            #myModal {
+            .modal {
                 position: fixed;
-                top: 50%;
-                left: 50%;
+                top: 0;
+                left: 0;
                 width: 100%;
-                height: 95%;
-
-                transform: translate(-50%, -50%);
-                background-color: hwb(195 94% 3%);
-                border: 1px solid rgb(71, 128, 233);
-                text-align: center;
-                z-index: 9999;
-                /* 提高 z-index，讓 modal 在最上層 */
+                height: 100%;
+               
+                /* 黑色半透明背景 */
+                z-index: 999;
+                /* 在模態框之下，但覆蓋其他內容 */
+                display: none;
+                /* 默認隱藏模態框 */
             }
         }
     </style>
