@@ -7,9 +7,14 @@
     <title>仲介選工系統 10-8</title>
 
     <style>
+        body {
+            display: flex;
+            margin: 0;
+        }
+
         /* 样式部分保持不变 */
         .container {
-            max-width: 100%;
+            max-width: 900px;
             font-family: sans-serif;
             margin: auto;
         }
@@ -47,7 +52,7 @@
         }
 
         td {
-            background-color: rgb(236, 239, 237);
+            background-color: hwb(132 19% 43%)e;
         }
 
         table td:focus {
@@ -72,49 +77,57 @@
             background-color: rgba(0, 0, 0, 0.7);
         }
 
-        /* .modal-content {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: hwb(195 94% 3%);
-    padding: 20px;
-    border: 1px solid rgb(71, 128, 233);
-    width: 60%;
-    height: 25%;
-    text-align: center;
-} */
-
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: hwb(195 94% 3%);
+            padding: 20px;
+            border: 1px solid rgb(71, 128, 233);
+            width: 500px;
+            height: 400px;
+            overflow-y: auto;
+            text-align: center;
+            /* 將文本居中 */
+        }
 
         #videoPlayer,
         #Himg {
-            width: 100%;
-            height: 100%;
+            width: 270px;
+            height: 400px;
         }
 
+        #Himg {
+            width: 270px;
+            height: 400px;
+            display: none;
+        }
 
         .close {
-            color: #f31111;
+            color: hsl(0, 90%, 62%);
             float: right;
-            font-size: 30px;
+            font-size: 28px;
             font-weight: bold;
             background-color: #4CAF50;
-            width: 35px;
+            width: 30PX;
         }
 
         .close:hover,
         .close:focus {
-            color: rgb(15, 249, 54);
-            background-color: #f90a36;
+            color: black;
             text-decoration: none;
+            background-color: crimson;
         }
 
         #tableContainer {
+            overflow: auto;
             max-height: calc(100vh - 150px);
             z-index: 0;
         }
 
         thead th {
+            position: -webkit-sticky;
             position: sticky;
             top: 0;
             background-color: aquamarine;
@@ -127,19 +140,8 @@
         }
 
         #myModal {
-            position: fixed;
-            /* 使其固定在螢幕上，不隨滾動移動 */
-            top: 25%;
-            /* 從螢幕頂部開始的 50% */
-            left: 50%;
-            /* 從螢幕左邊開始的 50% */
-            transform: translate(-50%, -50%);
-            /* 用 transform 讓元素的中心點位於正中間 */
-
             z-index: 1;
             border-bottom: 2px solid rgb(8, 20, 234);
-            width: 70%;
-            height: 25%;
         }
 
         .label {
@@ -151,21 +153,6 @@
                 display: none !important;
                 /* 添加 !important 來強制應用這個樣式 */
             }
-
-            .modal {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-               
-                /* 黑色半透明背景 */
-                z-index: 999;
-                /* 在模態框之下，但覆蓋其他內容 */
-                display: none;
-                /* 默認隱藏模態框 */
-            }
-
         }
     </style>
 </head>
@@ -287,21 +274,22 @@
     </div>
 
     <div id="myModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 500px; height: 420px; overflow-y: auto;">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 align="center">個 人 基 本 資 料</h3>
             <TABLE CELLPADDING=2 border=4 BORDERCOLORLIGHT="#FFD0D0" BORDERCOLORDARK="#A425B1"
-                style="text-transform: uppercase;">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h3><b>個 人 基 本 資 料</b></h3>
-
+                style="width: 500px; height: 350px;">
+                <!-- <caption><b>個 人 履 歷 表</b></caption> -->
                 <tr>
-                    <TH>編號: <label id="code"></label></TH>
-                    <td style="width:55%;" rowspan=8>
-                        <video id="videoPlayer" controls>
+                    <TH width="450">編號: <label id="code"></label></TH>
+
+                    <td WIDTH=100 rowspan=6>
+                        <video id="videoPlayer" style="width: 230px; height: 330px;" controls>
                             <!-- 預設顯示的內容，可自行更改 image/jpeg-->
                             <source type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                        <img id="Himg" src="" alt="Default Image">
+                        <img id="Himg" src="" alt="Default Image" style="width: 230px; height: 330px; ">
                     </td>
                 </tr>
 
@@ -309,36 +297,35 @@
                     <TH style=" text-align: left;">&nbsp;&nbsp;名: <label id="name"></label></TH>
                 </TR>
                 <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;出生日期:<label id="bhd"></label></TH>
-                </TR>
-
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;年齡:<label id="age"></label></TH>
-                </TR>
-
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;身高:<label id="height"></label></TH>
-                </TR>
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;體重:<label id="weight"></label></TH>
-                </TR>
-
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;學歷:<label id="edu"></label></TH>
-                </TR>
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;婚姻狀況:<label id="mrg"></label></TH>
-                </TR>
-
-                <!-- 修改這一列，讓工作經驗跨越整個表格寬度 -->
-                <TR>
-                    <TH style="text-align:left;" colspan="2">
-                        <b>工作經驗:</b>
-                        <br> <label style="color: hwb(230 2% 36%);" id="exp1"></label>
-                        <br> <label style="color: hwb(230 2% 36%);" id="exp2"></label>
+                    <TH style=" text-align: left;">&nbsp;&nbsp;出生日期:<label
+                            id="bhd"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年齡:<label id="age"></label>
                     </TH>
                 </TR>
+
+                <TR>
+                    <TH style=" text-align: left;">&nbsp;&nbsp;身高:<label
+                            id="height"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;體重:<label
+                            id="weight"></label></TH>
+                </TR>
+
+                <TR>
+                    <TH style=" text-align: left;">&nbsp;&nbsp;學歷:<label
+                            id="edu"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;婚姻狀況:<label
+                            id="mrg"></label></TH>
+                </TR>
+                <TR>
+                    <TH>工作經驗:
+                        <br style="text-align: left;"> <label id="exp1"></label>
+                        <br style="text-align: left;"> <label id="exp2"></label>
+                    </TH>
+                </TR>
+                <!-- <TH COLSPAN=3 style="height: 45px; text-align: center;" <button onclick="showDetail()"> -->
+                <!-- 播放自我介紹影片</button></TH> -->
+                <!-- <button onclick="showVideo()">播放自我介紹影片</button> -->
+                </TH>
             </TABLE>
+
+            <div id="modalContent"> </div>
         </div>
     </div>
 
