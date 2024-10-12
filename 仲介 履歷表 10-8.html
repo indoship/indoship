@@ -7,7 +7,6 @@
     <title>仲介選工系統 10-8</title>
 
     <style>
-
         /* 样式部分保持不变 */
         .container {
             max-width: 100%;
@@ -153,12 +152,12 @@
                 /* 添加 !important 來強制應用這個樣式 */
             }
 
-           #myModal {
+            #myModal {
                 position: fixed;
                 top: 20%;
                 left: 50%;
-                width:70%; 
-               
+                width: 70%;
+
                 transform: translate(-50%, -50%);
                 background-color: hwb(195 94% 3%);
                 border: 1px solid rgb(71, 128, 233);
@@ -312,11 +311,10 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h3 align="center">個 人 基 本 資 料</h3>
-            <TABLE CELLPADDING=2 border=4 BORDERCOLORLIGHT="#FFD0D0" BORDERCOLORDARK="#A425B1"
+            <TABLE CELLPADDING=2 border=4 BORDERCOLORLIGHT="#FFD0D0" BORDERCOLORDARK="#A425B1">
                 <tr>
                     <TH>編號: <label id="code"></label></TH>
-
-                    <td style="width: 65%;" rowspan=9>
+                    <td style="width: 65%;" rowspan=8>
                         <video id="videoPlayer" controls>
                             <!-- 預設顯示的內容，可自行更改 image/jpeg-->
                             <source type="video/mp4">
@@ -325,46 +323,45 @@
                         <img id="Himg" src="" alt="Default Image">
                     </td>
                 </tr>
-
+    
                 <TR>
                     <TH style=" text-align: left;">&nbsp;&nbsp;名: <label id="name"></label></TH>
                 </TR>
                 <TR>
                     <TH style=" text-align: left;">&nbsp;&nbsp;出生日期:<label id="bhd"></label></TH>
                 </TR>
-
+    
                 <TR>
                     <TH style=" text-align: left;">&nbsp;&nbsp;年齡:<label id="age"></label></TH>
                 </TR>
-
+    
                 <TR>
                     <TH style=" text-align: left;">&nbsp;&nbsp;身高:<label id="height"></label></TH>
                 </TR>
                 <TR>
                     <TH style=" text-align: left;">&nbsp;&nbsp;體重:<label id="weight"></label></TH>
                 </TR>
-
+    
                 <TR>
                     <TH style=" text-align: left;">&nbsp;&nbsp;學歷:<label id="edu"></label></TH>
                 </TR>
                 <TR>
                     <TH style=" text-align: left;">&nbsp;&nbsp;婚姻狀況:<label id="mrg"></label></TH>
                 </TR>
-                <TR>
-                    <TH>工作經驗:
-                        <br style="text-align: left;"> <label id="exp1"></label>
-                        <br style="text-align: left;"> <label id="exp2"></label>
+    
+                <!-- 修改這一列，讓工作經驗跨越整個表格寬度 -->
+                <TR >
+                    <TH  style="text-align:left;" colspan="2">
+                        <b>工作經驗:</b>
+                        <br> <label style="color: hwb(230 2% 36%);" id="exp1"></label>
+                        <br> <label style="color: hwb(230 2% 36%);" id="exp2"></label>
                     </TH>
                 </TR>
-                <!-- <TH COLSPAN=3 style="height: 45px; text-align: center;" <button onclick="showDetail()"> -->
-                <!-- 播放自我介紹影片</button></TH> -->
-                <!-- <button onclick="showVideo()">播放自我介紹影片</button> -->
-                </TH>
             </TABLE>
-
-            <div id="modalContent"> </div>
         </div>
     </div>
+    
+        
 
 
 
