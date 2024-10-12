@@ -17,7 +17,830 @@
             max-width: 100%;
             font-family: sans-serif;
             margin: auto;
+        }<!DOCTYPE html> <!-- 仲介選工系統 10-8是複製 仲介選工系統 10-6 -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仲介選工系統 10-8</title>
+
+    <style>
+
+        /* 样式部分保持不变 */
+        .container {
+            max-width: 100%;
+            font-family: sans-serif;
+            margin: auto;
         }
+
+        .sidebar {
+            font-size: 12px;
+            flex: 0 0 15%;
+            padding: 15px;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            text-align: center;
+            color: hsl(250, 94%, 26%);
+        }
+
+        h5 {
+            padding: -10px;
+            color: #0a0b08;
+        }
+
+        table {
+            width: 100%;
+            border-spacing: 0px;
+        }
+
+        th {
+            text-align: center;
+            background-color: aquamarine;
+        }
+
+        td {
+            background-color: rgb(236, 239, 237);
+        }
+
+        table td:focus {
+            background-color: chocolate;
+        }
+
+        table th,
+        table td {
+            padding: 3px 0px;
+            border-bottom: 2px solid hwb(37 4% 10%);
+            outline: none;
+            text-align: center;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* .modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: hwb(195 94% 3%);
+    padding: 20px;
+    border: 1px solid rgb(71, 128, 233);
+    width: 60%;
+    height: 25%;
+    text-align: center;
+} */
+
+
+        #videoPlayer,
+        #Himg {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .close {
+            color: #f31111;
+            float: right;
+            font-size: 30px;
+            font-weight: bold;
+            background-color: #4CAF50;
+            width: 35px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: rgb(15, 249, 54);
+            background-color: #f90a36;
+            text-decoration: none;
+        }
+
+        #tableContainer {
+            max-height: calc(100vh - 150px);
+            z-index: 0;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background-color: aquamarine;
+            z-index: 2;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        #myModal {
+            position: fixed;
+            /* 使其固定在螢幕上，不隨滾動移動 */
+            top: 25%;
+            /* 從螢幕頂部開始的 50% */
+            left: 50%;
+            /* 從螢幕左邊開始的 50% */
+            transform: translate(-50%, -50%);
+            /* 用 transform 讓元素的中心點位於正中間 */
+
+            z-index: 1;
+            border-bottom: 2px solid rgb(8, 20, 234);
+            width: 70%;
+            height: 25%;
+        }
+
+        .label {
+            color: brown;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                display: none !important;
+                /* 添加 !important 來強制應用這個樣式 */
+            }
+
+            #myModal {
+                position: fixed;
+                top: 20%;
+                left: 40%;
+                transform: translate(-50%, -50%);
+                background-color: hwb(195 94% 3%);
+                border: 1px solid rgb(71, 128, 233);
+                text-align: center;
+                z-index: 9999;
+                /* 提高 z-index，讓 modal 在最上層 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h3>
+            可選人選<br>
+            <label id="male">0</label>
+            <br>
+            <hr>
+            <label id="CHsheight"></label>
+        </h3>
+        <!---->
+        <hr>請輸入公司名稱
+        <input style="background-color:blanchedalmond;width: 90%;" type="text" id="jobno" placeholder="公司名稱"><br><br>
+        請輸入公司密碼
+        <input style="background-color:blanchedalmond;width: 90%;" type="text" id="jobpw" placeholder="公司密碼">
+
+        <!-- <button style="cursor: pointer; color: hwb(359 18% 7%);background-color: hwb(35 29% 7%);margin-top: 10px;"
+            id="checkAndToggleBtn" onclick="checkpwd()"><b>顯示預約<br>視訊人選</b></button><br>
+         -->
+        <label style="color: hsl(60, 4%, 5%); font-size: 12px;"><b>性別</b></label><br>
+        <input type="radio" name="ssex" value="ssex1" data-gender="female" onchange="filterByHWA()">女生<br>
+        <input type="radio" name="ssex" value="ssex2" data-gender="male" onchange="filterByHWA()">男生<br>
+        <hr>
+
+        <label style="color: hsl(60, 4%, 5%); font-size: 12px;"><b>身高區間</b></label><br>
+        <input type="radio" name="sheight" value="sheight1" data-min="1" data-max="300" onchange="filterByHWA()"
+            checked>不拘<br>
+        <input type="radio" name="sheight" value="sheight2" data-min="150" data-max="155"
+            onchange="filterByHWA()">150-155<br>
+        <input type="radio" name="sheight" value="sheight3" data-min="156" data-max="160"
+            onchange="filterByHWA()">156-160<br>
+        <input type="radio" name="sheight" value="sheight4" data-min="161" data-max="165"
+            onchange="filterByHWA()">161-165<br>
+        <input type="radio" name="sheight" value="sheight5" data-min="166" data-max="170"
+            onchange="filterByHWA()">166-170<br>
+        <input type="radio" name="sheight" value="sheight6" data-min="171" data-max="300"
+            onchange="filterByHWA()">171公分以上
+
+        <hr>
+        <label style="color: hsl(60, 4%, 5%); font-size: 12px;"><b>體重區間</b></label><br>
+        <input type="radio" name="sweight" value="sweight1" data-min="1" data-max="300" onchange="filterByHWA()"
+            checked>不拘<br>
+        <input type="radio" name="sweight" value="sweight2" data-min="50" data-max="55"
+            onchange="filterByHWA()">50~55公斤<br>
+        <input type="radio" name="sweight" value="sweight3" data-min="56" data-max="60"
+            onchange="filterByHWA()">56~60公斤<br>
+        <input type="radio" name="sweight" value="sweight4" data-min="61" data-max="65"
+            onchange="filterByHWA()">61-65公斤<br>
+        <input type="radio" name="sweight" value="sweight5" data-min="61" data-max="65"
+            onchange="filterByHWA()">66-70公斤<br>
+        <input type="radio" name="sweight" value="sweight6" data-min="61" data-max="65"
+            onchange="filterByHWA()">71-75公斤<br>
+        <input type="radio" name="sweight" value="sweight7" data-min="61" data-max="65"
+            onchange="filterByHWA()">76-80公斤<br>
+        <input type="radio" name="sweight" value="sweight8" data-min="81" data-max="300" onchange="filterByHWA()">81公斤以上
+
+        <hr>
+        <label style="color: hsl(60, 4%, 5%); font-size: 12px;"><b>年齡區間</b></label><br>
+        <input type="radio" name="sage" value="sage1" data-min="1" data-max="300" onchange="filterByHWA()"
+            checked>不拘<br>
+        <input type="radio" name="sage" value="sage2" data-min="20" data-max="25" onchange="filterByHWA()">20~25歲<br>
+        <input type="radio" name="sage" value="sage3" data-min="26" data-max="30" onchange="filterByHWA()">26-30歲<br>
+        <input type="radio" name="sage" value="sage4" data-min="31" data-max="35" onchange="filterByHWA()">31-35歲<br>
+        <input type="radio" name="sage" value="sage5" data-min="36" data-max="40" onchange="filterByHWA()">36-40歲<br>
+        <input type="radio" name="sage" value="sage6" data-min="41" data-max="100" onchange="filterByHWA()">41歲以上<br>
+        <hr>
+        <button id="Btnselection" onclick="renderTable(filteredData);"
+            style="background-color: #4CAF50; color: white; font-size: 16px;">依篩選條件<br>列出履歷表
+        </button>
+        <hr>
+
+    </div>
+    <div class="container">
+        <br><br>
+        <div style="text-align: center;">
+
+            <label style="color: #a84c0a;font-size:35px;"><b>仲介選工系統 10-8</b></label>
+        </div>
+        <br><br>
+        <!-- 自定義的模態框 -->
+        <div id="customAlert"
+            style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background-color:white; border:1px solid black; z-index:1000;">
+            <p>沒有這個聘工表編號</p>
+            <p>請點擊以下連結以填寫聘工表：<br>
+                <a href="聘工表輸入-3.html" target="_blank" style="color:blue;">前往填寫聘工表</a>
+            </p>
+            <button onclick="closeCustomAlert()">關閉</button>
+        </div>
+
+        <!-- 背景遮罩 -->
+        <div id="customAlertOverlay"
+            style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5); z-index:999;">
+        </div>
+
+
+        <div>
+            <label for="pageSize">&nbsp;&nbsp;&nbsp;Page Size:</label>
+            <select id="pageSize" onchange="changePageSize()">
+
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+
+                #videoContainer {
+                display: none;
+                }
+
+            </select>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 45px;">編號/名</th>
+                    <th style="width: 60px;">年齡</th>
+                    <th style="width: 60px;">身高</th>
+                    <th style="width: 60px;">體重</th>
+                    <th style="width: 80px;"><!-- <button >自我介紹</button> --></th>
+                    <th style="width: 80px;"><!-- <button onclick="">學習履歷表</button> --></th>
+                    <th style="width: 120px;"><!-- <button onclick="">安排視訊</button> --></th>
+                    <th style="width: 140px;"><!-- <button onclick="">視訊時段</button> --></th>
+
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+        <div id="tableContainer"></div>
+
+        <div style="font-size: 16px;text-align: center;color: #051cb0;" id="pagination">
+            <button style="font-size: 16px;color: #f96903;" onclick="prevPage()"><b>Previous</b></button>
+            <span id="pageInfo"></span>
+            <button style="font-size: 16px;color: #f96903;" onclick="nextPage()"><b>Next</b></button>
+            <br>
+        </div>
+
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 align="center">個 人 基 本 資 料</h3>
+            <TABLE CELLPADDING=2 border=4 BORDERCOLORLIGHT="#FFD0D0" BORDERCOLORDARK="#A425B1"
+                <tr>
+                    <TH>編號: <label id="code"></label></TH>
+
+                    <td style="width: 65%;" rowspan=9>
+                        <video id="videoPlayer" controls>
+                            <!-- 預設顯示的內容，可自行更改 image/jpeg-->
+                            <source type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <img id="Himg" src="" alt="Default Image">
+                    </td>
+                </tr>
+
+                <TR>
+                    <TH style=" text-align: left;">&nbsp;&nbsp;名: <label id="name"></label></TH>
+                </TR>
+                <TR>
+                    <TH style=" text-align: left;">&nbsp;&nbsp;出生日期:<label id="bhd"></label></TH>
+                </TR>
+
+                <TR>
+                    <TH style=" text-align: left;">&nbsp;&nbsp;年齡:<label id="age"></label></TH>
+                </TR>
+
+                <TR>
+                    <TH style=" text-align: left;">&nbsp;&nbsp;身高:<label id="height"></label></TH>
+                </TR>
+                <TR>
+                    <TH style=" text-align: left;">&nbsp;&nbsp;體重:<label id="weight"></label></TH>
+                </TR>
+
+                <TR>
+                    <TH style=" text-align: left;">&nbsp;&nbsp;學歷:<label id="edu"></label></TH>
+                </TR>
+                <TR>
+                    <TH style=" text-align: left;">&nbsp;&nbsp;婚姻狀況:<label id="mrg"></label></TH>
+                </TR>
+                <TR>
+                    <TH>工作經驗:
+                        <br style="text-align: left;"> <label id="exp1"></label>
+                        <br style="text-align: left;"> <label id="exp2"></label>
+                    </TH>
+                </TR>
+                <!-- <TH COLSPAN=3 style="height: 45px; text-align: center;" <button onclick="showDetail()"> -->
+                <!-- 播放自我介紹影片</button></TH> -->
+                <!-- <button onclick="showVideo()">播放自我介紹影片</button> -->
+                </TH>
+            </TABLE>
+
+            <div id="modalContent"> </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="firebaseConfig.js"></script>
+    <script>
+        var data = [];
+        var filteredData = [];
+
+        const dataContainer = document.getElementById('tableBody');
+        const pageSizeSelect = document.getElementById('pageSize');
+        const searchInput = document.getElementById('search');
+
+        var fetchdata = databaseJOBSCRIPT.ref('KFA/');
+        fetchdata.on('value', (snapshot) => {
+            data = [];
+            snapshot.forEach((childSnapshot) => {
+                data.push({
+                    key: childSnapshot.key,
+                    ...childSnapshot.val()
+                });
+            });
+            filteredData = data;
+            renderTable(filteredData);
+            const maleCount = filteredData.filter(item => item.sex === 'male').length;
+            const femaleCount = filteredData.filter(item => item.sex === 'female').length;
+
+            male.innerText = `男生人數: ${maleCount}人\n女生人數: ${femaleCount}人`;
+
+            //weman.innerText = data.length;
+            CHsheight.innerText = `符合篩選條件:\n ${maleCount + femaleCount} 人`;
+
+        });
+
+        function renderTable(filteredData) {
+            var htmldata = '';
+            const startIdx = (currentPage - 1) * itemsPerPage;
+            const endIdx = startIdx + itemsPerPage;
+
+            for (var i = startIdx; i < Math.min(endIdx, filteredData.length); i++) {
+                if (filteredData[i].code && filteredData[i].code !== '') {
+                    htmldata += `
+            <tr>
+<td id="image-code-name-${filteredData[i].key}" style="text-decoration: underline;cursor: pointer;">
+    <!-- 圖片和代碼 -->
+    <img src="${filteredData[i].image1}" alt="Image" style="max-width: 85px; max-height: 110px;">
+    <br>
+    <span>${filteredData[i].code}</span><br>
+    <!-- 超連結 -->
+    <a onclick="window.open('psl-biodata.html?key=${filteredData[i].key}&name=${filteredData[i].name}&age=${filteredData[i].age}', '_blank');">
+        ${filteredData[i].name}
+    </a>
+</td>
+                <td id="age-${filteredData[i].key}">${filteredData[i].age}</td>
+                <td id="height-${filteredData[i].key}">${filteredData[i].height}</td>
+                <td id="weight-${filteredData[i].key}">${filteredData[i].weight}</td>
+                <td>
+                    ${filteredData[i].self && filteredData[i].height !== null
+                            ? `<button  style="cursor: pointer;" onclick="showDetail('${filteredData[i].key}', 'name', 'height', 'weight', 'self')" id="button-${filteredData[i].key}">自我<br>介紹</button> `
+                            : ''}
+                </td>
+                <td>
+                    ${filteredData[i]['101'] !== undefined && filteredData[i]['101'] !== null
+                            ? `<button style="cursor: pointer;" onclick="window.open('siderbar 4.html?key=${filteredData[i].key}&name=${filteredData[i].name}&imageUrl=${encodeURIComponent(filteredData[i].image1)}', '_blank', 'width=' + window.innerWidth * 0.5);">學習<br>成績</button>`
+                            : ''}
+                </td>
+                ${filteredData[i].score4 ? `<td><button onclick="showScore4('${filteredData[i].key}')">學習履歷表</button></td>` : ''}
+                <td>
+                     <button id="${filteredData[i].key}" style="cursor: pointer;" onclick="openVideoWindow('${filteredData[i].key}', '${filteredData[i].name}')">
+                            安排與該<br>學員視訊</button>
+                </td>
+                                <td>
+                     <label id="invLabel-${filteredData[i].key}" style="display: none;"></label><br>                
+                </td>            
+            
+                </tr>
+                
+            `;
+                }
+            }
+            dataContainer.innerHTML = htmldata;
+            updatePagination();
+            checkAndToggle();
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+            document.getElementById('tableContainer').style.display = 'block';
+            var videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.pause();
+            videoPlayer.src = '';
+        }
+
+        function showDetail(key, field, showHimg) {
+
+            var modalContent = document.getElementById('modalContent');
+            var codeLabel = document.getElementById('code');
+            var nameLabel = document.getElementById('name');
+            var Himg = document.getElementById('Himg');
+            var videoPlayer = document.getElementById('videoPlayer');
+            var mrgLabel = document.getElementById('mrg');
+            var weightLabel = document.getElementById('weight');
+            var heightLabel = document.getElementById('height');
+            var ageLabel = document.getElementById('age');
+            var exp1Label = document.getElementById('exp1');
+            var exp2Label = document.getElementById('exp2');
+            var eduLabel = document.getElementById('edu');
+            var bhdLabel = document.getElementById('bhd');
+
+            document.getElementById('myModal').style.display = 'block';
+            document.getElementById('tableContainer').style.display = 'none';
+
+            var value = filteredData.find(item => item.key === key);
+
+            if (!value || !Object.prototype.hasOwnProperty.call(value, field)) {
+                console.error(`Invalid field: ${field}`);
+                return;
+            }
+            codeLabel.innerText = value.code;
+            nameLabel.innerText = value.name;
+            Himg.src = value.image2;
+            mrgLabel.innerText = value.mrg;
+            weightLabel.innerText = value.weight + "公斤";
+            heightLabel.innerText = value.height + "公分";
+            ageLabel.innerText = value.age + "歲";
+            exp1Label.innerText = value.exp1;
+            exp2Label.innerText = value.exp2;
+            eduLabel.innerText = value.edu;
+            bhdLabel.innerText = value.bhd;
+
+            const displayexp1 = value.exp1 !== undefined ? value.exp1 : '';
+            const displayexp2 = value.exp2 !== undefined ? value.exp2 : '';
+
+            showVideo(value.self, !showHimg);
+
+            if (value.self) {
+                Himg.style.display = showHimg ? 'none' : 'block';
+            }
+
+            if (document.getElementById('myModal').style.display === 'block' && videoPlayer) {
+                videoPlayer.style.display = 'block';
+            }
+
+            document.getElementById('myModal').style.display = 'block';
+            document.getElementById('tableContainer').style.display = 'none';
+        }
+
+        function showVideo(videoPath, autoplay) {
+            var videoPlayer = document.getElementById('videoPlayer');
+            var Himg = document.getElementById('Himg');
+
+            currentVideoPath = videoPath;
+            videoPlayer.src = videoPath;
+
+            if (videoPath) {
+                videoPlayer.oncanplaythrough = function () {
+                    videoPlayer.play();
+                };
+            }
+
+            videoPlayer.addEventListener('ended', function () {
+                videoPlayer.style.display = 'none';
+                Himg.style.display = 'block';
+            });
+
+            if (autoplay && videoPath) {
+                videoPlayer.play();
+            }
+        }
+
+        function filterTable() {
+            const searchTerm = searchInput.value.toLowerCase();
+            filteredData = data.filter(item =>
+                (item.code && item.code.toLowerCase().includes(searchTerm)) ||
+                (item.name && item.name.toLowerCase().includes(searchTerm)) ||
+                (item.renderTable && item.age.toString().toLowerCase().includes(searchTerm)) ||
+                (item.weight && item.weight.toString().toLowerCase().includes(searchTerm)) ||
+                (item.height && item.height.toString().toLowerCase().includes(searchTerm))
+            );
+            renderTable(filteredData);
+        }
+
+        function changePageSize() {
+            itemsPerPage = parseInt(pageSizeSelect.value, 10);
+            currentPage = 1;
+            renderTable(filteredData);
+            updatePagination();
+        }
+
+        function sortTable(field, ascending) {
+            filteredData.sort((a, b) => {
+                const valueA = typeof a[field] === 'string' ? a[field].toLowerCase() : a[field];
+                const valueB = typeof b[field] === 'string' ? b[field].toLowerCase() : b[field];
+
+                if (valueA < valueB) {
+                    return ascending ? -1 : 1;
+                }
+                if (valueA > valueB) {
+                    return ascending ? 1 : -1;
+                }
+                return 0;
+            });
+            renderTable(filteredData);
+        }
+
+        let itemsPerPage = 10;
+        let currentPage = 1;
+
+        function updatePagination() {
+            const totalItems = filteredData.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+            document.getElementById('pageInfo').innerText = `Showing ${((currentPage - 1) * itemsPerPage) + 1} to ${Math.min(currentPage * itemsPerPage, totalItems)} of ${totalItems} entries`;
+            document.querySelector('#pagination button:nth-child(1)').disabled = currentPage === 1;
+            document.querySelector('#pagination button:nth-child(3)').disabled = currentPage === totalPages;
+        }
+
+        function nextPage() {
+            const totalItems = filteredData.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTable(filteredData);
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable(filteredData);
+            }
+        }
+
+        function showScore3(key) {
+            console.log(`顯示履歷表，鍵：${key}`);
+        }
+
+        function showScore4(key) {
+            console.log(`顯示學習履歷表，鍵：${key}`);
+        }
+
+        function filterByHWA() {
+            const checkedSexOptions = document.querySelectorAll('input[name="ssex"]:checked');
+            const checkedHeightOptions = document.querySelectorAll('input[name="sheight"]:checked');
+            const checkedAgeOptions = document.querySelectorAll('input[name="sage"]:checked');
+            const checkedWeightOptions = document.querySelectorAll('input[name="sweight"]:checked');
+            const CHsheight = document.getElementById('CHsheight');
+
+            filteredData = data.slice();
+
+            CHsheight.innerText = '';
+
+            filteredData = filteredData.filter(item => {
+                const itemConditions = [];
+
+                for (const option of checkedSexOptions) {
+                    const targetSex = option.dataset.gender;
+
+                    itemConditions.push(item.sex === targetSex);
+                }
+
+                for (const option of checkedHeightOptions) {
+                    const itemHeight = parseInt(item.height, 10);
+                    const min = parseInt(option.dataset.min, 10);
+                    const max = parseInt(option.dataset.max, 10);
+
+                    itemConditions.push(itemHeight >= min && itemHeight <= max);
+                }
+
+                for (const option of checkedAgeOptions) {
+                    const itemAge = parseInt(item.age, 10);
+                    const min = parseInt(option.dataset.min, 10);
+                    const max = parseInt(option.dataset.max, 10);
+
+                    itemConditions.push(itemAge >= min && itemAge <= max);
+                }
+
+                for (const option of checkedWeightOptions) {
+                    const itemWeight = parseInt(item.weight, 10);
+                    const min = parseInt(option.dataset.min, 10);
+                    const max = parseInt(option.dataset.max, 10);
+                    itemConditions.push(itemWeight >= min && itemWeight <= max);
+                }
+
+                return itemConditions.every(condition => condition);
+            });
+
+            CHsheight.innerText = `符合篩選條件: \n ${filteredData.length} 人`;
+            // renderTable(filteredData);  // 假設 renderTable(filteredData) 是用來渲染表格的函數
+        }
+
+        // 創建一個函數來打開視窗並正確傳遞 Tangency 參數
+        function openVideoWindow(key, name) {
+            // 獲取 'jobno' 的值
+            const Tangency = document.getElementById("jobno").value;
+
+            // 構建URL
+            const url = `安排視訊-2.html?key=${key}&name=${name}&Tagency=${Tangency}`;
+
+            // 打開新窗口
+            window.open(url, '_blank', 'width=480,height=380');
+        }
+
+
+        function checkpwd() {
+            // 取得 jobno 和 jobpw 的值
+            //var jobnoValue = document.getElementById("jobno").value;
+            //var jobpwValue = document.getElementById("jobpw").value;
+
+            // Firebase 的參考節點 job
+            var ref = databaseJOBSCRIPT.ref('job/' + jobnoValue);
+
+            // 檢查 jobno 是否存在
+            ref.once('value', function (snapshot) {
+                if (snapshot.exists()) {
+                    // 如果 jobno 存在，檢查 jobpw
+                    var jobData = snapshot.val();
+                    var storedJobpw = jobData.bpwd; // Firebase 中存儲的密碼
+                    console.log('0 storedJobpw: ', storedJobpw);
+                    if (jobpwValue === storedJobpw) {
+                        // 密碼正確，繼續進行後續操作
+                        console.log('聘工表編號和密碼正確');
+                        // 在這裡添加你需要執行的其他操作...
+                    } else {
+                        // 密碼錯誤
+                        alert("聘工表編號的密碼錯誤");
+                    }
+                } else {
+                    // 顯示自定義彈出窗口，提示用戶並提供超連結
+                    showCustomAlert();
+                }
+            }).catch(function (error) {
+                // 捕捉 Firebase 查詢錯誤
+                console.error("Firebase 查詢時發生錯誤: ", error);
+            });
+            checkAndToggle();
+
+        }
+
+        function checkAndToggle() {
+            // 初始化符合條件的父節點數量
+            let matchingParentCount = 0;
+
+            // 初始化存放 key 和其對應資料的矩陣
+            let dataMatrix = {};
+
+            // 取得 jobno 的值
+            var jobnoValue = document.getElementById("jobno").value;
+
+            // 使用實際 key 值，正確形成 Firebase 路徑
+            var ref = databaseJOBSCRIPT.ref('INTERVIEW/');
+
+            ref.once('value', function (snapshot) {
+                if (snapshot.exists()) {
+                    snapshot.forEach(function (childSnapshot) {
+                        // 取得每個 INTERVIEW 節點下的值
+                        var key = childSnapshot.key; // 獨立的 key
+                        var childData = childSnapshot.val();
+
+                        // 取得 Iagency, Tagency, TimeZone 的值
+                        var IagencyValue = childData.Iagency;
+                        var TagencyValue = childData.Tagency;
+                        var selectedInterviewValue = childData.TimeZone;
+
+                        // 檢查 Tagency 是否等於 jobnoValue
+                        //if (TagencyValue === jobnoValue) {
+                        matchingParentCount++;
+
+                        // 將 key 和其相關資料存入 dataMatrix 中，以 Iagency 為 key 進行分組
+                        if (!dataMatrix[IagencyValue]) {
+                            dataMatrix[IagencyValue] = [];
+                        }
+
+                        // 將每個 key 的資料加入對應的 Iagency 條目中
+                        dataMatrix[IagencyValue].push({
+                            Tagency: TagencyValue,
+                            TimeZone: selectedInterviewValue,
+                            key: key
+                        });
+                        //}
+                    });
+
+                    // 當所有資料收集完成後，將其一次性更新到對應的 label 並生成刪除按鈕
+                    for (var Iagency in dataMatrix) {
+                        if (dataMatrix.hasOwnProperty(Iagency)) {
+                            var label = document.getElementById('invLabel-' + Iagency);
+                            if (label) {
+                                // 構建要顯示的內容，將每個 key 對應的資料合併起來
+                                var labelContent = dataMatrix[Iagency].map(function (item) {
+                                    var url = `test radio.html?bcode=${item.Tagency}`;
+                                    var deleteButtonId = 'deleteButton-' + item.key;
+
+                                    // 創建每個 item 的內容，包含連結、時段和刪除按鈕
+                                    return '聘工表編號:<br><a href="' + url + '" target="_blank" style="color:blue;">'
+                                        + item.Tagency
+                                        + '</a><br>約的時段是:<br>'
+                                        + item.TimeZone.join(',')
+                                        + '<br><button id="' + deleteButtonId + '" style="color:red; cursor:pointer;">刪除預約</button>';
+                                }).join('<br><br>'); // 合併每個 key 的資料，並用 <br><br> 分隔
+
+                                // 更新 label 內容
+                                label.innerHTML = labelContent;
+                                label.style.display = 'inline';
+                                label.style.color = 'blue';
+                                label.style.fontSize = '14px';
+
+                                // 為每個項目綁定刪除按鈕事件
+                                dataMatrix[Iagency].forEach(function (item) {
+                                    var deleteButtonId = 'deleteButton-' + item.key;
+                                    var deleteButton = document.getElementById(deleteButtonId);
+
+                                    if (deleteButton) {
+                                        deleteButton.onclick = function () {
+                                            console.log('嘗試刪除 Firebase 中的 key: ', item.key);
+                                            var ref = databaseJOBSCRIPT.ref('INTERVIEW/' + item.key);
+                                            ref.remove().then(function () {
+                                                console.log('預約已成功刪除', item.key);
+                                                // 隱藏對應的刪除按鈕和內容
+                                                // deleteButton.parentElement.style.display = 'none';
+                                                renderTable(filteredData);
+                                            }).catch(function (error) {
+                                                console.error('刪除預約時發生錯誤: ', error);
+                                            });
+                                        };
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    // 如果沒有符合的 Tagency，更新按鈕文字為 "尚未預約"
+                    if (matchingParentCount === 0) {
+                        var button = document.getElementById('checkAndToggleBtn');
+                        button.textContent = '您尚未預約視訊';
+                        button.style.color = 'red';
+                    }
+                }
+            });
+        }
+        // 如果沒有符合的 Tagency，更新按鈕文字為 "尚未預約"
+
+        // 顯示自定義模態框的函數
+        function showCustomAlert() {
+            document.getElementById('customAlert').style.display = 'block';
+            document.getElementById('customAlertOverlay').style.display = 'block';
+        }
+
+        // 關閉自定義模態框的函數
+        function closeCustomAlert() {
+            document.getElementById('customAlert').style.display = 'none';
+            document.getElementById('customAlertOverlay').style.display = 'none';
+        }
+
+    </script>
+</body>
+
+</html>
 
         .sidebar {
             font-size: 12px;
