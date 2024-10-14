@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>仲介選工系統 10-8</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>仲介選工系統 10-8</title>
 
     <style>
         body {
@@ -196,12 +197,15 @@
             object-fit: contain;
             display: block;
          }
-            img {
-             width: 100%;
-             height: 100%; /* 高度填滿容器 */
-             object-fit: cover; /* 圖片會覆蓋整個容器，但可能會裁切部分內容 */
-             display: block;
-         }
+           img {
+           width: 100%;
+           height: auto;
+           object-fit: contain; /* 或者使用 cover 根據需要 */
+           display: block;
+           max-width: 100%; /* 確保圖片不會超過容器寬度 */
+           max-height: 100vh; /* 限制圖片高度不超過視窗高度 */
+     }
+
      }
     </style>
 </head>
