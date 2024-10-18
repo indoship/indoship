@@ -139,7 +139,7 @@
         document.getElementById('1004').innerHTML = extractAfterDash(value.psex);
 
         // 處理 wcity 和 wblock
-        document.getElementById('1007').innerHTML = (value.wcity || '') + "  " + (value.wblock || '');
+        document.getElementById('1007').innerHTML =  extractAfterDash(value.wcity) + "  " +  extractAfterDash(value.district);
 
         document.getElementById('1009').innerHTML = value.wfperson || '';
 
