@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JO FORM</FORM>
+  </title>
+  <!-- Bootstrap連結 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+
+  <!-- CSS連結 -->
+  <link rel="stylesheet" href="聘工表style.css">
+
+  <!--JQuery 連結-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!--SimplePagenation 連結-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"></script>
+</head>
+
+
+<body>
+  <div style="margin-left:10px;margin-right:10px; background-color: hsl(82, 86%, 35%);">
+    <h1><b>填寫聘工表</b></h1>
+
+    <div style="background-color: hsl(32, 80%, 54%);font-size: 14px; height:auto;width: 85%;margin: 0 auto;">
+      <label style="margin-top: 15px;margin-left:20px;"><b>*聘工表編號</b></label>
+      <input style="background-color:#fcfbfa ;width:75%;" type="text" id="bcode" required><br>
+      <label style="margin-top: 15px;margin-left: 20px;"><b>*聘工表密碼</b></label>
+      <input style="background-color:#fcfbfa ;width:75%;margin-bottom: 15px;" type="text" id="bpwd" required>
+    </div>
+    <br>
+    <div style="margin-left:10px;margin-right:15px; background-color: hsl(52, 79%, 74%);">
+      <br>
+      <div style=" margin-left: 10px;">
+        <div class="col">
+          <label><b>*連絡電話</b></label><br>
+          <input style="background-color:blanchedalmond;" type="number" id="btelno" required>
+        </div>
+      </div>
+      <div>
+        <div style="margin-top: 15px; margin-left: 10px;" class="col">
+          <label for="age"><b>*Line ID</b></label><br>
+          <input style="background-color:blanchedalmond;" type="text" id="bline" required>
+        </div>
+      </div>
+      <div>
+        <div style="margin-top: 15px; margin-left: 10px;" class="col">
+          <label><b>*雇主姓名</b></label><br>
+          <input style="background-color:blanchedalmond;margin-bottom: 10px;" type="text" id="bname" required>
+        </div>
+      </div>
+
+      <label style="margin-top:10px; margin-left: 10px;"><b>*聘雇資格</b></label>
+      <br>
+      <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
+        <input type="radio" name="bdoc" value="已經有函文" style="display: inline-block;margin-left: 10px; ">已經有函文
+        <input type="radio" name="bdoc" value="巴氏量表" style="display: inline-block;margin-left: 10px; ">巴氏量表
+        <input type="radio" name="bdoc" value="身心障礙證明" style="display: inline-block;margin-left: 10px; ">身心障礙證明
+        <input type="radio" name="bdoc" value="連續六個月長照收據" style="display: inline-block;margin-left: 10px; ">連續六個月長照收據
+        <input type="radio" name="bdoc" value="其它" style="display: inline-block;margin-left: 10px;">其它
+        <br>
+      </div>
+      <label style="margin-top: 10px; margin-left: 10px; "><b>*聘僱方式</b></label><br>
+      <div style="margin-left: 10px;background-color: cadetblue;width: 280px;">
+        <input type="radio" name="wform" value="不拘" style="display: inline-block;margin-left: 10px;" checked>不拘
+        <input type="radio" name="wform" value="國外引進" style="margin-left: 10px;">國外引進
+        <input type="radio" name="wform" value="國內承接" style="margin-left: 10px;">國內承接
+        <br>
+      </div>
+      <div style="display: flex; gap: 20px; align-items: center;margin-top: 10px;">
+        <div>
+          <label style=" margin-left: 10px;"><b>*被照顧人性別</b></label>
+          <div style="margin-left: 10px;background-color: cadetblue;width: 120px;">
+            <input type="radio" name="psex" value="男生-pria" style="display: inline-block;margin-left: 5px; ">男生
+            <input type="radio" name="psex" value="女生-wanita" style="display: inline-block;margin-left: 10px; ">女生
+          </div>
+        </div>
+        <div>
+          <label style=" margin-left: 10px;"><b>*被照顧人年齡</b></label>
+          <div style="margin-left: 10px;background-color: cadetblue;width:85px;">
+            <input style="width: 50px;background-color: white;" type="number" id="page">
+            <label>歲</label>
+            <br>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 15px; align-items: center;margin-top: 10px;">
+        <div>
+          <label style=" margin-left: 10px;"><b>*被照顧人身高</b></label>
+          <div style="margin-left: 10px;background-color: cadetblue;width: 85px;">
+            <input style="width: 50px;background-color: white;" type="number" id="pheight">
+            <label>cm.</label>
+          </div>
+        </div>
+        <div>
+          <label style=" margin-left: 10px;"><b>*被照顧人體重</b></label>
+          <div style="margin-left: 10px;background-color: cadetblue;width: 85px;">
+            <input style="width: 50px;background-color: white;" type="number" id="pweight" required>
+            <label>kg.</label>
+            <br>
+          </div>
+        </div>
+        <div>
+          <label style=" margin-left: 10px;"><b>*與被照顧人同住幾人</b></label>
+          <div style="margin-left: 10px;background-color: cadetblue;width: 65px;">
+            <input style=" width: 40px;background-color: white;" type="number" id="wfperson" required>
+            <label>人</label>
+            <br>
+          </div>
+        </div>
+      </div>
+      <br>
+      <label style=" margin-left: 10px;"><b>被照顧人所在縣市</b></label>
+      <div style="margin-left: 10px;background-color: cadetblue;width:150px;">
+        <!--<input style=" width: 160PX;" type="text" id="wcity" required> -->
+        <select style="background-color: white;" id="wcity" onchange="updateDistricts()">
+          <option value="">--請選擇縣市--</option>
+          <option value="台北市-Taipei City">台北市</option>
+          <option value="新北市-New Taipei City">新北市</option>
+          <option value="桃園市-Taoyuan City">桃園市</option>
+          <option value="台中市-Taichung City">台中市</option>
+          <option value="台南市-Tainan City">台南市</option>
+          <option value="高雄市-Kaohsiung City">高雄市</option>
+          <option value="基隆市-Keelung City">基隆市</option>
+          <option value="新竹市-Hsinchu City">新竹市</option>
+          <option value="嘉義市-Chiayi City">嘉義市</option>
+          <option value="新竹縣-Hsinchu County">新竹縣</option>
+          <option value="苗栗縣-Miaoli County">苗栗縣</option>
+          <option value="彰化縣-Changhua County">彰化縣</option>
+          <option value="南投縣-Nantou County">南投縣</option>
+          <option value="雲林縣-Yunlin County">雲林縣</option>
+          <option value="嘉義縣-Chiayi County">嘉義縣</option>
+          <option value="屏東縣-Pingtung County">屏東縣</option>
+          <option value="宜蘭縣-Yilan County">宜蘭縣</option>
+          <option value="花蓮縣-Hualien County">花蓮縣</option>
+          <option value="台東縣-Taitung County">台東縣</option>
+          <option value="澎湖縣-Penghu County">澎湖縣</option>
+          <option value="金門縣-Kinmen County">金門縣</option>
+          <option value="連江縣-Lienchiang County">連江縣</option>
+        </select>
+        <br>
+      </div>
+      <label style=" margin-left: 10px;"><b>被照顧人所在行政區</b></label><br>
+      <div style="margin-left: 10px;background-color: cadetblue;width:165px;">
+        <!--<input style="width: 160px;" type="text" id="wblock" required> -->
+        <select style="background-color: white;" id="district">
+          <option value="">--請先選擇縣市--</option>
+        </select>
+        <br>
+      </div>
+      <label style="margin-top: 10px;margin-left: 10px; "><b>被照顧人主要病症</b></label><br>
+      <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="caresk"
+            value="中風-Stroke">中風</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox2" name="caresk"
+            value="失智-Pikun">失智</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox3" name="caresk" value="癌症-Kanke">
+          癌症</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox4" name="caresk"
+            value="肢體障礙-Gangguan Fisik">肢體障礙</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox5" name="caresk"
+            value="視力障礙-Gangguan Penglihatan">視力障礙</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox6" name="caresk"
+            value="精神障礙-gangguan jiwa">精神障礙</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox7" name="caresk"
+            value="心臟病-Penyakit Jantung">心臟病</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox8" name="caresk"
+            value="高血壓-Darah Tinggi">高血壓</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox9" name="caresk"
+            value="糖尿病-diabetes">糖尿病</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox10" name="caresk"
+            value="洗腎-dialisis ginjal">洗腎</label>
+      </div>
+      <label style="margin-top: 10px;margin-left: 10px;">
+        <b>被照顧人行動能力</b></label><br>
+      <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
+
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="caremo"
+            value="行動自如-Bisa berjalan">行動自如</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox2" name="caremo"
+            value="虛弱(行動緩慢須扶持)-Lemah(Gerakan lambat, perlu dituntun)">虛弱(行動緩慢須扶持)</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox3" name="caremo"
+            value="使用助行器-Gunakan alat bantu berjalan">使用助行器</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox4" name="caremo"
+            value="坐輪椅-Duduk kursi roda">坐輪椅</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox5" name="caremo"
+            value="半身癱瘓-Lumpuh separuh ">半身癱瘓</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox6" name="caremo"
+            value="全身癱瘓-Lumpuh total">全身癱瘓</label>
+        <br>
+      </div>
+      <label style="margin-top: 10px;margin-left: 10px;"><b>被照顧人使用的輔助器械</b></label><br>
+      <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="caremh"
+            value="無-tidak ada">無</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox2" name="caremh"
+            value="尿布-popok">尿布</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbo3" name="caremh"
+            value="鼻胃管-selang nasogastrik">鼻胃管</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox4" name="caremh"
+            value="氣切-trakeotomi">氣切</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox5" name="caremh"
+            value="呼吸器/氧氣機-mesin pernafasan/oksigen">呼吸器/氧氣機</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox6" name="caremh"
+            value="尿袋-kantong urin">尿袋</label>
+        <label style="margin-left: 10px;"><input type="checkbox" id="checkbox7" name="caremh"
+            value="造口-perut">造口</label>
+        <br>
+      </div>
+      <label style="margin-top: 10px;margin-left: 10px;"><b>基本資料備註</b></label><br>
+      <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
+        <textarea style=" background-color:white; width:100%;" id="infrmr">
+        </textarea>
+      </div>
+      <div>
+        <label style="margin-top: 15px;font-size: 18px;margin-left: 10px;"><b>看護工作內容</b></label>
+        <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="carepet"
+              value="餵食三餐-Suapi makan hari">餵食三餐</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox2" name="carepet"
+              value="鼻胃管餵食-Makan melalui Selang makan">鼻胃管餵食</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox3" name="carepet"
+              value="餵藥-Suapi obat">餵藥</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox4" name="carepet"
+              value="翻身、按摩、拍背-Balik badan, pijit, tepuk punggung">翻身、按摩、拍背</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox5" name="carepet"
+              value="幫病人刷牙洗-臉Bantu sikat gigi">幫病人刷牙洗臉</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox6" name="carepet"
+              value="幫病人洗澡-Memandikan pasien">幫病人洗澡</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox7" name="carepet"
+              value="導尿-Selang kencin">導尿</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox8" name="carepet"
+              value="量血壓及體溫-Ukur tens">量血壓及體溫</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox9" name="carepet"
+              value="換尿布-Ganti popok">換尿布</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox10" name="carepet"
+              value="打針(胰島素)-Suntik (Insulin)">打針(胰島素)</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox11" name="carepet"
+              value="抽痰-sedot dahak">抽痰</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox16" name="carepet
+                  value=" 輪椅散步Jalan-jalan dengan kursi roda">輪椅散步</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox12" name="carepet"
+              value="陪同病人就醫/復健-Temani ke RS/Terapi">陪同病人就醫/復健</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox13" name="carepet"
+              value="居家夜間伴護-Jaga malam hari ">居家夜間伴護</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox14" name="carepet"
+              value="醫院看護-Jaga di RS ">醫院看護</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox15" name="carepet"
+              value="無-tidak ">無</label>
+        </div>
+        <label style="margin-top: 10px;margin-left: 10px; "><b>是否需要烹飪</b></label><br>
+        <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
+          <label>
+            <input type="checkbox" id="checkbox1" name="meal" value="不需要-tidak perlu" checked>不需要
+          </label>
+          <label style="margin-left: 10px;">
+            <input type="checkbox" id="checkbox2" name="meal" value="早餐-Sarapan">早餐
+          </label>
+          <label style="margin-left: 10px;">
+            <input type="checkbox" id="checkbox3" name="meal" value="午餐-Makan siang">午餐
+          </label>
+          <label style="margin-left: 10px;">
+            <input type="checkbox" id="checkbox4" name="meal" value="晚餐-Makan malam">晚餐
+          </label>
+          <label style="margin-left: 10px;">
+            <input type="checkbox" id="checkbox5" name="meal" value="宵夜-Makan malam tambahan">宵夜
+          </label>
+        </div>
+        <label style="margin-top: 10px;margin-left: 10px; "><b>是否需要照顧小孩</b></label>
+        <br>
+        <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="carechid"
+              value="不需要-tidak perlu" checked>不需要-tidak perlu</label>
+          <br>
+          <label style="margin-left: 10px; margin-top: 10px;">照顧人數</label>
+          <input style=" width:40px; font-size: 14px;background-color: white;" type="number" id="carechid_no" required>
+          <label>人</label>
+
+          <label style="margin-left: 10px;">年齡Umur-carechid_age</label>
+          <input style=" width: 80px; font-size: 14px;background-color: white;" type="text" id="carechid_age">
+          <label>歲</label><br>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox2" name="carechid"
+              value="接送上下學-Antar jemput sekolah">接送上下學</label>
+          <label style="margin-left: 10px;"><input type="checkbox" nid="checkbox3" name="carechid"
+              value="泡奶、餵奶-Seduh & suapi susu  ">泡奶、餵奶</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox4" name="carechid"
+              value="換尿布-Ganti popok">換尿布</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox5" name="carechid"
+              value="陪讀陪玩-Temani belajar & bermain">陪讀陪玩</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox6" name="carechid"
+              value="準備、送便當-Menyiapkan&mengantar rantang">準備、送便當</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox7" name="carechid"
+              value="三餐照顧-Urusi makan 3hari ">三餐照顧</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox8" name="carechid"
+              value="洗澡-Memandikan">洗澡</label>
+        </div>
+        <label style="margin-top: 10px;margin-left: 10px; "><b>是否需要家事處理</b></label><br>
+        <div style="margin-left: 10px;background-color: cadetblue;width: 90%;">
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox1" name="hwk" value="不需要-tidak perlu"
+              checked>不需要-tidak
+            perlu</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox2" name="hwk"
+              value="洗衣-Cuci pakaian">洗衣</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox3" name="hwk"
+              value="燙衣-Setrika pakaian">燙衣</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox4" name="hwk"
+              value="倒圾垃-Buang sampah">倒圾垃</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox5" name="hwk"
+              value="澆花、整理庭園-Siram bunga, taman">澆花、整理庭園</label>
+          <label style="margin-left: 10px;"><input type="checkbox" id="checkbox6" name="hwk"
+              value="清洗車輛-Cuci mobil">清洗車輛</label>
+        </div>
+        <label style="margin-top:15px;margin-left: 10px;"><b>工作內容備註</b></label><br>
+        <div style="margin-left: 10px;margin-bottom:20px;background-color: cadetblue;width: 90%;">
+          <textarea style="width:100%;background-color: white;" id="jobmr"></textarea>
+          <br>
+        </div>
+      </div>
+      <button
+        style="margin-bottom: 25px; margin-top: 10px; height: 50px; width:100%; background-color: chocolate; font-size: 20px;"
+        id="Sumit" onclick="sendData()"><b>確認送出</b>
+      </button><br>
+
+
+      <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+      <script>
+
+        // 定義各縣市與其對應的行政區
+        const districtsByCity = {
+          '台北市-Taipei City': ['中正區-Zhongzheng District', '大同區-Datong District', '中山區-Zhongshan District', '松山區-Songshan District', '大安區-Daan District', '萬華區-Wanhua District', '信義區-Xinyi District', '士林區-Shilin District', '北投區-Beitou District', '內湖區-Neihu District', '南港區-Nangang District', '文山區-Wenshan District'],
+          '新北市-New Taipei City': ['板橋區-Banqiao District', '三重區-Sanchong District', '中和區-Zhonghe District', '永和區-Yonghe District', '新莊區-Xinzhuang District', '新店區-Xindian District', '樹林區-Shulin District', '鶯歌區-Yingge District', '三峽區-Sanxia District', '淡水區-Tamsui District', '汐止區-Xizhi District', '瑞芳區-Ruifang District', '土城區-Tucheng District', '蘆洲區-Luzhou District', '五股區-Wugu District', '泰山區-Taishan District', '林口區-Linkou District', '深坑區-Shenkeng District', '石碇區-Shiding District', '坪林區-Pinglin District', '三芝區-Sanzhi District', '石門區-Shimen District', '八里區-Bali District', '平溪區-Pingxi District', '雙溪區-Shuangxi District', '貢寮區-Gongliao District', '金山區-Jinshan District', '萬里區-Wanli District', '烏來區-Wulai District'],
+          '桃園市-Taoyuan City': ['桃園區-Taoyuan District', '中壢區-Zhongli District', '平鎮區-Pingzhen District', '八德區-Bade District', '楊梅區-Yangmei District', '蘆竹區-Luzhu District', '大溪區-Daxi District', '龍潭區-Longtan District', '龜山區-Guishan District', '大園區-Dayuan District', '觀音區-Guanyin District', '新屋區-Xinwu District', '復興區-Fuxing District'],
+          '台中市-Taichung City': ['中區-Central District', '東區-Eastern District', '南區-Southern District', '西區-Western District', '北區-Northern District', '西屯區-Xitun District', '南屯區-Nantun District', '北屯區-Beitun District', '豐原區-Fengyuan District', '大里區-Dali District', '太平區-Taiping District', '清水區-Qingshui District', '沙鹿區-Shalu District', '梧棲區-Wuqing District', '后里區-Houli District', '神岡區-Shengang District', '潭子區-Tanzi District', '大雅區-Daya District', '新社區-Xinshe District', '石岡區-Shigang District', '外埔區-Waipu District', '大安區-Daan District', '烏日區-Wuri District', '大肚區-Dadu District', '龍井區-Longjing District', '霧峰區-Wufeng District', '和平區-Heping District'],
+          '台南市-Tainan City': ['中西區-West Central District', '東區-Eastern District', '南區-Southern District', '北區-Northern District', '安平區-Anping District', '安南區-Annan District', '永康區-Yongkang District', '歸仁區-Gueiren District', '新化區-Xinhua District', '左鎮區-Zuozhen District', '玉井區-Yujing District', '楠西區-Nanxi District', '南化區-Nanhua District', '仁德區-Rende District', '關廟區-Guanmiao District', '龍崎區-Longqi District', '官田區-Guantian District', '麻豆區-Madou District', '佳里區-Jiali District', '西港區-Xigang District', '七股區-Qigu District', '將軍區-Jiangjun District', '學甲區-Xuejia District', '北門區-Beimen District', '新營區-Xinying District', '後壁區-Houbi District', '白河區-Baihe District', '東山區-Dongshan District', '六甲區-Liujia District', '下營區-Xiaying District', '柳營區-Liuying District', '鹽水區-Yanshui District', '善化區-Shanhua District', '大內區-Danei District', '山上區-Shanshang District', '新市區-Xinshi District', '安定區-Anding District'],
+          '高雄市-Kaohsiung City': ['楠梓區-Nanzi District', '左營區-Zuoying District', '鼓山區-Gushan District', '三民區-Sanmin District', '鹽埕區-Yancheng District', '前金區-Qianjin District', '新興區-Xinxing District', '苓雅區-Lingya District', '前鎮區-Qianzhen District', '旗津區-Qijin District', '小港區-Xiaogang District', '鳳山區-Fengshan District', '林園區-Linyuan District', '大寮區-Daliao District', '大樹區-Dashu District', '大社區-Das District', '仁武區-Renwu District', '鳥松區-Niaosong District', '岡山區-Gangshan District', '橋頭區-Qiaotou District', '燕巢區-Yanchao District', '田寮區-Tianliao District', '阿蓮區-Alian District', '路竹區-Luzhu District', '湖內區-Hunei District', '茄萣區-Qieding District', '永安區-Yongan District', '彌陀區-Mituo District', '梓官區-Zuoying District', '旗山區-Qishan District', '美濃區-Meinong District', '六龜區-Liugui District', '甲仙區-Jiaxian District', '杉林區-Shanlin District', '內門區-Neimen District', '茂林區-Maolin District', '桃源區-Taoyuan District', '那瑪夏區-Namasia District'],
+          '宜蘭縣-Yilan County': ['宜蘭市-Yilan City', '頭城鎮-Toucheng Township', '礁溪鄉-Jiaoxi Township', '壯圍鄉-Zhuangwei Township', '員山鄉-Yuanshan Township', '羅東鎮-Luodong Township', '三星鄉-Sanxing Township', '大同鄉-Datong Township', '五結鄉-Wujie Township', '冬山鄉-Dongshan Township', '蘇澳鎮-Suao Township', '南澳鄉-Nanao Township', '釣魚臺-Diaoyutai Islands'], '基隆市-Keelung City': ['仁愛區-Renai District', '信義區-Xinyi District', '中正區-Zhongzheng District', '中山區-Zhongshan District', '安樂區-Anle District', '暖暖區-Nuannuan District', '七堵區-Qidu District'],
+          '新竹市-Hsinchu City': ['東區-Eastern District', '北區-Northern District', '香山區-Xiangshan District'],
+          '新竹縣-Hsinchu County': ['竹北市-Zhubei City', '湖口鄉-Hukou Township', '新豐鄉-Xinfeng Township', '新埔鎮-Xinpu Township', '關西鎮-Guanxi Township', '芎林鄉-Qionglin Township', '寶山鄉-Baoshan Township', '竹東鎮-Zhudong Township', '五峰鄉-Wufeng Township', '橫山鄉-Hengshan Township', '尖石鄉-Jianshi Township', '北埔鄉-Beipu Township', '峨眉鄉-Emei Township'],
+          '苗栗縣-Miaoli County': ['竹南鎮-Zhunan Township', '頭份市-Toufen City', '三灣鄉-Sanwan Township', '南庄鄉-Nanzhuang Township', '獅潭鄉-Shitan Township', '後龍鎮-Houlong Township', '通霄鎮-Tongxiao Township', '苑裡鎮-Yuanli Township', '苗栗市-Miaoli City', '造橋鄉-Zaoqiao Township', '頭屋鄉-Touwu Township', '公館鄉-Gongguan Township', '大湖鄉-Dahu Township', '泰安鄉-Taian Township', '銅鑼鄉-Tongluo Township', '三義鄉-Sanyi Township', '西湖鄉-Xihu Township', '卓蘭鎮-Zhuolan Township'], '嘉義市-Chiayi City': ['東區-Eastern District', '西區-Western District'],
+          '彰化縣-Changhua County': ['彰化市-Changhua City', '芬園鄉-Fenyuan Township', '花壇鄉-Huatan Township', '秀水鄉-Xiushui Township', '鹿港鎮-Lukang Township', '福興鄉-Fuxing Township', '線西鄉-Xianxi Township', '和美鎮-Hemei Township', '伸港鄉-Shengang Township', '員林市-Yuanlin City', '社頭鄉-Shetou Township', '永靖鄉-Yongjing Township', '埔心鄉-Puxin Township', '溪湖鎮-Xihu Township', '大村鄉-Dacun Township', '埔鹽鄉-Puyan Township', '田中鎮-Tianzhong Township', '北斗鎮-Beidou Township', '田尾鄉-Tianwei Township', '埤頭鄉-Pitou Township', '溪州鄉-Xizhou Township', '竹塘鄉-Zhutang Township', '二林鎮-Erlin Township', '大城鄉-Dacheng Township', '芳苑鄉-Fangyuan Township', '二水鄉-Ershui Township'],
+          '南投縣-Nantou County': ['南投市-Nantou City', '中寮鄉-Zhongliao Township', '草屯鎮-Caotun Township', '國姓鄉-Guoxing Township', '埔里鎮-Puli Township', '仁愛鄉-Renai Township', '名間鄉-Mingjian Township', '集集鎮-Jiji Township', '水里鄉-Shuili Township', '魚池鄉-Yuchi Township', '信義鄉-Xinyi Township', '竹山鎮-Zhushan Township', '鹿谷鄉-Lugu Township'],
+          '雲林縣-Yunlin County': ['斗南鎮-Dounan Township', '大埤鄉-Dapi Township', '虎尾鎮-Huwei Township', '土庫鎮-Tuku Township', '褒忠鄉-Baozhong Township', '東勢鄉-Dongshi Township', '臺西鄉-Taixi Township', '崙背鄉-Lunbei Township', '麥寮鄉-Mailiao Township', '斗六市-Douliou City', '林內鄉-Linnei Township', '古坑鄉-Gukeng Township', '莿桐鄉-Citong Township', '西螺鎮-Xiluo Township', '二崙鄉-Erlun Township', '北港鎮-Beigang Township', '水林鄉-Shuilin Township', '口湖鄉-Kouhu Township', '四湖鄉-Sihu Township', '元長鄉-Yuanjiang Township'],
+          '嘉義縣-Chiayi County': ['番路鄉-Fanlu Township', '梅山鄉-Meishan Township', '竹崎鄉-Zhuqi Township', '阿里山鄉-Alishan Township', '中埔鄉-Zhongpu Township', '大埔鄉-Dapu Township', '水上鄉-Shuishang Township', '鹿草鄉-Lucao Township', '太保市-Taibao City', '朴子市-Puzi City', '東石鄉-Dongshi Township', '六腳鄉-Liujiao Township', '新港鄉-Xingang Township', '民雄鄉-Minxiung Township', '大林鎮-Dalin Township', '溪口鄉-Xikou Township', '義竹鄉-Yizhu Township', '布袋鎮-Budai Township'],
+          '屏東縣-Pingtung County': ['屏東市-Pingtung City', '三地門鄉-Sandimen Township', '霧臺鄉-Wutai Township', '瑪家鄉-Majia Township', '九如鄉-Jiuru Township', '里港鄉-Ligang Township', '高樹鄉-Gaoshu Township', '鹽埔鄉-Yanpu Township', '長治鄉-Changzhi Township', '麟洛鄉-Linluo Township', '竹田鄉-Zhutian Township', '內埔鄉-Neipu Township', '萬丹鄉-Wandan Township', '潮州鎮-Chaozhou Township', '泰武鄉-Taiwu Township', '來義鄉-Laiyi Township', '萬巒鄉-Wanluan Township', '崁頂鄉-Kanding Township', '新埤鄉-Xinpi Township', '南州鄉-Nanzhou Township', '林邊鄉-Linbian Township', '東港鎮-Donggang Township', '琉球鄉-Liuchiu Township', '佳冬鄉-Jiadong Township', '新園鄉-Xinyuan Township', '枋寮鄉-Fangliao Township', '枋山鄉-Fangshan Township', '春日鄉-Chunri Township', '獅子鄉-Shizi Township', '車城鄉-Checheng Township', '牡丹鄉-Mudan Township', '恆春鎮-Hengchun Township', '滿州鄉-Manzhou Township'],
+          '花蓮縣-Hualien County': ['花蓮市-Hualien City', '新城鄉-Xincheng Township', '秀林鄉-Xiulin Township', '吉安鄉-Jian Township', '壽豐鄉-Shoufeng Township', '鳳林鎮-Fenglin Township', '光復鄉-Guangfu Township', '豐濱鄉-Fengbin Township', '瑞穗鄉-Ruisui Township', '萬榮鄉-Wanrong Township', '玉里鎮-Yuli Township', '卓溪鄉-Zuoxi Township', '富里鄉-Fuli Township'],
+          '台東縣-Taitung County': ['台東市-Taitung City', '綠島鄉-Ludao Township', '蘭嶼鄉-Lanyu Township', '延平鄉-Yanping Township', '卑南鄉-Beinan Township', '鹿野鄉-Luye Township', '關山鎮-Guanshan Township', '海端鄉-Haiduan Township', '池上鄉-Chishang Township', '東河鄉-Donghe Township', '成功鎮-Chenggong Township', '長濱鄉-Changbin Township', '太麻里鄉-Taimali Township', '金峰鄉-Jinfeng Township', '大武鄉-Dawu Township', '達仁鄉-Daren Township'],
+          '澎湖縣-Penghu County': ['馬公市-Magong City', '西嶼鄉-Xiyu Township', '望安鄉-Wangan Township', '七美鄉-Qimei Township', '白沙鄉-Baisha Township', '湖西鄉-Huxi Township'],
+          '金門縣-Kinmen County': ['金城鎮-Jincheng Township', '金湖鎮-Jinhu Township', '金沙鎮-Jinsha Township', '金寧鄉-Jinning Township', '烈嶼鄉-Lieyu Township', '烏坵鄉-Wuqiu Township'],
+          '連江縣-Lienchiang County': ['南竿鄉-Nangan Township', '北竿鄉-Beigan Township', '莒光鄉-Juguang Township', '東引鄉-Dongyin Township']
+        };
+
+
+        // 當選擇縣市時更新行政區選項
+        function updateDistricts() {
+          const citySelect = document.getElementById('wcity');
+          const districtSelect = document.getElementById('district');
+          const selectedCity = citySelect.value;
+
+          // 清空之前的行政區選項
+          districtSelect.innerHTML = '';
+
+          // 如果有選擇的縣市，則載入對應的行政區
+          if (selectedCity) {
+            const districts = districtsByCity[selectedCity];
+            districts.forEach(district => {
+              const option = document.createElement('option');
+              option.value = district;
+              option.text = district;
+              districtSelect.appendChild(option);
+            });
+          }
+        }
+
+        const firebaseConfig1 = { databaseURL: "https://jobscript-79d02-default-rtdb.firebaseio.com/" }
+        firebase.initializeApp(firebaseConfig1, "db1");
+        const database1 = firebase.database(firebase.app("db1"));
+
+        //const firebaseConfig2 = { databaseURL: "https://ptkcf-521ad-default-rtdb.firebaseio.com/" }
+        //firebase.initializeApp(firebaseConfig2, "db2");
+        //const database2 = firebase.database(firebase.app("db2"));
+
+
+        // Access the first database
+        // const db1Ref = firebase.database(firebase.app("db1")).ref('messages/+ firebaseIndex');
+        // const db2Ref = firebase.database(firebase.app("db2")).ref('messages/+ firebaseIndex');
+
+        // 定義一個函數，處理每組 checkbox 的選擇行為
+        function handleCheckboxGroup(groupName) {
+          const checkboxes = document.querySelectorAll(`input[name="${groupName}"]`);
+
+          checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', function () {
+              // 如果選中的是除了 "不需要-tidak perlu-tidak perlu" 以外的其他選項，則取消選中 "不需要-tidak perlu"
+              if (checkbox.value !== '不需要-tidak perlu' && checkbox.checked) {
+                document.querySelector(`input[name="${groupName}"][value="不需要-tidak perlu"]`).checked = false;
+              }
+
+              // 如果所有其他選項都未選中，則重新選中 "不需要-tidak perlu"
+              const otherSelected = Array.from(checkboxes).some(cb => cb.value !== '不需要-tidak perlu' && cb.checked);
+              if (!otherSelected) {
+                document.querySelector(`input[name="${groupName}"][value="不需要-tidak perlu"]`).checked = true;
+              }
+            });
+          });
+        }
+        // 處理多組 checkbox
+        handleCheckboxGroup('hwk');
+        handleCheckboxGroup('carechid');
+        handleCheckboxGroup('meal');
+
+        function sendData() {
+          // 獲取所有選中的複選框
+          const bcode = document.getElementById('bcode').value;
+          const bpwd = document.getElementById('bpwd').value;
+          const bname = document.getElementById('bname').value;
+          const btelno = document.getElementById('btelno').value;
+          const bline = document.getElementById('bline').value;
+          const bdoc = document.querySelector('input[name="bdoc"]:checked');
+          const page = document.getElementById('page').value;
+          const pweight = document.getElementById('pweight').value;
+          const pheight = document.getElementById('pheight').value;
+          const psex = document.querySelector('input[name="psex"]:checked');
+
+          const citySelect = document.getElementById('wcity');
+          const districtSelect = document.getElementById('district');
+          const selectedCity = citySelect.value;
+          const selectedDistrict = districtSelect.value;
+
+          const wfperson = document.getElementById("wfperson").value;
+
+          const selectedcaresk = [];
+          const careskcheckboxes = document.querySelectorAll('input[name="caresk"]:checked');
+          careskcheckboxes.forEach((checkbox) => {
+            selectedcaresk.push(checkbox.value); // 收集被選中的值
+          });
+
+          const selectedcaremo = [];
+          const caremocheckboxes = document.querySelectorAll('input[name="caremo"]:checked');
+          caremocheckboxes.forEach((checkbox) => {
+            selectedcaremo.push(checkbox.value); // 收集被選中的值
+          });
+
+
+          const selectedcaremh = [];
+          const caremhcheckboxes = document.querySelectorAll('input[name="caremh"]:checked');
+          caremhcheckboxes.forEach((checkbox) => {
+            selectedcaremh.push(checkbox.value); // 收集被選中的值
+          });
+
+          const selectedcarepet = [];
+          const carepetcheckboxes = document.querySelectorAll('input[name="carepet"]:checked'); // 修正拼寫
+          carepetcheckboxes.forEach((checkbox) => {
+            selectedcarepet.push(checkbox.value); // 收集被選中的值
+          });
+
+
+          const selectedMeals = [];
+          const mealcheckboxes = document.querySelectorAll('input[name="meal"]:checked');
+          mealcheckboxes.forEach((checkbox) => {
+            selectedMeals.push(checkbox.value); // 收集被選中的值
+          });
+
+          const selectedcarechid = [];
+          const carechidckboxes = document.querySelectorAll('input[name="carechid"]:checked'); // 修正變數名
+          carechidckboxes.forEach((checkbox) => {
+            selectedcarechid.push(checkbox.value); // 收集被選中的值
+          });
+
+
+          const selectedhwk = [];
+          const hwkcheckboxes = document.querySelectorAll('input[name="hwk"]:checked');
+          hwkcheckboxes.forEach((checkbox) => {
+            selectedhwk.push(checkbox.value); // 收集被選中的值
+          });
+          const infrmr = document.getElementById("infrmr").value;
+          const jobmr = document.getElementById("jobmr").value;
+
+          const wform = document.querySelector('input[name="wform"]:checked');
+          console.log(psex)
+
+          // 检查输入是否有效
+          if (!bcode) {
+            // 如果有任何输入为空，阻止表单提交
+            alert('請自創聘工表編號');
+            return false; // 阻止表单提交
+          }
+
+          if (!bpwd) {
+            // 如果有任何输入为空，阻止表单提交
+            alert('請自創聘工表密碼');
+            return false; // 阻止表单提交
+          }
+          if (!btelno) {
+            // 如果有任何输入为空，阻止表单提交
+            alert('請輸入連絡電話');
+            return false; // 阻止表单提交
+          }
+          if (!bline) {
+            // 如果有任何输入为空，阻止表单提交
+            alert('Line ID');
+            return false; // 阻止表单提交
+          }
+          if (!bname) {
+            // 如果有任何输入为空，阻止表单提交
+            alert('請輸入雇主姓名');
+            return false; // 阻止表单提交
+          }
+          if (!bdoc) {
+            // 如果有任何输入为空，阻止表单提交
+            alert('請輸入聘雇資格');
+            return false; // 阻止表单提交
+          }
+          if (!page) {
+            // 如果有任何输入为空，阻止表单提交
+            alert('請輸入被照顧人年齡');
+            return false; // 阻止表单提交
+          }
+          if (!pheight) {
+            // 如果有任何输入为空，阻止表单提交
+            alert('請輸入被照顧人身高');
+            return false; // 阻止表单提交
+          }
+          if (!pweight) {
+            // 如果有任何输入为空，阻止表单提交
+            alert('請輸入被照顧人體重');
+            return false; // 阻止表单提交
+          }
+          if (!psex) {
+            // 如果有任何输入为空，阻止表单提交
+            alert('請輸入被照顧人性別');
+            return false; // 阻止表单提交
+          }
+
+          // 清空之前的行政區選項
+          districtSelect.innerHTML = '';
+
+          // 如果有選擇的縣市，則載入對應的行政區
+          if (selectedCity) {
+            const districts = districtsByCity[selectedCity];
+            districts.forEach(district => {
+              const option = document.createElement('option');
+              option.value = district;
+              option.text = district;
+              districtSelect.appendChild(option);
+            });
+          }
+
+
+          // 現在在給定的路徑上將數據設置到數據庫中
+          const userData = {
+            bcode: bcode,
+            bpwd: bpwd,
+            bname: bname,
+            btelno: btelno,
+            bline: bline,
+            bdoc: bdoc.value,
+            page: page,
+            pweight: pweight,
+            pheight: pheight,
+            psex: psex.value,
+
+            wcity: selectedCity,
+            district: selectedDistrict,
+            
+            wfperson: wfperson,
+            selectedcaresk: selectedcaresk,
+            selectedcaremo: selectedcaremo,
+            selectedcaremh: selectedcaremh,
+            selectedcarepet: selectedcarepet,
+            selectedMeals: selectedMeals,
+            selectedcarechid: selectedcarechid,
+            selectedhwk: selectedhwk,
+            infrmr: infrmr,
+            jobmr: jobmr,
+            wform: wform.value
+          };
+          // 將資料同時寫入到兩個 Firebase 數據庫
+          //  db1Ref.push(userData)
+
+          database1.ref('job/' + bcode).set(userData)
+          saveData(bcode, bpwd);
+        }
+
+        function saveData(bcode, bpwd) {
+          // 模擬資料儲存完成（這裡是假設的例子）
+          setTimeout(function () {
+            // 資料儲存完成的通知
+            alert(
+              "資料儲存完成！\n\n" +
+              "請使用以下通關資料安排視訊：\n" +
+              "您的聘工表編號: " + bcode + "\n" +
+              "聘工表密碼: " + bpwd
+            );
+
+            // 通知完成後，關閉視窗或跳轉下一個頁面
+            //window.close(); // 關閉當前視窗
+            // 或者
+            window.location.href = "KCF 履歷表 10-5.html"; // 跳轉到下一個頁面
+          }, 1000); // 模擬1秒後完成儲存
+        }
+
+        // 在某個按鈕點擊後執行儲存
+        //document.querySelector("#saveButton").addEventListener("click", saveData);
+
+      </script>
+</body>
+
+</html>
