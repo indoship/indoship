@@ -104,16 +104,19 @@
         }
 
         .close {
-            color: #aaa;
+            color: hsl(0, 90%, 62%);
             float: right;
             font-size: 28px;
             font-weight: bold;
+            background-color: #4CAF50;
+            width: 30PX;
         }
 
         .close:hover,
         .close:focus {
             color: black;
             text-decoration: none;
+            background-color: crimson;
         }
 
         #tableContainer {
@@ -156,9 +159,10 @@
             <label id="CHsheight"></label>
         </h3>
         <hr>請輸入聘工表編號
-        <input style="background-color:blanchedalmond; " type="text" id="jobno" placeholder="聘工表編號" required><br><br>
+        <input style="background-color:blanchedalmond; width: 85%;" type="text" id="jobno" placeholder="聘工表編號"
+            required><br><br>
         請輸入聘工表密碼
-        <input style="background-color:blanchedalmond;" type="text" id="jobpw" placeholder="聘工表密碼" required>
+        <input style="background-color:blanchedalmond; width: 85%;" type="text" id="jobpw" placeholder="聘工表密碼" required>
 
         <button style="cursor: pointer; color: hwb(359 18% 7%);background-color: hsl(55, 61%, 82%);margin-top: 10px;"
             id="checkAndToggleBtn" onclick="checkpwd()"><b>顯示預約視訊人選</b></button>
@@ -217,7 +221,7 @@
 
     </div>
     <div class="container">
-        <div style="display: flex; align-items: center;">
+        <div style="display: flex; margin-left: 10px;">
             <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </h1>
             <img width="60px" src="" style="margin-right: 10px;">
@@ -638,7 +642,8 @@
             const Tangency = document.getElementById("jobno").value;
 
             // 構建URL
-            const url = `安排視訊-2.html?key=${key}&name=${name}&Tagency=${Tangency}`;
+            const url = `安排視訊-2.html?key=${key}&name=${name}&Tagency=${Tangency}&From=雇主邀約-undangan majikan`;
+
 
             // 打開新窗口
             window.open(url, '_blank', 'width=480,height=380');
@@ -701,12 +706,13 @@
                         var IagencyValue = childData.Iagency;
                         var TagencyValue = childData.Tagency;
                         var selectedInterviewValue = childData.TimeZone;
-
-                        console.log('1子節點 (key): ', key);
-                        console.log('2Iagency: ', IagencyValue);
-                        console.log('3Tagency: ', TagencyValue);
-                        console.log('4TimeZone', selectedInterviewValue)
-
+                        var ORF = childData.From;
+                        var FromValue = ORF ? ORF.split('-')[0] : '';  // 確保 ORF 有值才執行 split
+                        //console.log('1子節點 (key): ', key);
+                        // console.log('2Iagency: ', IagencyValue);
+                        // console.log('3Tagency: ', TagencyValue);
+                        // console.log('4TimeZone', selectedInterviewValue)
+                        //console.log('5FromValue', FromValue)
                         // 檢查 Tagency 是否等於 jobnoValue
                         if (TagencyValue === jobnoValue) {
                             console.log('5對應的 Tagency: ', TagencyValue);
@@ -721,7 +727,9 @@
                             var label = document.getElementById('invLabel-' + IagencyValue);
                             if (label) {
                                 var url = `test radio.html?bcode=${TagencyValue}`;
-                                label.innerHTML = '聘工表編號:<br> <a href="' + url + '" target="_blank" style="color:blue;">' + TagencyValue + '</a><br>視訊時段是:<br>' + selectedInterviewValue.join('<br>');
+                                label.innerHTML =
+                                    FromValue + '<br>'
+                                    + '視訊時段是:<br>' + selectedInterviewValue.join('<br>');
                                 label.style.display = 'inline';
                                 label.style.color = 'blue';
                                 label.style.fontSize = '14px';
