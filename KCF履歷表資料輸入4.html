@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Isi Informasi Resume</title>
+  <!-- Bootstrap連結 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+
+  <!-- CSS連結 -->
+  <link rel="stylesheet" href="style.css">
+
+  <!--JQuery 連結-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!--SimplePagenation 連結-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"></script>
+</head>
+
+
+<body>
+
+  <div style="width: auto; height: auto;" class="container-fluid">
+    <h1>KCF Isi Informasi Resume</h1>
+
+    <div class="tab-content">
+      <!-- 第一部份：標籤分頁的導覽列 -->
+      <div class="nav nav-tabs nav-justified row">
+        <!-- 按鈕1 -->
+        <div class="col-12 col-md-4 p-2">
+          <button id="button1" class="nav-link active w-100" data-bs-toggle="tab" data-bs-target="#menu1"
+            aria-selected="true">
+            Informasi pribadi dasar<br>個人基本資料
+          </button>
+        </div>
+        <!-- 按鈕2
+        <button id="button2" class="nav-link" data-bs-toggle="tab" data-bs-target="#menu2" aria-selected="false">
+          Status keluarga<br>家庭狀況
+        </button> -->
+        <!-- 按鈕3 -->
+        <div class="col-12 col-md-4 p-2">
+          <button id="button3" class="nav-link w-100" data-bs-toggle="tab" data-bs-target="#menu3"
+            aria-selected="false">
+            status pernikahan<br>婚姻狀況
+          </button>
+        </div>
+        <!-- 按鈕4 -->
+        <div class="col-12 col-md-6 p-2">
+          <button class="nav-link w-100" data-bs-toggle="tab" data-bs-target="#menu4" aria-selected="false">
+            pengalaman kerja<br>工作經驗
+          </button>
+        </div>
+      </div>
+
+      <div class="containerN" style="background-color: #7ff74c;font-size: 14px;" class="row my-4">
+        <div style="margin-top: 10px;margin-left: 15px;" class="col-md">
+          <label>* No.Induk編號</label>
+          <input class="form-control" style="background-color:#eec07c;width: 45%;" type="text" id="code" required>
+        </div>
+        <div style="margin-top: 10px;margin-left: 15px;" class="col-md">
+          <label>* Nama 姓名</label>
+          <input class="form-control" style="background-color:#eec07c;width: 45%;margin-bottom: 15px; " type="text"
+            id="name" required>
+        </div>
+      </div>
+
+      <div class="tab-pane fade show active" id="menu1">
+        <div class="container">
+          <!-- 第一行 -->
+          <div class="row my-4 ">
+            <div class="col-md">
+              <label>*Tgl.lahir 出生日期</label>
+              <input class="form-control" style="background-color:blanchedalmond;" type="text" id="bhd" required>
+            </div>
+            <div class="col-md">
+              <label>*Umur 年齡</label>
+              <input class="form-control" style="background-color:blanchedalmond; width: 135px;" type="text" id="age"
+                required>
+              <label class="d-inline-block">tahun</label>
+            </div>
+            <div class="col-md">
+              <label for="bhp">*Tempat lahir 出生地</label>
+              <input class="form-control" style="background-color:blanchedalmond;" type="text" id="bhp" required>
+            </div>
+          </div>
+
+          <!-- 第二行 -->
+          <div class="row my-4 margin-left: 10px;">
+            <div class="col-md mb-3">
+              <label for="weight">*Berat badan 體重</label>
+              <!-- 使用 d-flex 將 input 和 label 放在同一行 -->
+              <div class="d-flex ">
+                <input class="form-control" style="background-color:blanchedalmond; width: 80px;" type="text"
+                  id="weight" required>
+                <label class="ms-2">kg.</label> <!-- 使用 ms-2 增加間距 -->
+              </div>
+            </div>
+            <div class="col-md  mb-4">
+              <label for="height">*Tinggi Badan 身高</label>
+              <div class="d-flex align-items-center">
+                <input class="form-control d-inline-block" style="background-color:blanchedalmond; width: 100px;"
+                  type="text" id="height" required>
+                <label class="ms-2">cm.</label>
+              </div>
+            </div>
+            <div class="col-md">
+              <label>*Dimana kamu saat ini</label>
+              <div class="d-flex align-items-center">
+                <select class="form-select" style="background-color:blanchedalmond;" id="FCTY">
+                  <option value="IND">Indonesia 印尼</option>
+                  <option value="TWN">Taiwan 台灣</option>
+                  <option value="HKG">Hongkong 香港</option>
+                  <option value="SNG">Singapura 新加坡</option>
+                  <!-- 其他選項省略 -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- 第三行 -->
+          <div class="row my-4">
+            <div class="col-md">
+              <label for="edu">*Pendidikan 學歷</label>
+              <select class="form-select" style="background-color:blanchedalmond;" id="edu">
+                <option value="小學">SD 小學</option>
+                <option value="國中" selected>SMP/SLTP 國中</option>
+                <option value="高中">SMA/SLTA/SMK高中</option>
+                <option value="大學">D3/S1大學</option>
+              </select>
+            </div>
+            <div class="col-md">
+              <label for="reg">*Agama 宗教信仰</label>
+              <select class="form-select" style="background-color:blanchedalmond;" id="reg">
+                <option value="回教" selected>Islam 回教</option>
+                <option value="天主教">Katolik天主教</option>
+                <option value="基督教">Keristenan基督教</option>
+                <option value="佛教">Buddha佛教</option>
+                <option value="印度教">Hinduisme印度教</option>
+              </select>
+            </div>
+            <div class="col-md">
+              <label for="sex">*Jenis Kelamin 性別</label>
+              <select class="form-select" style="background-color:blanchedalmond;" id="sex">
+                <option value="male">Pria 男性</option>
+                <option value="female" selected>Perempuan 女性</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 第四行 -->
+          <div class="row my-4">
+            <div class="col-md">
+              <label>Jumlah Saudara 兄弟姊妹數</label>
+              <input class="form-control" style="width: 130px;" type="text" id="bsn" required>
+            </div>
+            <div class="col-md">
+              <label>Anak Ke 家中排行</label>
+              <input class="form-control" style="width: 130px;" type="text" id="rng" required>
+            </div>
+            <div class="col-md">
+              <label>Nomor Paspor 護照號碼</label>
+              <input class="form-control" style="width: 150px;" type="text" id="pasno">
+            </div>
+          </div>
+
+          <!-- 第五行 -->
+          <div class="row my-4">
+            <div class="col-md">
+              <label>Foto Setengah Panjang 半身照 :</label>
+              <input class="form-control" style="width:  85%;" type="file" id="image1">
+            </div>
+          </div>
+
+          <!-- 第六行 -->
+          <div class="row my-4">
+            <div class="col-md">
+              <label>Citra Seluruh Tubuh 全身照 :</label>
+              <input class="form-control" style="width:  85%;" type="file" id="image2">
+            </div>
+          </div>
+
+          <!-- 第七行 -->
+          <div class="row my-4 mb-5">
+            <div class="col-md">
+              <label>Pengenalan Diri MP4 自我介紹 :</label>
+              <input class="form-control" style="width: 85%;" type="file" id="self">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第3個內容婚姻狀況 -->
+      <div class="tab-pane fade show active" id="menu3">
+        <div style="margin-top: 25px; margin-left: 15px;" class="row">
+          <div class="row my-4">
+            <div class="col-md">
+              <label for="mrg">*Status Perkawinan</label><br>
+              <select id="mrg" size="4">
+                <option value="未婚" selected>Belum Kawin未婚</option>
+                <option value="已婚">Kawin已婚</option>
+                <option value="離婚">Cerai離婚</option>
+                <option value="寡居">Janda寡居</option>
+              </select>
+            </div>
+            <div class="col">
+              <div class="col-md">
+                <label for="hsbname">Nama Pasangan配偶名</label><br>
+                <input type="text" id="hsbname" required>
+              </div>
+              <div class="col-md">
+                <label style="margin-top: 10px;" for="hsbage">Umur Pasangan配偶年齡</label><br>
+                <input type="text" id="hsbage" required>
+              </div>
+            </div>
+            <div class="col-md">
+              <label style="margin-top: 10px;" for="hsbjob">Pekerjaan Pasangan配偶工作</label><br>
+              <select id="hsbjob" size="4">
+                <option value="農夫">Petani農夫</option>
+                <option value="家庭主婦">Ibu rumah tangga家庭主婦</option>
+                <option value="上班">Bekerja上班</option>
+                <option value="開店">Buka toko開店</option>
+                <option value="工廠工作">Pabrik kerja工廠工作</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div style=" margin-left: 15px;" class="row">
+          <div class="row my-4">
+            <div class="col">
+              <label for="childn">Jumlah Anak</label><br>
+              <input type="text" id="childn">
+            </div>
+            <div class="col-md">
+              <label for="childb">Umur Anak Sulung</label><br>
+              <input type="text" id="childb">
+
+            </div>
+            <div class="col-md">
+              <label for="childl">Umur Anak Bungsu</label><br>
+              <input style="margin-bottom: 15px;" type="text" id="childl">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第4個內容工作經驗 -->
+      <div class="tab-pane fade" id="menu4">
+        <div style="margin-top: 15px; margin-left: 15px;" class="row">
+          <div class="row my-4">
+            <div class="col-md">
+              <label style="margin-top: 10px;" id="exp1"><b>Pengalaman Kerja1 工作經驗 1:</b></label>
+              <!-- <input type="text" id="exp1"> -->
+              <div style="margin-top: 20px;" class="row">
+                <div class="col-md">
+                  <label>Mulai Danggal開始日期</label><br>
+                  <input id="startDay1" type="month" placeholder="開始日期" class="form-controlday"><br>
+                  <label>Tanggal khir結束日期</label><br>
+                  <input id="finishDay1" type="month" placeholder="結束日期" class="form-controlday">
+                </div>
+              </div>
+              <div style="width:300px;" class="col-md">
+                <label>Tempat Kerja</label>
+                <select id="place1" size="5" class="form-select">
+                  <option value="當地">Indonesia</option>
+                  <option value="台灣">Taiwan</option>
+                  <option value="新加坡">Singapura</option>
+                  <option value="馬來西亞">Malaysia</option>
+                  <option value="香港">Hongkong</option>
+                  <option value="澳門">Macao</option>
+                  <option value="阿拉伯">Arab</option>
+                  <option value="韓國">Korea</option>
+                  <option value="汶萊">Brunai</option>
+                  <option value="日本">Jepan</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md">
+              <label>Konten Pekerjaan</label><br>
+              <textarea style="height: 120px;width: auto;" id="job1ds"></textarea>
+            </div><br><br>
+            <div class="col">
+              <label>Alasan Untuk Pergi</label>
+              <select style="width:250px;" id="finishReason1" size="5" class="form-select">
+                <option value="合約到期">kontrak telah habis</option>
+                <option value="家裡有事">Sesuatu terjadi di rumah</option>
+                <option value="結婚">nikah</option>
+                <option value="要到台灣工作">Ingin bekerja di Taiwan</option>
+                <option value="被照顧人往生">Orang yang dirawat meninggal dunia</option>
+              </select>
+            </div>
+          </div><br>
+          <label style="margin-top: 45px;" id="exp2"><b>Pengalaman Kerja2 工作經驗 2:</b></label>
+          <div style="margin-top: 20px;" class="row">
+            <div class="col-md">
+              <label>Mulai Danggal開始日期</label><br>
+              <input id="startDay2" type="month" placeholder="開始日期" class="form-controlday"><br>
+              <label>Tanggal khir結束日期</label><br>
+              <input id="finishDay2" type="month" placeholder="結束日期" class="form-controlday">
+            </div>
+          </div>
+          <div style="width:300px;" class="col-md">
+            <label>Tempat Kerja</label>
+            <select id="place2" size="5" class="form-select">
+              <option value="當地">Indonesia</option>
+              <option value="台灣">Taiwan</option>
+              <option value="新加坡">Singapura</option>
+              <option value="馬來西亞">Malaysia</option>
+              <option value="香港">Hongkong</option>
+              <option value="澳門">Macao</option>
+              <option value="阿拉伯">Arab</option>
+              <option value="韓國">Korea</option>
+              <option value="汶萊">Brunai</option>
+              <option value="日本">Jepan</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div style="margin-top: 25px;" class="row">
+          <div class="col-md">
+            <label>Konten pekerjaan</label><br>
+            <textarea style="height: 120px;" id="job2ds"></textarea>
+          </div>
+          <div class="col-md">
+            <label>Alasan untuk pergi</label><br>
+            <select style="width: 320px;" id="finishReason2" size="5" class="form-select">
+              <option value="合約到期">kontrak telah habis</option>
+              <option value="家裡有事">Sesuatu terjadi di rumah</option>
+              <option value="結婚">nikah</option>
+              <option value="要到台灣工作">Ingin bekerja di Taiwan</option>
+              <option value="被照顧人往生">Orang yang dirawat meninggal dunia</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items: center; ">
+        <button style="margin-bottom: 15px; height: 45px; width: 50%; background-color: chocolate;" id="Sumit"
+          onclick="sendData()">Sumit
+        </button>
+      </div>
+
+      <div id="progressContainer">
+        <p id="progressMessage"></p>
+        <p id="errorMessage"></p>
+      </div>
+
+
+    </div>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  <!-- 引入 Firebase 配置 -->
+  <script src="firebaseConfig.js"></script>
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // 選擇所有的 tab 按鈕
+      const tabButtons = document.querySelectorAll(".nav-link");
+
+      // 對每個按鈕綁定點擊事件
+      tabButtons.forEach(button => {
+        button.addEventListener("click", function () {
+          // 移除其他按鈕的 active 樣式
+          tabButtons.forEach(btn => btn.classList.remove("active"));
+
+          // 對當前點擊的按鈕添加 active 樣式
+          this.classList.add("active");
+        });
+      });
+    });
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfigJOBSCRIPT, "dbJOB");
+    const database1 = firebase.database(firebase.app("dbJOB"));
+    const storage = firebase.storage(firebase.app("dbJOB"));
+
+    function sendData() {
+
+      const code = document.getElementById('code').value;
+      const name = document.getElementById('name').value;
+      const bhd = document.getElementById('bhd').value;
+      const bhp = document.getElementById('bhp').value;
+      const age = document.getElementById('age').value;
+      const weight = document.getElementById('weight').value;
+      const height = document.getElementById('height').value;
+      const FCTY = document.getElementById('FCTY').value;
+      const mrg = document.getElementById('mrg').value;
+      const edu = document.getElementById('edu').value;
+      const reg = document.getElementById('reg').value;
+      const bsn = document.getElementById('bsn').value;
+      const rng = document.getElementById('rng').value;
+      const hsbname = document.getElementById('hsbname').value;
+      const hsbage = document.getElementById('hsbage').value;
+      const hsbjob = document.getElementById('hsbjob').value;
+      const childn = document.getElementById('childn').value;
+      const childb = document.getElementById('childb').value;
+      const childl = document.getElementById('childl').value;
+      const firebaseIndex = document.getElementById('code').value;
+      const pasno = document.getElementById('pasno').value;
+      var startDate1 = document.getElementById("startDay1").value;
+      var finishDate1 = document.getElementById("finishDay1").value;
+      var place1 = document.getElementById("place1").value;
+      var jobContent1 = document.getElementById("job1ds").value;
+      var finishReason1 = document.getElementById("finishReason1").value;
+      var exp1 = '';
+      // 檢查是否有填寫資料
+      if (place1 && jobContent1 && finishReason1) {
+        // 生成文字內容
+        var resultText = startDate1 + " ~ " + finishDate1 + "\n" + "工作地點: " + place1 +
+          "\n" + "工作內容: " + jobContent1 + "\n" + "離職原因: " + finishReason1;
+        // 將生成的文字內容添加到保存所有工作經驗的變量中
+        exp1 = resultText;
+      }
+
+      var startDate2 = document.getElementById("startDay2").value;
+      var finishDate2 = document.getElementById("finishDay2").value;
+      var place2 = document.getElementById("place2").value;
+      var jobContent2 = document.getElementById("job2ds").value;
+      var finishReason2 = document.getElementById("finishReason2").value;
+      var exp2 = '';
+
+      // 檢查是否有填寫資料
+      if (place2 && jobContent2 && finishReason2) {
+        // 生成文字內容
+        var resultText2 = startDate2 + " ~ " + finishDate2 + "\n" + " 地點: " + place2 +
+          "\n工作內容: " + jobContent2 + " \n離職原因: " + finishReason2;
+        exp2 = resultText2;
+      }
+
+      const sex = document.getElementById("sex").value;
+
+      // 獲取所有已勾選的工作專長
+      //const selectedPro = [];
+      //const checkboxes = document.querySelectorAll('input[name="pro"]:checked');
+      //checkboxes.forEach((checkbox) => {
+      //   selectedPro.push(checkbox.value);
+      //});
+
+      // 检查输入是否有效
+      if (!code || !name || !bhd || !age || !height || !weight || !FCTY || !mrg || !edu || !sex) {
+        // 如果有任何输入为空，阻止表单提交
+        alert('Silakan isi semua bidang yang wajib diisi.\n\nNo.Induk\nNama \nTgl.lahir\nUmur\nTempat lahir\nBerat badan\nTinggi Badan\npilih tujuan anda bekerja');
+        return false; // 阻止表单提交
+      }
+      // 現在在給定的路徑上將數據設置到數據庫中
+      const userData = {
+        code: code,
+        name: name,
+        bhd: bhd,
+        bhp: bhp,
+        age: age,
+        weight: weight,
+        height: height,
+        FCTY: FCTY,
+        mrg: mrg,
+        edu: edu,
+        reg: reg,
+        bsn: bsn,
+        rng: rng,
+        hsbname: hsbname,
+        hsbage: hsbage,
+        hsbjob: hsbjob,
+        childn: childn,
+        childb: childb,
+        childl: childl,
+        exp1: exp1,
+        exp2: exp2,
+        sex: sex,
+        pasno: pasno
+      };
+      // 將資料同時寫入到兩個 Firebase 數據庫
+      //  db1Ref.push(userData)
+      const selectedOption = document.getElementById('FCTY').value;
+
+      database1.ref('KFA/' + firebaseIndex).set(userData)
+      // 調用上傳文件的函數
+      uploadFiles();
+    }
+
+    function uploadFiles() {
+      uploadFile('image1', 'image1');
+      uploadFile('image2', 'image2');
+      uploadFile('self', 'self');
+    }
+
+    function uploadFile(inputId, storagePath) {
+      const fileInput = document.getElementById(inputId);
+      const file = fileInput.files[0];
+
+      const storageRef = storage.ref();
+      const uploadTask = storageRef.child(storagePath + '/' + code.value).put(file);
+
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          // 進度更新
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          const roundedProgress = Math.round(progress);  // 四捨五入進度為整數
+          progressMessage.textContent = `Upload is ${roundedProgress}% done`;
+        },
+        (error) => {
+          // 上傳失敗
+          console.error('Upload failed:', error);
+        },
+        () => {
+          // 上傳完成
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            saveFileUrl(storagePath, code, downloadURL);
+            // 恢復進度訊息
+            progressMessage.textContent = "Upload completed";
+
+            // 這裡可以設置為原始狀態，例如空白
+            setTimeout(() => {
+              progressMessage.textContent = "";
+              //document.getElementById('code').value = '';
+            }, 5000);  // 3秒後清空進度顯示
+          });
+        }
+      );
+    }
+
+    function saveFileUrl(path, code, url) {
+      //const abc = document.getElementById('code').value;
+      console.log(code.value);
+      const fileRef = database1.ref('KFA/' + code.value + '/' + path);
+      fileRef.set(url);
+
+      // Clear the form
+      //document.getElementById('code').value = '';
+      document.getElementById('name').value = '';
+      document.getElementById('bhd').value = '';
+      document.getElementById('age').value = '';
+      document.getElementById('bhp').value = '';
+      document.getElementById('weight').value = '';
+      document.getElementById('height').value = '';
+      document.getElementById('FCTY').value = '';
+      document.getElementById('bsn').value = '';
+      document.getElementById('rng').value = '';
+
+      document.getElementById('hsbname').value = '';
+      document.getElementById('hsbage').value = '';
+      document.getElementById('hsbjob').value = '';
+      document.getElementById('childn').value = '';
+      document.getElementById('childb').value = '';
+      document.getElementById('childl').value = '';
+
+      document.getElementById("startDay1").value = '';
+      document.getElementById("finishDay1").value = '';
+      document.getElementById("job1ds").value = '';
+      document.getElementById("startDay2").value = '';
+      document.getElementById("finishDay2").value = '';
+      document.getElementById("job2ds").value = '';
+      document.getElementById("pasno").value = ''
+    }
+
+
+  </script>
+</body>
+
+</html>
