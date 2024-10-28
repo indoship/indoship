@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pekerjaan yang ada</title>
+    <style>
+        .container {
+            font-family: sans-serif;
+            margin: auto;
+        }
+
+
+        style body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h2 {
+            color: hsl(0, 97%, 49%);
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #9ce8c9;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 6px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: #080808;
+            font-weight: bold;
+            text-transform: uppercase;
+            size: 14PX;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: hsl(49, 76%, 70%);
+        }
+
+        td {
+            font-size: 16px;
+        }
+
+        th,
+        td {
+            text-align: center;
+        }
+
+        .pagination {
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination button {
+            margin: 0 5px;
+            padding: 8px 16px;
+            background-color: hsl(122, 78%, 22%);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pagination button:hover {
+            background-color: #45a049;
+        }
+
+        .pagination button.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- 分頁按鈕的頂部 -->
+        <div class="pagination" id="pagination-top">
+            <!-- 分頁按鈕將插入這裡 -->
+        </div>
+        <div style="margin-top: 25px;margin-left: 15px;" class="row">
+            <div class="col-md">
+                <input style="background-color:blanchedalmond;font-size: 14px;" type="text" id="biono"
+                    placeholder="Nomor resume" required>
+            </div>
+            <div class="col-md">
+                <input style="background-color:blanchedalmond; margin-top: 10px;font-size: 14px;" type="text"
+                    id="BioName" placeholder="Nama resume">
+            </div>
+            <div class="col-md">
+                <button
+                    style="cursor: pointer; color: hwb(359 18% 7%);font-size: 14px;height: 40px; background-color: hsl(55, 61%, 82%); margin-top: 10px;"
+                    id="checkAndToggleBtn" onclick="checkpwd()">
+                    <u><b>Mengundang Anda ke obrolan video</b></u>
+                </button>
+            </div>
+        </div>
+
+        <h2 style="margin-left: 95px;">Daftar Pekerjaan</h2>
+
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>bcode</th>
+                    <th>Jenis<br>kelamin</th>
+                    <th>Kabupaten<br>atau kota</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 資料會插入這裡 -->
+            </tbody>
+        </table>
+
+        <!-- 分頁按鈕的底部 -->
+        <div class="pagination" id="pagination-bottom">
+            <!-- 分頁按鈕將插入這裡 -->
+        </div>
+
+        <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+        <script src="firebaseConfig.js"></script>
+        <script>
+            var data = [];
+            var filteredData = [];
+            var currentPage = 1;
+            var rowsPerPage = 10; // 每頁顯示的資料筆數
+
+            // 假設這是從 Firebase 取得的資料
+            var fetchdata = databaseJOBSCRIPT.ref('job/');
+
+            // Firebase 數據加載完成後，渲染表格並設置分頁
+            fetchdata.on('value', (snapshot) => {
+                data = [];
+                snapshot.forEach((childSnapshot) => {
+                    const item = childSnapshot.val();
+
+                    // 只對特定的節點進行 "-" 分割處理
+                    const formattedpsex = item.psex && item.psex.includes('-') ? item.psex.split('-')[1].trim() : item.psex;
+                    const formattedwcity = item.wcity && item.wcity.includes('-') ? item.wcity.split('-')[1].trim() : item.wcity;
+
+                    // 將分割後的值與其他資料一起推入 data 陣列
+                    data.push({
+                        key: childSnapshot.key,
+                        ...item,
+                        psex: formattedpsex,   // 更新分割後的 psex 值
+                        wcity: formattedwcity      // 更新分割後的 wcity 值
+                    });
+                });
+
+                // 渲染表格
+                renderTable();
+                // 設置分頁按鈕
+                setupPagination();
+            });
+
+
+            function renderTable(page = 1) {
+                const tableBody = document.querySelector("#data-table tbody");
+                tableBody.innerHTML = "";
+
+                // 計算當前頁的資料起始與結束位置
+                const startIndex = (page - 1) * rowsPerPage;
+                const endIndex = startIndex + rowsPerPage;
+                const pageData = data.slice(startIndex, endIndex);
+
+                // 動態生成表格內容，對 psex 和 wcity 做分割處理
+                pageData.forEach(item => {
+                    // 在這裡進行分割處理，確保每次頁面切換時都重新應用分割邏輯
+                    const formattedpsex = item.psex && item.psex;
+                    const formattedwcity = item.wcity && item.wcity;
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+            <td class="bcode-link" style="color: blue; text-decoration: underline; cursor: pointer;">
+                ${item.bcode}
+            </td>
+            <td>${formattedpsex}</td>
+            <td>${formattedwcity}</td>   <!-- 使用經過分割的 wcity 值 -->
+            <td>
+                <label id="invLabel-${item.bcode}" style="display: none;"></label><br>
+                <button id="${item.bcode}" style="background:orange; width:125px; color: blue; text-decoration: underline; cursor: pointer;" 
+                    onclick="window.open('Jadwalkan panggilan video-indo.html?key=${item.bcode}&biono=' + document.getElementById('biono').value + '&BioName=' + document.getElementById('BioName').value + '&From=自我推薦-merekomendasikan diri sendiri' , '_blank', 'width=300,height=500');">
+                    Atur obrolan video dengan majikan
+                </button>
+            </td>
+             `;
+
+                    // 監聽點擊事件，點擊 bcode 欄位才會跳轉
+                    const bcodeCell = row.querySelector(".bcode-link");
+                    bcodeCell.addEventListener('click', () => {
+                        const bcode = item.bcode;
+                        const bpwd = item.bpwd;
+                        const url = `Tabel isi pekerjaan-Indo.html?bcode=${bcode}&bpwd=${bpwd}`;
+                        window.open(url, '_blank');
+                    });
+
+                    tableBody.appendChild(row);
+                });
+
+                // 每次渲染表格後，重新生成分頁按鈕
+                setupPagination();
+            }
+
+            // 分頁按鈕設置函數
+            function setupPagination() {
+                const totalPages = Math.ceil(data.length / rowsPerPage);
+                const paginationBottom = document.getElementById('pagination-bottom');
+
+                paginationBottom.innerHTML = "";
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const buttonBottom = createPaginationButton(i);
+                    paginationBottom.appendChild(buttonBottom);  // 確保按鈕被插入到底部的分頁區域
+                }
+            }
+
+            // 創建分頁按鈕函數
+            function createPaginationButton(page) {
+                const button = document.createElement('button');
+                button.textContent = page;
+                if (page === currentPage) {
+                    button.classList.add('active');
+                }
+                button.addEventListener('click', () => {
+                    currentPage = page;
+                    renderTable(currentPage);  // 每次按下按鈕時重新渲染表格
+                });
+                return button;
+            }
+
+            function checkpwd() {
+                // 取得 biono 和 BioName 的值
+                var bionoValue = document.getElementById('biono').value;
+                var BioNameValue = document.getElementById('BioName').value;
+
+                if (bionoValue === '') {
+                    alert("Silakan masukkan nomor resume");
+                    return; // 停止函數執行
+                }
+
+                if (BioNameValue === '') {
+                    alert("Silakan masukkan nama resume");
+                    return; // 停止函數執行
+                }
+
+                // Firebase 的參考節點 job
+                var ref = databaseJOBSCRIPT.ref('KFA/' + bionoValue);
+
+                // 檢查 biono 是否存在
+                ref.once('value', function (snapshot) {
+                    if (snapshot.exists()) {
+                        // 如果 biono 存在，檢查 BioName
+                        var BioData = snapshot.val();
+                        var storedBioName = BioData.name; // Firebase 中存儲的名稱
+                        var storedBiocode = BioData.code; // Firebase 中存儲的編號
+
+                        // 檢查輸入的 BioName 是否匹配存儲的名稱
+                        if (BioNameValue === storedBioName) {
+                            // 檢查 biono 是否匹配
+                            if (bionoValue === storedBiocode) {
+                                checkAndToggle(); // 呼叫其他處理函數
+                            } else {
+                                alert("Nomor resume yang dimasukkan salah");
+                            }
+                        } else {
+                            alert("Nama resume yang dimasukkan salah");
+                        }
+                    } else {
+                        alert("Nomor riwayat masukan tidak ada");
+                    }
+                });
+            }
+
+            function checkAndToggle() {
+                // 初始化符合條件的父節點數量
+                let matchingParentCount = 0;
+
+                // 取得 biono 的值
+                var bionoValue = document.getElementById("biono").value;
+
+                // 使用實際 key 值，正確形成 Firebase 路徑
+                var ref = databaseJOBSCRIPT.ref('INTERVIEW/');
+
+                ref.once('value', function (snapshot) {
+                    if (snapshot.exists()) {
+                        snapshot.forEach(function (childSnapshot) {
+                            // 取得每個 INTERVIEW 節點下的值
+                            var key = childSnapshot.key;
+                            var childData = childSnapshot.val();
+
+                            // 取得 Iagency, Tagency, TimeZone 的值
+                            var IagencyValue = childData.Iagency;
+                            var TagencyValue = childData.Tagency;
+                            var selectedInterviewValue = childData.TimeZone;
+                            var ORF = childData.From;
+                            var FromValue = ORF ? ORF.split('-')[1] : '';  // 確保 ORF 有值才執行 split
+
+
+                            // 檢查 Tagency 是否等於 bionoValue
+                            if (IagencyValue === bionoValue) {
+                                matchingParentCount++;
+                                // 設定按鈕文字和顏色
+                                var button = document.getElementById('checkAndToggleBtn');
+                                button.innerHTML = matchingParentCount + ' orang<br>telah melakukan reservasi untuk obrolan video';
+                                button.style.color = 'blue';
+
+                                // 更新對應的 label
+                                var label = document.getElementById('invLabel-' + TagencyValue);
+                                if (label) {
+                                    var url = `test radio.html?bcode=${TagencyValue}`;
+                                    label.innerHTML =
+                                    FromValue + '<br>'
+                                    +'sesi video:<br>' + selectedInterviewValue.join('<br>');
+                                    label.style.display = 'inline';
+                                    label.style.color = 'blue';
+                                    label.style.fontSize = '14px';
+                                }
+
+                                // 綁定刪除按鈕
+                                var deleteButton = document.getElementById(TagencyValue);
+                                if (deleteButton) {
+                                    deleteButton.innerHTML = 'Batalkan reservasi';
+                                    deleteButton.style.color = 'red';
+                                    deleteButton.style.fontSize = '14px';
+                                    deleteButton.onclick = function () {
+                                        var ref = databaseJOBSCRIPT.ref('INTERVIEW/' + key);
+                                        ref.remove().then(function () {
+                                            deleteButton.style.display = 'none';
+                                            renderTable(filteredData);
+                                        })
+                                    };
+                                }
+                            }
+                        });
+
+                        // 如果沒有符合的 Tagency，更新按鈕文字為 "尚未預約"
+                        if (matchingParentCount === 0) {
+                            var button = document.getElementById('checkAndToggleBtn');
+                            button.textContent = 'Anda belum memesan panggilan video';
+                            button.style.color = 'red';
+                        }
+                    }
+                });
+            }
+        </script>
+    </div>
+</body>
+
+</html>
