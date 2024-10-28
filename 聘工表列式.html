@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pekerjaan yang ada</title>
     <style>
-
         .container {
             font-family: sans-serif;
             margin: auto;
@@ -199,7 +198,7 @@
             <td>
                 <label id="invLabel-${item.bcode}" style="display: none;"></label><br>
                 <button id="${item.bcode}" style="background:orange; width:125px; color: blue; text-decoration: underline; cursor: pointer;" 
-                    onclick="window.open('Jadwalkan panggilan video-indo.html?key=${item.bcode}&biono=' + document.getElementById('biono').value + '&BioName=' + document.getElementById('BioName').value, '_blank', 'width=300,height=500');">
+                    onclick="window.open('Jadwalkan panggilan video-indo.html?key=${item.bcode}&biono=' + document.getElementById('biono').value + '&BioName=' + document.getElementById('BioName').value + '&From=自我推薦-merekomendasikan diri sendiri' , '_blank', 'width=300,height=500');">
                     Atur obrolan video dengan majikan
                 </button>
             </td>
@@ -312,6 +311,9 @@
                             var IagencyValue = childData.Iagency;
                             var TagencyValue = childData.Tagency;
                             var selectedInterviewValue = childData.TimeZone;
+                            var ORF = childData.From;
+                            var FromValue = ORF ? ORF.split('-')[1] : '';  // 確保 ORF 有值才執行 split
+
 
                             // 檢查 Tagency 是否等於 bionoValue
                             if (IagencyValue === bionoValue) {
@@ -325,7 +327,9 @@
                                 var label = document.getElementById('invLabel-' + TagencyValue);
                                 if (label) {
                                     var url = `test radio.html?bcode=${TagencyValue}`;
-                                    label.innerHTML = 'sesi video:<br>' + selectedInterviewValue.join('<br>');
+                                    label.innerHTML =
+                                    FromValue + '<br>'
+                                    +'sesi video:<br>' + selectedInterviewValue.join('<br>');
                                     label.style.display = 'inline';
                                     label.style.color = 'blue';
                                     label.style.fontSize = '14px';
