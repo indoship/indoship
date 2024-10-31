@@ -4,784 +4,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAIWAN Process Report 5</title>
+    <title>台仲聘工表管理-1</title>
     <style>
-        body {
-            display: flex;
-            margin: 0;
-        }
-
-        /* 样式部分保持不变 */
         .container {
-            max-width: 85%;
             font-family: sans-serif;
-            margin-left: 5px;
-            margin-right: 5px;
-            cursor: auto;
+            margin: auto;
         }
 
-        .sidebar {
-            font-size: 12px;
-            flex: 0 0 15%;
-            padding: 15px;
-            background-color: hwb(27 67% 2%);
-        }
-
-        h1 {
-            text-align: center;
+        style body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
         }
 
         h2 {
-            text-align: center;
-            color: #0d2fb5;
-        }
-
-        h5 {
-            padding: -10px;
-            color: #0a0b08;
+            color: hsl(0, 97%, 49%);
         }
 
         table {
-            width: 650px;
-            border-spacing: 0px;
-            background-color: hsl(69, 77%, 83%);
+            width: 80%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #9ce8c9;
+            border-radius: 8px;
+            overflow: hidden;
+        }
 
+        th,
+        td {
+            padding: 6px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
         }
 
         th {
-            text-align: center;
-            background-color: aquamarine;
+            background-color: #4CAF50;
+            color: #080808;
+            font-weight: bold;
+            text-transform: uppercase;
+            size: 14PX;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: hsl(49, 76%, 70%);
         }
 
         td {
-            background-color: rgb(233, 220, 162);
-
+            font-size: 16px;
         }
 
-        table td:focus {
-            background-color: chocolate;
-        }
-
-        table th,
-        table td {
-            padding: 1px 0px;
-            border-bottom: 2px solid hwb(37 4% 10%);
-            outline: none;
+        th,
+        td {
             text-align: center;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+        .pagination {
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
         }
 
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: hwb(195 94% 3%);
-            padding: 20px;
-            border: 1px solid rgb(71, 128, 233);
-            width: 500px;
-            height: 400px;
-            overflow-y: auto;
-            text-align: center;
-            /* 將文本居中 */
+        .pagination button {
+            margin: 0 5px;
+            padding: 8px 16px;
+            background-color: hsl(122, 78%, 22%);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
-        #tableContainer {
-            overflow: auto;
-            max-height: calc(100vh - 150px);
-            z-index: 0;
+        .pagination button:hover {
+            background-color: #45a049;
         }
 
-        thead th {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            z-index: 2;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-        }
-
-        #myModal {
-            z-index: 1;
-            border-bottom: 2px solid rgb(8, 20, 234);
-        }
-
-        #L2 {
-            color: #f41212;
-            font-size: 20x;
-            font-weight: bold;
+        .pagination button.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
     </style>
 </head>
 
 <body>
-    <div class="sidebar">
-        <h2>TAIWAN</h2>
-        <h3>
-            Kandidat opsional<br>
-            <label id="male">0</label>
-            <br>
-            <hr>
-            <label id="CHsheight"></label>
-        </h3>
+
+    <div>
+
+        <hr>請輸入公司名稱
+        <input style="background-color:blanchedalmond;width: 10%;" type="text" id="jobno" placeholder="公司名稱">
+        請輸入公司密碼
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input style="background-color:blanchedalmond;width: 10%;" type="text" id="jobpw"
+            placeholder="公司密碼">
+
+        <label id="selradio"></label>
         <hr>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="color: hsl(0, 97%, 49%);" id="L2"></label>
         <div id="firebaseOptions"></div>
         <hr>
-
-        <label style="color: hsl(60, 4%, 5%); font-size: 12px;"><b>jenis kelamin</b></label><br>
-        <input type="radio" name="ssex" value="ssex1" data-gender="female" onchange="filterByHWA()">gadis<br>
-        <input type="radio" name="ssex" value="ssex2" data-gender="male" onchange="filterByHWA()">anak laki-laki<br>
-        <hr>
-
-        <label style="color: hsl(60, 4%, 5%); font-size: 12px;"><b>rentang ketinggian</b></label><br>
-        <input type="radio" name="sheight" value="sheight1" data-min="1" data-max="300" onchange="filterByHWA()"
-            checked>tidak resmi<br>
-        <input type="radio" name="sheight" value="sheight2" data-min="150" data-max="155"
-            onchange="filterByHWA()">150-155cm.<br>
-        <input type="radio" name="sheight" value="sheight3" data-min="156" data-max="160"
-            onchange="filterByHWA()">156-160cm.<br>
-        <input type="radio" name="sheight" value="sheight4" data-min="161" data-max="165"
-            onchange="filterByHWA()">161-16cm.<br>
-        <input type="radio" name="sheight" value="sheight5" data-min="166" data-max="170"
-            onchange="filterByHWA()">166-170cm.<br>
-        <input type="radio" name="sheight" value="sheight6" data-min="171" data-max="300" onchange="filterByHWA()">Lebih
-        dari 171cm.
-
-        <hr>
-        <label style="color: hsl(60, 4%, 5%); font-size: 12px;"><b>kisaran berat badan</b></label><br>
-        <input type="radio" name="sweight" value="sweight1" data-min="1" data-max="300" onchange="filterByHWA()"
-            checked>tidak resmi<br>
-        <input type="radio" name="sweight" value="sweight2" data-min="50" data-max="55"
-            onchange="filterByHWA()">50~55kg.<br>
-        <input type="radio" name="sweight" value="sweight3" data-min="56" data-max="60"
-            onchange="filterByHWA()">56~60kg.<br>
-        <input type="radio" name="sweight" value="sweight4" data-min="61" data-max="65"
-            onchange="filterByHWA()">61-65kg.<br>
-        <input type="radio" name="sweight" value="sweight5" data-min="61" data-max="65"
-            onchange="filterByHWA()">66-70kg.<br>
-        <input type="radio" name="sweight" value="sweight6" data-min="61" data-max="65"
-            onchange="filterByHWA()">71-75kg.<br>
-        <input type="radio" name="sweight" value="sweight7" data-min="61" data-max="65"
-            onchange="filterByHWA()">76-80kg.<br>
-        <input type="radio" name="sweight" value="sweight8" data-min="81" data-max="300" onchange="filterByHWA()">Lebih
-        dari 81kg
-
-        <hr>
-        <label style="color: hsl(60, 4%, 5%); font-size: 12px;"><b>rentang usia</b></label><br>
-        <input type="radio" name="sage" value="sage1" data-min="1" data-max="300" onchange="filterByHWA()" checked>tidak
-        resmi<br>
-        <input type="radio" name="sage" value="sage2" data-min="20" data-max="25"
-            onchange="filterByHWA()">20~25tahun<br>
-        <input type="radio" name="sage" value="sage3" data-min="26" data-max="30"
-            onchange="filterByHWA()">26-30tahun<br>
-        <input type="radio" name="sage" value="sage4" data-min="31" data-max="35"
-            onchange="filterByHWA()">31-35tahun<br>
-        <input type="radio" name="sage" value="sage5" data-min="36" data-max="40"
-            onchange="filterByHWA()">36-40tahun<br>
-        <input type="radio" name="sage" value="sage6" data-min="41" data-max="100" onchange="filterByHWA()">Lebih dari
-        41 tahun<br>
-        <hr>
-        <button id="Btnselection" onclick="renderTable(filteredData);"
-            style="background-color: #4CAF50; color: white; font-size: 16px;">Saring berdasarkan<br>Daftar resume
-        </button>
-        <hr>
-
     </div>
+
     <div class="container">
-        <div>
-            <h1>TAIWAN Process Report 5</h1>
+        <!-- 分頁按鈕的頂部 -->
+        <div class="pagination" id="pagination-top">
+            <!-- 分頁按鈕將插入這裡 -->
         </div>
-        <div>
-            <label for="search">Search:</label>
-            <input type="text" id="search" oninput="filterTable()">
-            <label for="pageSize">Page Size:</label>
-            <select id="pageSize" onchange="changePageSize()">
 
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
+        <h2 style="margin-left: 95px;">聘工表</h2>
 
-                #videoContainer {
-                display: none;
-                }
-
-            </select>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="L2"></label>
-            <label id="selradio"></label>
-
-        </div>
-        <table>
+        <table id="data-table">
             <thead>
                 <tr>
-                    <th style="width:80px;">
-                        <label>nomor<br>seri</label>
-                    </th>
-                    <th>
-                        <label>usia</label>
-                    </th>
-                    <th>
-                        <label>tinggi</label>
-                    </th>
-                    <th>
-                        <label>berat</label>
-                    </th>
-                    <th>
-                    </th>
-
-                    <th>
-                    </th>
-                    <th style="width:150px;">
-                        <!-- <button onclick="">視訊時段</button> -->
-                    </th>
-
+                    <th>編號</th>
+                    <th>雇主</th>
+                    <th>進用方式</th>
+                    <th>工作地</th>
+                    <th></th>
                 </tr>
             </thead>
-
-            <tbody id="tableBody">
+            <tbody>
+                <!-- 資料會插入這裡 -->
             </tbody>
         </table>
-        <div id="tableContainer"></div>
 
-        <div id="pagination">
-            <button onclick="prevPage()">Previous</button>
-            <span id="pageInfo"></span>
-            <button onclick="nextPage()">Next</button>
+        <!-- 分頁按鈕的底部 -->
+        <div class="pagination" id="pagination">
+            <!-- 分頁按鈕將插入這裡 -->
         </div>
     </div>
-
-    <div id="myModal" class="modal">
-        <div class="modal-content" style="width: 500px; height: 420px; overflow-y: auto;">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h3 align="center">個 人 基 本 資 料</h3>
-            <TABLE CELLPADDING=2 border=4 BORDERCOLORLIGHT="#FFD0D0" BORDERCOLORDARK="#A425B1"
-                style="width: 500px; height: 350px;">
-                <!-- <caption><b>個 人 履 歷 表</b></caption> -->
-                <tr>
-                    <TH width="450">編號: <label id="code"></label></TH>
-
-                    <td WIDTH=100 rowspan=6>
-                        <video id="videoPlayer" style="width: 230px; height: 330px;" controls>
-                            <!-- 預設顯示的內容，可自行更改 image/jpeg-->
-                            <source type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <img id="Himg" src="" alt="Default Image" style="width: 230px; height: 330px; ">
-                    </td>
-                </tr>
-
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;名: <label id="name"></label></TH>
-                </TR>
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;出生日期:<label
-                            id="bhd"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年齡:<label id="age"></label>
-                    </TH>
-                </TR>
-
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;身高:<label
-                            id="height"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;體重:<label
-                            id="weight"></label></TH>
-                </TR>
-
-                <TR>
-                    <TH style=" text-align: left;">&nbsp;&nbsp;學歷:<label
-                            id="edu"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;婚姻狀況:<label
-                            id="mrg"></label></TH>
-                </TR>
-                <TR>
-                    <TH>工作經驗:
-                        <br style="text-align: left;"> <label id="exp1"></label>
-                        <br style="text-align: left;"> <label id="exp2"></label>
-                    </TH>
-                </TR>
-                <!-- <TH COLSPAN=3 style="height: 45px; text-align: center;" <button onclick="showDetail()"> -->
-                <!-- 播放自我介紹影片</button></TH> -->
-                <!-- <button onclick="showVideo()">播放自我介紹影片</button> -->
-                </TH>
-            </TABLE>
-
-            <div id="modalContent"> </div>
-        </div>
-    </div>
-
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     <script src="firebaseConfig.js"></script>
-
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderTable(); // 確保 DOM 加載後再渲染表格
+        });
 
-        var data = [];
-        var filteredData = [];
+        let data = [];
+        let filteredData = [];
+        var currentPage = 1;
+        var rowsPerPage = 10; // 每頁顯示的資料筆數
+        let page = 1; // 設置默認頁面
 
-        const dataContainer = document.getElementById('tableBody');
-        const pageSizeSelect = document.getElementById('pageSize');
-        const searchInput = document.getElementById('search');
+        // 假設這是從 Firebase 取得的資料
+        var fetchdata = databaseJOBSCRIPT.ref('job/');
 
-        var fetchdata = databaseJOBSCRIPT.ref('KFA/');
+        // Firebase 數據加載完成後，渲染表格並設置分頁
         fetchdata.on('value', (snapshot) => {
             data = [];
             snapshot.forEach((childSnapshot) => {
-                const nodeValue = childSnapshot.val();
-                const { subnodesString, statusChecked } = extractTASubnodesAndCheckStatus(nodeValue.TA);
+                const item = childSnapshot.val();
 
+                // 只對特定的節點進行 "-" 分割處理
+                const formattedwform = item.wform && item.wform.includes('-') ? item.wform.split('-')[0].trim() : item.wform;
+                const formattedwcity = item.wcity && item.wcity.includes('-') ? item.wcity.split('-')[0].trim() : item.wcity;
+
+                // 將分割後的值與其他資料一起推入 data 陣列
                 data.push({
                     key: childSnapshot.key,
-                    subnodesString: subnodesString,
-                    memilihChecked: statusChecked,
-                    ...nodeValue
+                    ...item,
+                    wform: formattedwform,   // 更新分割後的 wform 值
+                    wcity: formattedwcity      // 更新分割後的 wcity 值
+                });
+            });
+            filteredData = data
+
+            // 渲染表格
+            renderTable();
+            // 設置分頁按鈕
+            setupPagination(filteredData.length, rowsPerPage, page);
+
+
+            let selectedRadioValue; // 定义全局变量
+
+            const firebaseOptionsContainer = document.getElementById('firebaseOptions');
+            // Get a reference to the 'TWNAGN' node
+            const twnagnRef = databaseJOBSCRIPT.ref('SELES');
+
+            // Fetch data from Firebase and create radio buttons with labels
+            twnagnRef.on('value', function (snapshot) {
+                // Clear the container first to avoid appending duplicate data
+                firebaseOptionsContainer.innerHTML = '';
+
+                let count = 0; // Track the number of items in the current row
+                let rowDiv = document.createElement('div'); // Create a row div to contain radio buttons
+
+                snapshot.forEach(function (childSnapshot) {
+                    var optionKey = childSnapshot.key; // e.g., '0003AUSTIL'
+
+                    // Get '聘工表', '使用量', '確認' values
+                    var JOValue = childSnapshot.child('聘工表').val();
+                    var usageValue = childSnapshot.child('使用量').val();
+                    var cfmValue = childSnapshot.child('確認').val();
+
+                    // Create radio button
+                    var radioOption = document.createElement('input');
+                    radioOption.type = 'radio';
+                    radioOption.name = 'firebaseOption';
+                    radioOption.value = optionKey;
+
+                    // Create label and display '使用量' and 'CFM' values
+                    var label = document.createElement('label');
+                    label.htmlFor = optionKey;
+                    label.innerHTML = `${optionKey}
+                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;聘工表:${JOValue}
+                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用量:${usageValue}
+                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C&nbsp;F&nbsp;M&nbsp;:${cfmValue}`;
+
+                    // Create a container for radioOption and label
+                    var optionContainer = document.createElement('div');
+                    optionContainer.style.display = 'inline-block';
+                    optionContainer.style.marginRight = '10px';
+                    optionContainer.appendChild(radioOption);
+                    optionContainer.appendChild(label);
+
+                    // Append optionContainer to the current row div
+                    rowDiv.appendChild(optionContainer);
+                    count++;
+
+                    // If 5 items are in the row, append the rowDiv to firebaseOptionsContainer and reset count
+                    if (count === 5) {
+                        firebaseOptionsContainer.appendChild(rowDiv);
+                        firebaseOptionsContainer.appendChild(document.createElement('br')); // Add a line break
+                        rowDiv = document.createElement('div'); // Create a new row div
+                        count = 0;
+                    }
+
+
+                    // Append any remaining items in the last row
+                    if (count > 0) {
+                        firebaseOptionsContainer.appendChild(rowDiv);
+                    }
+
+                    checkAndToggle()
+
+                    // 添加点击事件监听器
+                    radioOption.addEventListener('click', function () {
+                        const selradio = document.getElementById('selradio');
+
+                        selectedRadioValue = this.value; // 更新全局变量
+                        selradio.text = this.value;
+                        document.getElementById('L2').innerText = "履歷表傳送到:" + selradio.text;
+                        // 根據 SELES 值篩選資料
+                        filteredData = data.filter(item => item.SELES === selradio.text);
+                        console.log("264", selradio.text, filteredData)
+                        // 將篩選結果渲染回表格
+                        renderTable(filteredData);
+                    });
                 });
             });
 
-            filteredData = data;
-            renderTable(filteredData);
-            const maleCount = filteredData.filter(item => item.sex === 'male').length;
-            const femaleCount = filteredData.filter(item => item.sex === 'female').length;
-
-            male.innerText = `Jumlah anak laki-laki: ${maleCount}\nJumlah anak perempuan: ${femaleCount}`;
-
-            CHsheight.innerText = `Memenuhi kriteria filter: ${data.length} `;
         });
 
-        function renderTable(filteredData) {
-            var htmldata = '';
-            const startIdx = (currentPage - 1) * itemsPerPage;
-            const endIdx = startIdx + itemsPerPage;
 
-            for (var i = startIdx; i < Math.min(endIdx, filteredData.length); i++) {
-                if (filteredData[i].code && filteredData[i].code !== '') {
-                    htmldata += `
-                <tr>
-                   <td id="image-code-name-${filteredData[i].key}">
-                     <img src="${filteredData[i].image1}" alt="Image" style="max-width: 75px; max-height: 100px;"><br>
-                     <span>${filteredData[i].code}</span><br>
-                     <span style="text-decoration: underline;">
-                       <a onclick="window.open('修改資料.html?key=${filteredData[i].key}&name=${filteredData[i].name}&age=${filteredData[i].age}', '_blank');">
-                             ${filteredData[i].name}
-                        </a>
-                     </span>
-                   </td>
+        function renderTable(page = 1, rowsPerPage = 10) {
+            // 確保 page 和 rowsPerPage 是有效的數字
+            page = Number(page);
+            rowsPerPage = Number(rowsPerPage);
 
-                   <td id="age-${filteredData[i].key}">${filteredData[i].age}</td>
-                   <td id="height-${filteredData[i].key}">${filteredData[i].height}</td>
-                   <td id="weight-${filteredData[i].key}">${filteredData[i].weight}</td> 
-                   <!-- 這裡插入subnodesString -->
-                   <td>${filteredData[i].subnodesString || ''}</td>
-                    <td>
-                         <!-- memilih checkbox -->
-                         <input type="checkbox" name="status_${filteredData[i].key}" ${filteredData[i].memilihChecked ? 'checked' : ''} data-nodekey="${filteredData[i].key}" data-type="memilih" onchange="FUNTIONmemilih(this)" ${filteredData[i].subnodesString.includes('CFM') ? 'disabled' : ''}>memilih
-                         <br>
-                         <!-- CFM checkbox -->
-                         <input type="checkbox" name="cfm_${filteredData[i].key}" ${filteredData[i].cfmChecked ? 'checked' : ''} data-nodekey="${filteredData[i].key}" data-type="cfm" onchange="FUNTIONcfm(this)" ${filteredData[i].subnodesString.includes('CFM') ? 'disabled' : ''}>CFM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                         <br>
-                         <!-- 新增的按鈕 -->
-                         <button type="button" style="background-color: black; color: red;" onclick="FUNCTIONMD('${filteredData[i].key}')">MD</button>
-                    </td>
-                    <td>
-                      <label id="invLabel-${filteredData[i].key}" style="display: none;"></label><br>  
-                    </td>
-                </tr>
-                `;
-                }
+            if (isNaN(page) || page < 1) {
+                page = 1; // 或者設置為其他默認值
             }
-            dataContainer.innerHTML = htmldata;
-            updatePagination();
-            checkAndToggle();
+            if (isNaN(rowsPerPage) || rowsPerPage < 1) {
+                rowsPerPage = 10; // 或者設置為其他默認值
+            }
+
+            const startIndex = (page - 1) * rowsPerPage;
+            const endIndex = Math.min(startIndex + rowsPerPage, filteredData.length);
+
+            const pageData = filteredData.slice(startIndex, endIndex);
+            const tableBody = document.querySelector("#data-table tbody");
+            tableBody.innerHTML = ""; // 清空之前的資料
+
+            if (pageData.length > 0) {
+                pageData.forEach(item => {
+                    const formattedwform = item.wform || ''; // 添加默認值
+                    const formattedwcity = item.wcity || ''; // 添加默認值
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                <td class="bcode-link" style="color: blue; text-decoration: underline; cursor: pointer;">
+                    ${item.bcode}
+                </td>
+                 <td>${item.bname}</td>
+                <td>${formattedwform}</td>
+                <td>${formattedwcity}</td>
+                            <td>
+                <label id="invLabel-${item.bcode}" style="display: none;"></label><br>
+<button id="${item.bcode}" style="background:orange; width:125px; color: blue; text-decoration: underline; cursor: pointer;" 
+    onclick="window.open('聘工表安排視訊-1.html?Tagency=${item.bcode}&bname=${item.bname}&From=台仲推薦-Rekomendasi lembaga Taiwan' , '_blank', 'width=300,height=500');">
+    安排學員視訊
+</button>
+            </td>
+            `;
+
+                    // 監聽點擊事件，點擊 bcode 欄位才會跳轉
+                    const bcodeCell = row.querySelector(".bcode-link");
+                    bcodeCell.addEventListener('click', () => {
+                        const bcode = item.bcode;
+                        const bpwd = item.bpwd;
+                        const url = `jo-ch.html?bcode=${bcode}&bpwd=${bpwd}`;
+                        window.open(url, '_blank');
+                    });
+
+
+                    tableBody.appendChild(row);
+                });
+            } else {
+                console.warn('沒有資料可顯示');
+            }
+            checkAndToggle()
+            setupPagination(filteredData.length, rowsPerPage, page);
         }
 
-        function showDetail(key, field, showHimg) {
+        function setupPagination(totalDataCount, rowsPerPage, currentPage) {
+            const paginationContainer = document.querySelector("#pagination");
+            paginationContainer.innerHTML = ""; // 清空之前的分頁
 
-            var modalContent = document.getElementById('modalContent');
-            var codeLabel = document.getElementById('code');
-            var nameLabel = document.getElementById('name');
-            var Himg = document.getElementById('Himg');
-            var videoPlayer = document.getElementById('videoPlayer');
-            var mrgLabel = document.getElementById('mrg');
-            var weightLabel = document.getElementById('weight');
-            var heightLabel = document.getElementById('height');
-            var ageLabel = document.getElementById('age');
-            var exp1Label = document.getElementById('exp1');
-            var exp2Label = document.getElementById('exp2');
-            var eduLabel = document.getElementById('edu');
-            var bhdLabel = document.getElementById('bhd');
+            // 根據資料總數與每頁顯示的筆數計算總頁數
+            const totalPages = Math.ceil(totalDataCount / rowsPerPage);
 
-            document.getElementById('myModal').style.display = 'block';
-            document.getElementById('tableContainer').style.display = 'none';
-
-            var value = filteredData.find(item => item.key === key);
-
-            if (!value || !Object.prototype.hasOwnProperty.call(value, field)) {
-                console.error(`Invalid field: ${field}`);
+            // 當資料總數小於每頁顯示的筆數時，隱藏分頁
+            if (totalPages <= 1) {
+                paginationContainer.style.display = 'none'; // 隱藏分頁
                 return;
+            } else {
+                paginationContainer.style.display = 'block'; // 顯示分頁
             }
-            codeLabel.innerText = value.code;
-            nameLabel.innerText = value.name;
-            Himg.src = value.image2;
-            mrgLabel.innerText = value.mrg;
-            weightLabel.innerText = value.weight + "公斤";
-            heightLabel.innerText = value.height + "公分";
-            ageLabel.innerText = value.age + "歲";
-            exp1Label.innerText = value.exp1;
-            exp2Label.innerText = value.exp2;
-            eduLabel.innerText = value.edu;
-            bhdLabel.innerText = value.bhd;
 
-            const displayexp1 = value.exp1 !== undefined ? value.exp1 : '';
-            const displayexp2 = value.exp2 !== undefined ? value.exp2 : '';
-
+            // 創建分頁按鈕
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement("button");
+                pageButton.innerText = i;
+                pageButton.disabled = (i === currentPage); // 當前頁數的按鈕禁用
+                pageButton.addEventListener("click", () => {
+                    renderTable(i, rowsPerPage); // 重新渲染表格
+                });
+                paginationContainer.appendChild(pageButton);
+            }
+            // 保持 radio 按鈕的顯示
+            const radioGroup = document.getElementById("radio-group");
+            if (radioGroup) {
+                paginationElement.appendChild(radioGroup); // 確保 radio 按鈕存在
+            }
         }
-        function filterTable() {
-            const searchTerm = searchInput.value.toLowerCase();
-            filteredData = data.filter(item =>
-                (item.code && item.code.toLowerCase().includes(searchTerm)) ||
-                (item.name && item.name.toLowerCase().includes(searchTerm)) ||
-                (item.renderTable && item.age.toString().toLowerCase().includes(searchTerm)) ||
-                (item.weight && item.weight.toString().toLowerCase().includes(searchTerm)) ||
-                (item.height && item.height.toString().toLowerCase().includes(searchTerm))
-            );
-            renderTable(filteredData);
-        }
-
-        function changePageSize() {
-            itemsPerPage = parseInt(pageSizeSelect.value, 10);
-            currentPage = 1;
-            renderTable(filteredData);
-            updatePagination();
-        }
-
-        function sortTable(field, ascending) {
-            filteredData.sort((a, b) => {
-                const valueA = typeof a[field] === 'string' ? a[field].toLowerCase() : a[field];
-                const valueB = typeof b[field] === 'string' ? b[field].toLowerCase() : b[field];
-
-                if (valueA < valueB) {
-                    return ascending ? -1 : 1;
-                }
-                if (valueA > valueB) {
-                    return ascending ? 1 : -1;
-                }
-                return 0;
+        // 創建分頁按鈕函數
+        function createPaginationButton(page) {
+            const button = document.createElement('button');
+            button.textContent = page;
+            if (page === currentPage) {
+                button.classList.add('active');
+            }
+            button.addEventListener('click', () => {
+                currentPage = page;
+                renderTable(currentPage);  // 每次按下按鈕時重新渲染表格
             });
-            renderTable(filteredData);
+            return button;
         }
 
-        let itemsPerPage = 10;
-        let currentPage = 1;
+        function checkpwd() {
+            // 取得 biono 和 BioName 的值
+            var bionoValue = document.getElementById('biono').value;
+            var BioNameValue = document.getElementById('BioName').value;
 
-        function updatePagination() {
-            const totalItems = filteredData.length;
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-            document.getElementById('pageInfo').innerText = `Showing ${((currentPage - 1) * itemsPerPage) + 1} to ${Math.min(currentPage * itemsPerPage, totalItems)} of ${totalItems} entries`;
-            document.querySelector('#pagination button:nth-child(1)').disabled = currentPage === 1;
-            document.querySelector('#pagination button:nth-child(3)').disabled = currentPage === totalPages;
-        }
-
-        function nextPage() {
-            const totalItems = filteredData.length;
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-            if (currentPage < totalPages) {
-                currentPage++;
-                renderTable(filteredData);
+            if (bionoValue === '') {
+                alert("Silakan masukkan nomor resume");
+                return; // 停止函數執行
             }
-        }
 
-        function prevPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                renderTable(filteredData);
+            if (BioNameValue === '') {
+                alert("Silakan masukkan nama resume");
+                return; // 停止函數執行
             }
-        }
 
-        function filterByHWA() {
-            const checkedSexOptions = document.querySelectorAll('input[name="ssex"]:checked');
-            const checkedHeightOptions = document.querySelectorAll('input[name="sheight"]:checked');
-            const checkedAgeOptions = document.querySelectorAll('input[name="sage"]:checked');
-            const checkedWeightOptions = document.querySelectorAll('input[name="sweight"]:checked');
-            const CHsheight = document.getElementById('CHsheight');
+            // Firebase 的參考節點 job
+            var ref = databaseJOBSCRIPT.ref('KFA/' + bionoValue);
 
-            filteredData = data.slice();
+            // 檢查 biono 是否存在
+            ref.once('value', function (snapshot) {
+                if (snapshot.exists()) {
+                    // 如果 biono 存在，檢查 BioName
+                    var BioData = snapshot.val();
+                    var storedBioName = BioData.name; // Firebase 中存儲的名稱
+                    var storedBiocode = BioData.code; // Firebase 中存儲的編號
 
-            CHsheight.innerText = '';
-
-            filteredData = filteredData.filter(item => {
-                const itemConditions = [];
-
-                for (const option of checkedSexOptions) {
-                    const targetSex = option.dataset.gender;
-                    itemConditions.push(item.sex === targetSex);
-                }
-
-                for (const option of checkedHeightOptions) {
-                    const itemHeight = parseInt(item.height, 10);
-                    const min = parseInt(option.dataset.min, 10);
-                    const max = parseInt(option.dataset.max, 10);
-
-                    itemConditions.push(itemHeight >= min && itemHeight <= max);
-                }
-
-                for (const option of checkedAgeOptions) {
-                    const itemAge = parseInt(item.age, 10);
-                    const min = parseInt(option.dataset.min, 10);
-                    const max = parseInt(option.dataset.max, 10);
-
-                    itemConditions.push(itemAge >= min && itemAge <= max);
-                }
-
-                for (const option of checkedWeightOptions) {
-                    const itemWeight = parseInt(item.weight, 10);
-                    const min = parseInt(option.dataset.min, 10);
-                    const max = parseInt(option.dataset.max, 10);
-
-                    itemConditions.push(itemWeight >= min && itemWeight <= max);
-                }
-
-                return itemConditions.every(condition => condition);
-            });
-
-            CHsheight.innerText = `符合篩選條件: \n ${filteredData.length} 人`;
-            // renderTable(filteredData);  // 假設 renderTable(filteredData) 是用來渲染表格的函數
-        }
-
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfigJOBSCRIPT, "dbJOB");
-        const database = firebase.database(firebase.app("dbJOB"));
-
-        function extractTASubnodesAndCheckStatus(taNode) {
-            let subnodesString = '';
-            let statusChecked = false; // Initialize statusChecked variable
-            for (const subnodeKey in taNode) {
-                if (taNode.hasOwnProperty(subnodeKey)) {
-                    // 如果 subnodeKey 是 'Dreason'，則跳過這次迴圈
-                    if (subnodeKey === 'Dreason') {
-                        continue;
-                    }
-                    const subnodeValue = taNode[subnodeKey];
-                    //console.log(subnodeValue)
-                    if (typeof subnodeValue === 'object' && subnodeValue.hasOwnProperty('ON')) {
-                        if (subnodeValue.hasOwnProperty('OFF') && subnodeValue.OFF !== "") {
-                            subnodesString += `<span style="color: black;">${subnodeKey}:<span style="color: black;">OFF<br>${subnodeValue.OFF}<br>`;
-                        } else if (subnodeValue.hasOwnProperty('CFM') && subnodeValue.CFM !== "") {
-                            subnodesString += `<span style="color: BLUE;background:whit;">${subnodeKey}<span style="color:blue;">CFM<br>${subnodeValue.CFM}<br>`;
+                    // 檢查輸入的 BioName 是否匹配存儲的名稱
+                    if (BioNameValue === storedBioName) {
+                        // 檢查 biono 是否匹配
+                        if (bionoValue === storedBiocode) {
+                            checkAndToggle(); // 呼叫其他處理函數
                         } else {
-                            subnodesString += `<span style="color: green;">${subnodeKey}:<span style="color: green;">ON<br> ${subnodeValue.ON}<br>`;
-                            statusChecked = true;
+                            alert("Nomor resume yang dimasukkan salah");
                         }
                     } else {
-                        subnodesString += `${subnodeKey}: ${JSON.stringify(subnodeValue)}<br>`;
+                        alert("Nama resume yang dimasukkan salah");
                     }
-                }
-            }
-            return { subnodesString, statusChecked };
-        }
-
-        let selectedRadioValue; // 定义全局变量
-
-        const firebaseOptionsContainer = document.getElementById('firebaseOptions');
-        // Get a reference to the 'TWNAGN' node
-        const twnagnRef = database.ref('TWNAGN4');
-
-        // Fetch data from Firebase and create radio buttons with labels
-        twnagnRef.on('value', function (snapshot) {
-            // Clear the container first to avoid appending duplicate data
-            firebaseOptionsContainer.innerHTML = '';
-
-            snapshot.forEach(function (childSnapshot) {
-                var optionKey = childSnapshot.key; // 例如 '0003AUSTIL'
-
-                // 获取子节点中的 '使用量' 和 'CFM'
-                var usageValue = childSnapshot.child('使用量').val();
-                var cfmValue = childSnapshot.child('確認').val();
-
-                // 创建 radio button
-                var radioOption = document.createElement('input');
-                radioOption.type = 'radio';
-                radioOption.name = 'firebaseOption';
-                radioOption.value = optionKey;
-
-                // 创建 label 并显示 '使用量' 和 'CFM' 的值
-                var label = document.createElement('label');
-                label.htmlFor = optionKey;
-                label.innerHTML = `${optionKey}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用量:${usageValue}
-                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C&nbsp;&nbsp;F&nbsp;&nbsp;M: ${cfmValue}`;
-
-                // 将 radio button 和 label 添加到容器中
-                firebaseOptionsContainer.appendChild(radioOption);
-                firebaseOptionsContainer.appendChild(label);
-                firebaseOptionsContainer.appendChild(document.createElement('br'));
-
-                // 添加点击事件监听器
-                radioOption.addEventListener('click', function () {
-                    selectedRadioValue = this.value; // 更新全局变量
-                    selradio.text = this.value;
-                    document.getElementById('L2').innerText = "履歷表傳送到:" + selradio.text;
-                });
-            });
-
-        });
-
-        function FUNTIONmemilih(checkbox) {
-            if (!selectedRadioValue) {
-                alert("Silakan pilih agen koperasi Taiwan");//請選擇台灣合作代理商
-                checkbox.checked = false;
-                return;
-            }
-
-            const nodeKey = checkbox.getAttribute('data-nodekey'); // 获取节点键
-            const currentDate = new Date().toISOString().slice(0, 10); // 获取今天的日期
-            //const taPath = `TWN/${nodeKey}/TA/${selectedRadioValue}/`
-            const taPath = `KFA/${nodeKey}/TA/${selectedRadioValue}/`
-            if (checkbox.checked) {
-                // 复选框被选中时执行的逻辑
-                //console.log("memilih selected", nodeKey);
-                //const taPath = `TWN/${nodeKey}/TA/${selectedRadioValue}/ON`; // 使用正确的 nodeKey 和 selectedRadioValue
-                database.ref(taPath + `ON`).set(currentDate).then(() => {
-                    updateCounter使用量(selectedRadioValue, 1);
-                    database.ref(`INTERVIEW/${currentDate}/Iagency`).set(`${nodeKey}`)
-                    database.ref(`INTERVIEW/${currentDate}/Tagency`).set(`${selectedRadioValue}`)
-                    database.ref(`${selectedRadioValue}/${nodeKey}`).set(`${currentDate}`)
-                });
-            }
-            else {
-                // 复选框被取消选中时执行的逻辑
-
-                // 检查 ON 值是否存在
-                database.ref(taPath + `ON`).once('value').then((snapshot) => {
-                    if (snapshot.exists()) {
-
-                        database.ref(taPath + `OFF`).set(currentDate).then(() => {
-                            updateCounter使用量(selectedRadioValue, -1);
-                        });
-                    } else {
-                        // 如果 ON 不存在，保持复选框选中状态，并提示用户
-                        alert("Jangan menerima agen Taiwan yang berbeda.");//不接受不同台灣代理
-                        checkbox.checked = true;
-                    }
-                });
-            }
-        }
-
-        function FUNTIONcfm(checkbox) {
-            if (!selectedRadioValue) {
-                alert("Silakan pilih agen koperasi Taiwan");//請選擇台灣合作代理商
-                return;
-                checkbox.checked = false;
-            }
-
-            const nodeKey = checkbox.getAttribute('data-nodekey'); // 获取节点键
-            const currentDate = new Date().toISOString().slice(0, 10); // 获取今天的日期
-            //const taPath = `TWN/${nodeKey}/TA/${selectedRadioValue}/`
-            const taPath = `KFA/${nodeKey}/TA/${selectedRadioValue}/`
-            //console.log("FUNTIONcfm", nodeKey);
-
-            // 检查 ON 值是否存在
-            database.ref(taPath + `ON`).once('value').then((snapshot) => {
-                if (snapshot.exists()) {
-
-                    database.ref(taPath + `CFM`).set(currentDate).then(() => {
-                        updateCounter確認(selectedRadioValue, 1);
-                        updateCounter使用量(selectedRadioValue, -1);
-                    });
                 } else {
-                    // 如果 ON 不存在，保持复选框选中状态，并提示用户
-
-                    alert("Jangan menerima agen Taiwan yang berbeda.");//不接受不同台灣代理
-                    checkbox.checked = true;
+                    alert("Nomor riwayat masukan tidak ada");
                 }
             });
-
-        }
-        function updateCounter使用量(nodeKey, change) {
-            const counterRef = database.ref(`TWNAGN4/${nodeKey}/使用量/`);
-            counterRef.transaction((currentValue) => {
-                return (currentValue || 0) + change;
-            });
-        }
-
-        function updateCounter確認(nodeKey, change) {
-            const counterRef = database.ref(`TWNAGN4/${nodeKey}/確認/`);
-            counterRef.transaction((currentValue) => {
-                return (currentValue || 0) + change;
-            });
-        }
-
-        function FUNCTIONMD(key) {
-
-            // 彈出確認對話框
-            let confirmDelete = confirm("確定要刪除" + key + "資料嗎？");
-
-            // 如果用戶確認刪除
-            if (confirmDelete) {
-                // 遍歷 filteredData 陣列，找出匹配 key 的資料
-                for (let i = 0; i < filteredData.length; i++) {
-                    if (filteredData[i].key === key) {
-                        // 刪除該筆資料
-                        filteredData.splice(i, 1);
-                        break; // 找到並刪除後跳出迴圈
-                    }
-                }
-
-                // 重新渲染資料表格或視圖
-                renderTable(); // 假設你有一個渲染表格的函數
-            } else {
-                // 如果用戶取消刪除，可以在這裡處理或不做任何動作
-                console.log("用戶取消了刪除操作");
-            }
         }
 
         function checkAndToggle() {
             // 初始化符合條件的父節點數量
             let matchingParentCount = 0;
+
             // 初始化存放 key 和其對應資料的矩陣
             let dataMatrix = {};
-            // 取得 jobno 的值
-            //var jobnoValue = document.getElementById("jobno").value;
+
+            // 取得 biono 的值
+            //var bionoValue = document.getElementById("biono").value;
 
             // 使用實際 key 值，正確形成 Firebase 路徑
             var ref = databaseJOBSCRIPT.ref('INTERVIEW/');
-
             ref.once('value', function (snapshot) {
                 if (snapshot.exists()) {
                     snapshot.forEach(function (childSnapshot) {
                         // 取得每個 INTERVIEW 節點下的值
-                        var key = childSnapshot.key; // 獨立的 key
+                        var key = childSnapshot.key;
                         var childData = childSnapshot.val();
-                        var DreasonValue = '';  // 確保 DreasonValue 已定義並初始化
-                        // 取得 Iagency, Tagency, TimeZone 的值
-                        var IagencyValue = childData.Iagency || '';
-                        var TagencyValue = childData.Tagency || '';
-                        var selectedInterviewValue = childData.TimeZone;
-                        var ORF = childData.From || '';
-                        var FromValue = ORF ? ORF.split('-')[1] : '';  // 確保 ORF 有值才執行 split
-                        var DreasonValue = childData.Dreason.split('-')[1] || '';
-                        // 檢查 Tagency 是否等於 jobnoValue
-                        //if (TagencyValue === jobnoValue) {
-                        matchingParentCount++;
 
-                        // 將 key 和其相關資料存入 dataMatrix 中，以 Iagency 為 key 進行分組
-                        if (!dataMatrix[IagencyValue]) {
-                            dataMatrix[IagencyValue] = [];
+                        // 取得 Iagency, Tagency, TimeZone 和 From 的值
+                        var IagencyValue = childData.Iagency;
+                        var TagencyValue = childData.Tagency;
+                        var selectedInterviewValue = childData.TimeZone;
+                        var ORF = childData.From;
+                        var FromValue = ORF ? ORF.split('-')[0] : '';  // 確保 ORF 有值才執行 split
+                        var DreasonValue = childData.Dreason.split('-')[0] || '';
+                        // 檢查 Iagency 是否等於 bionoValue
+                        //if (IagencyValue === bionoValue) {
+                        matchingParentCount++;
+                        // 將 key 和其相關資料存入 dataMatrix 中，以 Tagency 為 key 進行分組
+                        if (!dataMatrix[TagencyValue]) {
+                            dataMatrix[TagencyValue] = [];
                         }
 
-                        // 將每個 key 的資料加入對應的 Iagency 條目中
-                        dataMatrix[IagencyValue].push({
-                            Tagency: TagencyValue,
+                        // 將每個 key 的資料加入對應的 Tagency 條目中
+                        dataMatrix[TagencyValue].push({
                             Iagency: IagencyValue,
+                            Tagency: TagencyValue,
                             TimeZone: selectedInterviewValue,
                             key: key,
                             From: FromValue,
@@ -789,99 +451,74 @@
                         });
                         //}
                     });
-                    // 當所有資料收集完成後，將其一次性更新到對應的 label 並生成刪除按鈕
-                    for (var Iagency in dataMatrix) {
-                        if (dataMatrix.hasOwnProperty(Iagency)) {
-                            var label = document.getElementById('invLabel-' + Iagency);
+
+                    // 當所有資料收集完成後，將其一次性更新到對應的 label 並生成顯示內容
+                    for (var Tagency in dataMatrix) {
+                        if (dataMatrix.hasOwnProperty(Tagency)) {
+                            var label = document.getElementById('invLabel-' + Tagency);
                             if (label) {
-                                var labelContent = dataMatrix[Iagency].map(function (item) {
-                                    var url = `Tabel isi pekerjaan-Indo.html?bcode=${item.Tagency}`;
+                                // 構建要顯示的內容，將每個 key 對應的資料合併起來
+                                var labelContent = dataMatrix[Tagency].map(function (item) {
+                                    var url = `psl-biodata.html?key=${item.Iagency}`;
                                     var deleteButtonId = 'deleteButton-' + item.key;
 
-                                    var itemContent = item.From + '<br>';
-                                    itemContent += 'BCODE:<a href="' + url + '" target="_blank">';
-                                    itemContent += item.Tagency + '</a><br>';
-                                    itemContent += item.Dreason + '<br>';
-                                    label.style.color = 'red';
+                                    // 創建每個 item 的內容，包含連結和時段
+                                    var itemContent = item.From
+                                        + '<a href="' + url + '" target="_blank" style="color:blue;">' + item.Iagency + '</a><br>'
+                                        + item.Dreason + '<br>';
 
-                                    if (item.Dreason === "menunggu tanggapan") {
-                                        itemContent += 'Waktu janji temu:<br>';
-                                        itemContent += item.TimeZone.join(',') + '<br>';
-                                        itemContent += '<button id="' + deleteButtonId + '" style="color:red; cursor:pointer;">Tanggapi undangan video</button>';
+                                    if (item.Dreason === "等待回應") {
+                                        itemContent += '視訊時間:<br>'
+                                            + item.TimeZone.join(',') + '<br>'
+                                            + '<button id="' + deleteButtonId + '" style="color:red; cursor:pointer;">回覆邀請</button>';
                                         label.style.color = 'blue';
                                     }
 
                                     return itemContent;
-                                }).join('<br><br>');
+                                }).join('<br><br>'); // 合併每個 key 的資料，並用 <br><br> 分隔
 
+                                // 設置 label 的內容
                                 label.innerHTML = labelContent;
                                 label.style.display = 'inline';
+                                label.style.color = 'blue';
                                 label.style.fontSize = '14px';
                             }
                         }
                     }
-
-                    // 使用 setTimeout 确保按钮生成后再绑定事件
-                    setTimeout(function () {
-                        for (var Iagency in dataMatrix) {
-                            if (dataMatrix.hasOwnProperty(Iagency)) {
-                                dataMatrix[Iagency].forEach(function (item) {
-                                    var deleteButtonId = 'deleteButton-' + item.key;
-                                    var deleteButton = document.getElementById(deleteButtonId);
-
-                                    if (deleteButton) {
-                                        deleteButton.onclick = function () {
-                                            var reason = prompt('Silakan pilih tanggapan：\n1. Sudah mempunyai majikan\n2. tidak kompeten\n3. Mundur dari pelatihan', 'Silakan masukkan nomor');
-                                            if (reason === '1' || reason === '2' || reason === '3') {
-                                                var deleteReason = '';
-                                                switch (reason) {
-                                                    case '1':
-                                                        deleteReason = '已經被選走-Sudah mempunyai majikan';
-                                                        break;
-                                                    case '2':
-                                                        deleteReason = '無法勝任-tidak kompeten';
-                                                        break;
-                                                    case '3':
-                                                        deleteReason = '退訓-Mundur dari pelatihan';
-                                                        break;
-                                                }
-
-                                                var confirmDelete = confirm('您選擇的刪除原因是：' + deleteReason + '\n您確定要刪除這個預約嗎？');
-                                                if (confirmDelete) {
-                                                    console.log('嘗試刪除 Firebase 中的 key: ', item.key, '原因: ', deleteReason);
-
-                                                    var kfaRef = databaseJOBSCRIPT.ref(`INTERVIEW/${item.key}`);
-                                                    kfaRef.update({
-                                                        Dreason: deleteReason
-                                                    }).then(function () {
-                                                        //console.log(`刪除原因已成功存儲到 INTERVIEW/${item.key}`);
-                                                    }).catch(function (error) {
-                                                        console.error(`儲存刪除原因到 INTERVIEW/${item.key} 時發生錯誤: `, error);
-                                                    });
-                                                    // console.log(`刪除原因已成功存儲到 job/${item.Tagency}/IA/Dreason`);
-                                                    renderTable(filteredData);
-                                                }
-                                            } else {
-                                                alert('請輸入正確的選項 (1, 2, 3)');
-                                            }
-                                        };
-                                    }
-                                });
-                            }
-                        }
-                    }, 100); // 延迟绑定事件
-                }
-
-                // 如果沒有符合的 Tagency，更新按鈕文字為 "尚未預約"
-                if (matchingParentCount === 0) {
-
-                    var button = document.getElementById('checkAndToggleBtn');
-                    button.textContent = '您尚未預約視訊';
-                    button.style.color = 'red';
                 }
             })
         }
+        // 如果沒有符合的 Iagency，更新按鈕文字為 "尚未預約"
+        // if (matchingParentCount === 0) {
+        //     var button = document.getElementById('checkAndToggleBtn');
+        //    button.textContent = '您尚未預約視訊';
+        //     button.style.color = 'red';
+        // }
+
+        // 綁定刪除按鈕
+        // var deleteButton = document.getElementById(TagencyValue);
+        //if (deleteButton) {
+        //deleteButton.innerHTML = '取消預訂';
+        // deleteButton.style.color = 'red';
+        // deleteButton.style.fontSize = '14px';
+        // deleteButton.onclick = function () {
+        //    var ref = databaseJOBSCRIPT.ref('INTERVIEW/' + key);
+        //     ref.remove().then(function () {
+        //        deleteButton.style.display = 'none';
+        //        renderTable(filteredData);
+        //    })
+        // };
+        // }
+        // }
+
+        // 如果沒有符合的 Tagency，更新按鈕文字為 "尚未預約"
+        //if (matchingParentCount === 0) {
+        //    var button = document.getElementById('checkAndToggleBtn');
+        //    button.textContent = 'Anda belum memesan panggilan video';
+        //    button.style.color = 'red';
+        //}
     </script>
+
 </body>
 
 </html>
