@@ -13,7 +13,6 @@
 
         /* 样式部分保持不变 */
         .container {
-            max-width: 85%;
             font-family: sans-serif;
             margin-left: 5px;
             margin-right: 5px;
@@ -42,7 +41,7 @@
         }
 
         table {
-            width: 650px;
+            width:100%;
             border-spacing: 0px;
             background-color: hsl(69, 77%, 83%);
 
@@ -111,6 +110,7 @@
         .container {
             position: relative;
             z-index: 1;
+            width: 95%;
         }
 
         #myModal {
@@ -747,10 +747,8 @@
         function checkAndToggle() {
             // 初始化符合條件的父節點數量
             let matchingParentCount = 0;
-
             // 初始化存放 key 和其對應資料的矩陣
             let dataMatrix = {};
-
             // 取得 jobno 的值
             //var jobnoValue = document.getElementById("jobno").value;
 
@@ -765,12 +763,12 @@
                         var childData = childSnapshot.val();
                         var DreasonValue = '';  // 確保 DreasonValue 已定義並初始化
                         // 取得 Iagency, Tagency, TimeZone 的值
-                        var IagencyValue = childData.Iagency;
-                        var TagencyValue = childData.Tagency;
+                        var IagencyValue = childData.Iagency || '';
+                        var TagencyValue = childData.Tagency || '';
                         var selectedInterviewValue = childData.TimeZone;
-                        var ORF = childData.From;
+                        var ORF = childData.From || '';
                         var FromValue = ORF ? ORF.split('-')[1] : '';  // 確保 ORF 有值才執行 split
-                        var DreasonValue = childData.Dreason.split('-')[1];
+                        var DreasonValue = childData.Dreason.split('-')[1] || '';
                         // 檢查 Tagency 是否等於 jobnoValue
                         //if (TagencyValue === jobnoValue) {
                         matchingParentCount++;
@@ -793,85 +791,83 @@
                     });
                     // 當所有資料收集完成後，將其一次性更新到對應的 label 並生成刪除按鈕
                     for (var Iagency in dataMatrix) {
-    if (dataMatrix.hasOwnProperty(Iagency)) {
-        var label = document.getElementById('invLabel-' + Iagency);
-        if (label) {
-            var labelContent = dataMatrix[Iagency].map(function (item) {
-                var url = `Tabel isi pekerjaan-Indo.html?bcode=${item.Tagency}`;
-                var deleteButtonId = 'deleteButton-' + item.key;
+                        if (dataMatrix.hasOwnProperty(Iagency)) {
+                            var label = document.getElementById('invLabel-' + Iagency);
+                            if (label) {
+                                var labelContent = dataMatrix[Iagency].map(function (item) {
+                                    var url = `Tabel isi pekerjaan-Indo.html?bcode=${item.Tagency}`;
+                                    var deleteButtonId = 'deleteButton-' + item.key;
 
-                var itemContent = item.From + '<br>';
-                itemContent += 'BCODE:<a href="' + url + '" target="_blank">';
-                itemContent += item.Tagency + '</a><br>';
-                itemContent += item.Dreason + '<br>';
-                label.style.color = 'red';
+                                    var itemContent = item.From + '<br>';
+                                    itemContent += 'BCODE:<a href="' + url + '" target="_blank">';
+                                    itemContent += item.Tagency + '</a><br>';
+                                    itemContent += item.Dreason + '<br>';
+                                    label.style.color = 'red';
 
-                if (item.Dreason === "menunggu tanggapan") {
-                    itemContent += 'Waktu janji temu:<br>';
-                    itemContent += item.TimeZone.join(',') + '<br>';
-                    itemContent += '<button id="' + deleteButtonId + '" style="color:red; cursor:pointer;">Tanggapi undangan video</button>';
-                    label.style.color = 'blue';
-                }
+                                    if (item.Dreason === "menunggu tanggapan") {
+                                        itemContent += 'Waktu janji temu:<br>';
+                                        itemContent += item.TimeZone.join(',') + '<br>';
+                                        itemContent += '<button id="' + deleteButtonId + '" style="color:red; cursor:pointer;">Tanggapi undangan video</button>';
+                                        label.style.color = 'blue';
+                                    }
 
-                return itemContent;
-            }).join('<br><br>');
+                                    return itemContent;
+                                }).join('<br><br>');
 
-            label.innerHTML = labelContent;
-            label.style.display = 'inline';
-            label.style.fontSize = '14px';
-        }
-    }
-}
-
-// 使用 setTimeout 确保按钮生成后再绑定事件
-setTimeout(function () {
-    for (var Iagency in dataMatrix) {
-        if (dataMatrix.hasOwnProperty(Iagency)) {
-            dataMatrix[Iagency].forEach(function (item) {
-                var deleteButtonId = 'deleteButton-' + item.key;
-                var deleteButton = document.getElementById(deleteButtonId);
-
-                if (deleteButton) {
-                    deleteButton.onclick = function () {
-                        var reason = prompt('Silakan pilih tanggapan：\n1. Sudah mempunyai majikan\n2. tidak kompeten\n3. Mundur dari pelatihan', 'Silakan masukkan nomor');
-                        if (reason === '1' || reason === '2' || reason === '3') {
-                            var deleteReason = '';
-                            switch (reason) {
-                                case '1':
-                                    deleteReason = '已經被選走-Sudah mempunyai majikan';
-                                    break;
-                                case '2':
-                                    deleteReason = '無法勝任-tidak kompeten';
-                                    break;
-                                case '3':
-                                    deleteReason = '退訓-Mundur dari pelatihan';
-                                    break;
+                                label.innerHTML = labelContent;
+                                label.style.display = 'inline';
+                                label.style.fontSize = '14px';
                             }
-
-                            var confirmDelete = confirm('您選擇的刪除原因是：' + deleteReason + '\n您確定要刪除這個預約嗎？');
-                            if (confirmDelete) {
-                                console.log('嘗試刪除 Firebase 中的 key: ', item.key, '原因: ', deleteReason);
-
-                                var kfaRef = databaseJOBSCRIPT.ref(`INTERVIEW/${item.key}`);
-                                kfaRef.update({
-                                    Dreason: deleteReason
-                                }).then(function () {
-                                    //console.log(`刪除原因已成功存儲到 INTERVIEW/${item.key}`);
-                                }).catch(function (error) {
-                                    console.error(`儲存刪除原因到 INTERVIEW/${item.key} 時發生錯誤: `, error);
-                                });
-                               // console.log(`刪除原因已成功存儲到 job/${item.Tagency}/IA/Dreason`);
-                                renderTable(filteredData);
-                            }
-                        } else {
-                            alert('請輸入正確的選項 (1, 2, 3)');
                         }
-                    };
-                }
-            });
-        }
-    }
-}, 100); // 延迟绑定事件
+                    }
+
+                    // 使用 setTimeout 确保按钮生成后再绑定事件
+                    setTimeout(function () {
+                        for (var Iagency in dataMatrix) {
+                            if (dataMatrix.hasOwnProperty(Iagency)) {
+                                dataMatrix[Iagency].forEach(function (item) {
+                                    var deleteButtonId = 'deleteButton-' + item.key;
+                                    var deleteButton = document.getElementById(deleteButtonId);
+
+                                    if (deleteButton) {
+                                        deleteButton.onclick = function () {
+                                            var reason = prompt('Silakan pilih tanggapan：\n1. Sudah mempunyai majikan\n2. tidak kompeten\n3. Mundur dari pelatihan', 'Silakan masukkan nomor');
+                                            if (reason === '1' || reason === '2' || reason === '3') {
+                                                var deleteReason = '';
+                                                switch (reason) {
+                                                    case '1':
+                                                        deleteReason = '已經被選走-Sudah mempunyai majikan';
+                                                        break;
+                                                    case '2':
+                                                        deleteReason = '無法勝任-tidak kompeten';
+                                                        break;
+                                                    case '3':
+                                                        deleteReason = '參加視訊-Bergabunglah dengan videonya';
+                                                        break;
+                                                }
+
+                                                var confirmDelete = confirm('Tanggapan Anda您的回應:' + deleteReason );
+                                                if (confirmDelete) {
+                                                    var kfaRef = databaseJOBSCRIPT.ref(`INTERVIEW/${item.key}`);
+                                                    kfaRef.update({
+                                                        Dreason: deleteReason
+                                                    }).then(function () {
+                                                        //console.log(`刪除原因已成功存儲到 INTERVIEW/${item.key}`);
+                                                    }).catch(function (error) {
+                                                        console.error(`儲存刪除原因到 INTERVIEW/${item.key} 時發生錯誤: `, error);
+                                                    });
+                                                    // console.log(`刪除原因已成功存儲到 job/${item.Tagency}/IA/Dreason`);
+                                                    renderTable(filteredData);
+                                                }
+                                            } else {
+                                                alert('請輸入正確的選項 (1, 2, 3)');
+                                            }
+                                        };
+                                    }
+                                });
+                            }
+                        }
+                    }, 100); // 延迟绑定事件
                 }
 
                 // 如果沒有符合的 Tagency，更新按鈕文字為 "尚未預約"
